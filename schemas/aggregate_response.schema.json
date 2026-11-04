@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aggregate_response.schema.json",
+  "title": "POST /v1/aggregate response (include_geometry=false)",
+  "type": "object",
+  "required": ["release_id", "boundary_version", "villages", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "release_id": { "type": "string", "minLength": 1 },
+    "boundary_version": { "type": "string", "minLength": 1 },
+    "villages": { "type": "array", "items": { "$ref": "#/$defs/village" } },
+    "summary": { "$ref": "#/$defs/summary" },
+    "diagnostics": { "$ref": "#/$defs/diagnostics" }
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[A-Za-z0-9_-]{1,64}$" },
+      "additionalProperties": { "type": "number" }
+    },
+    "village": {
+      "type": "object",
+      "required": ["village_id", "village_name", "district_code", "district_name", "regency_code", "regency_name", "area_m2", "metrics"],
+      "additionalProperties": false,
+      "properties": {
+        "village_id": { "type": "string", "minLength": 1 },
+        "village_name": { "type": "string", "minLength": 1 },
+        "district_code": { "type": "string", "minLength": 1 },
+        "district_name": { "type": "string", "minLength": 1 },
+        "regency_code": { "type": "string", "minLength": 1 },
+        "regency_name": { "type": "string", "minLength": 1 },
+        "area_m2": { "type": "number", "exclusiveMinimum": 0 },
+        "metrics": { "$ref": "#/$defs/metrics" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["village_count", "totals"],
+      "additionalProperties": false,
+      "properties": {
+        "village_count": { "type": "integer", "minimum": 0 },
+        "totals": { "$ref": "#/$defs/metrics" }
+      }
+    },
+    "count": { "type": "integer", "minimum": 0 },
+    "diagnostics": {
+      "type": "object",
+      "required": ["total_ms", "stages_ms", "partitions", "points_scanned", "points_interior", "points_boundary",
+                   "points_boundary_tested", "points_other_village", "unassigned_pois", "selected_cells", "candidate_cell_rows",
+                   "poi_villages_computed", "cache", "duckdb_profile"],
+      "additionalProperties": false,
+      "properties": {
+        "total_ms": { "type": "number", "minimum": 0 },
+        "stages_ms": {
+          "type": "object",
+          "propertyNames": { "enum": ["resolve_area", "reference", "h3_cells", "poi_scan", "poi_interior", "poi_boundary", "raster_geometry", "raster_read", "raster_coverage", "assemble"] },
+          "additionalProperties": { "type": "number" }
+        },
+        "partitions": { "type": "array", "items": { "type": "string" } },
+        "selected_cells": { "$ref": "#/$defs/count" },
+        "candidate_cell_rows": { "$ref": "#/$defs/count" },
+        "points_scanned": { "$ref": "#/$defs/count" },
+        "points_interior": { "$ref": "#/$defs/count" },
+        "points_boundary": { "$ref": "#/$defs/count" },
+        "points_boundary_tested": { "$ref": "#/$defs/count" },
+        "points_other_village": { "$ref": "#/$defs/count" },
+        "unassigned_pois": { "type": "object", "additionalProperties": { "$ref": "#/$defs/count" } },
+        "poi_villages_computed": { "$ref": "#/$defs/count" },
+        "cache": {
+          "type": "object",
+          "required": ["result_hits", "result_misses", "block_hits", "block_misses", "reference_hits", "reference_misses"],
+          "additionalProperties": false,
+          "properties": {
+            "result_hits": { "$ref": "#/$defs/count" }, "result_misses": { "$ref": "#/$defs/count" },
+            "block_hits": { "$ref": "#/$defs/count" }, "block_misses": { "$ref": "#/$defs/count" },
+            "reference_hits": { "$ref": "#/$defs/count" }, "reference_misses": { "$ref": "#/$defs/count" }
+          }
+        },
+        "duckdb_profile": {
+          "type": "object",
+          "additionalProperties": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } }
+        },
+        "raster_windows": { "$ref": "#/$defs/count" },
+        "raster_blocks": { "$ref": "#/$defs/count" },
+        "raster_pixels_read": { "$ref": "#/$defs/count" },
+        "raster_pixels_weighted": { "$ref": "#/$defs/count" },
+        "raster_nodata_weight": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

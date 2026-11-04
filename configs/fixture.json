@@ -1,0 +1,27 @@
+{
+  "release_id": "fixture-1",
+  "h3_resolution": 9,
+  "boundaries": {
+    "adapter": "geojson",
+    "path": "testdata/fixtures/villages.geojson",
+    "boundary_version": "fixture-1",
+    "source": { "name": "Synthetic fixture villages", "license": "CC0-1.0" }
+  },
+  "pois": {
+    "adapter": "geojson",
+    "path": "testdata/fixtures/pois.geojson",
+    "release": "fixture-1",
+    "source": { "name": "Synthetic fixture POIs", "license": "CC0-1.0" }
+  },
+  "rasters": [
+    {
+      "id": "population_2020",
+      "path": "testdata/fixtures/population.asc",
+      "srs": "EPSG:4326",
+      "units": "people",
+      "year": 2020,
+      "source": { "name": "Synthetic fixture raster", "license": "CC0-1.0" }
+    }
+  ],
+  "qc": { "cross_check_pois": true }
+}

@@ -1,0 +1,76 @@
+# CI: formatting, vet, staticcheck, unit + golden + contract
+# tests on every push; the docker compose demo + Playwright smoke test too.
+# Real-data invariant and performance tests run manually (docs/caching.md).
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      # GDAL lets the fixture release be built with its raster (prep), so
+      # the raster golden tests run against exactextract/rasterstats CSVs.
+      - name: Install GDAL
+        run: sudo apt-get update -q && sudo apt-get install -y -q gdal-bin
+
+      - name: gofmt
+        run: test -z "$(gofmt -l . | tee /dev/stderr)"
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: staticcheck
+        run: go run honnef.co/go/tools/cmd/staticcheck@v0.8.2 ./...
+
+      # Unit, golden (fixtures + bundled DIY sample), invariants
+      # on the bundled sample, and JSON Schema contract tests.
+      # DuckDB extensions are downloaded on first use (AllowInstall in tests).
+      - name: go test
+        run: go test -race -count=1 ./...
+
+  e2e:
+    runs-on: ubuntu-24.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start demo (RustFS + seed + 2 API replicas + load balancer)
+        run: docker compose up -d --build
+
+      - name: Wait for the load balancer
+        run: |
+          for i in $(seq 1 120); do
+            curl -sf localhost:8080/healthz && exit 0
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+
+      - name: API smoke
+        run: |
+          curl -sf -X POST localhost:8080/v1/aggregate -H 'Content-Type: application/json' \
+            -d '{"area":{"regency_code":"3471"},"metrics":[{"id":"c","type":"poi_count","categories":["cafe"]},{"id":"p","type":"raster_sum","layer":"population_2020","method":"fractional"}]}' \
+            | python3 -c 'import json,sys; r=json.load(sys.stdin); assert r["summary"]["village_count"]==45, r["summary"]; print(r["summary"])'
+
+      - name: Playwright smoke test
+        run: make e2e NO_SHOTS=1
+
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --tail 200
+
+      - name: Stop
+        if: always()
+        run: docker compose down -v

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Village Stats</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside id="panel" aria-label="Query controls">
+    <header class="brand">
+      <h1>Village Stats</h1>
+      <span id="release" class="badge" title="Data release">…</span>
+    </header>
+
+    <section class="block">
+      <h2>Area</h2>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-admin" aria-selected="true">Admin area</button>
+        <button role="tab" id="tab-draw" aria-selected="false">Draw</button>
+      </div>
+      <div id="area-admin">
+        <label>Province <select id="sel-province"></select></label>
+        <label>Regency <select id="sel-regency"><option value="">All regencies</option></select></label>
+        <label>District <select id="sel-district"><option value="">All districts</option></select></label>
+      </div>
+      <div id="area-draw" hidden>
+        <p class="hint">Click on the map to add points; double-click (or click the first point) to close the polygon. Villages touching it are returned.</p>
+        <div class="row">
+          <button id="btn-draw" class="secondary">Draw polygon</button>
+          <button id="btn-clear" class="secondary">Clear</button>
+        </div>
+        <p id="draw-status" class="hint"></p>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Points of interest</h2>
+      <div id="presets" class="chips"></div>
+      <input id="cat-search" type="search" placeholder="Search 800+ categories…" autocomplete="off" aria-label="Search categories">
+      <ul id="cat-results" class="cat-list" hidden></ul>
+      <div id="cat-selected" class="chips selected"></div>
+    </section>
+
+    <section class="block">
+      <h2>Population</h2>
+      <label class="check"><input type="checkbox" id="pop-on" checked> <span id="pop-label">Population</span></label>
+      <div class="seg" role="radiogroup" aria-label="Raster method">
+        <label><input type="radio" name="method" value="fractional" checked> Fractional</label>
+        <label><input type="radio" name="method" value="center"> Pixel centre</label>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Map shows</h2>
+      <select id="sel-view" aria-label="Map shows"></select>
+      <label class="check"><input type="checkbox" id="per-km2"> per km²</label>
+      <label class="check small"><input type="checkbox" id="no-cache"> Bypass cache (cold run)</label>
+    </section>
+
+    <div class="run">
+      <button id="btn-run" class="primary">Run query</button>
+      <span id="status" role="status" aria-live="polite"></span>
+    </div>
+    <div id="error" class="error" hidden></div>
+
+    <section class="block" id="summary-block" hidden>
+      <h2>Result</h2>
+      <div id="summary" class="summary"></div>
+      <table id="top" class="top"><caption>Top villages</caption><thead></thead><tbody></tbody></table>
+    </section>
+
+    <footer id="attribution" class="foot"></footer>
+  </aside>
+
+  <main id="map" aria-label="Map"></main>
+
+  <div id="legend" class="legend" hidden></div>
+
+  <section id="diag" class="diag" hidden aria-label="Diagnostics">
+    <button id="diag-toggle" class="diag-head" aria-expanded="true">
+      <span>Diagnostics</span><span id="diag-total"></span>
+    </button>
+    <div id="diag-body"></div>
+  </section>
+
+  <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/terra-draw@1.38.0/dist/terra-draw.umd.js"></script>
+  <script src="https://unpkg.com/terra-draw-maplibre-gl-adapter@1.5.0/dist/terra-draw-maplibre-gl-adapter.umd.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "error.schema.json",
+  "title": "Error response (every non-2xx)",
+  "type": "object",
+  "required": ["error", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "error": { "enum": ["invalid_json", "invalid_request", "body_too_large", "too_many_villages", "timeout",
+                        "storage_unavailable", "not_ready", "not_implemented", "client_closed", "internal"] },
+    "message": { "type": "string", "minLength": 1 },
+    "fields": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["field", "message"], "additionalProperties": false,
+        "properties": { "field": { "type": "string", "minLength": 1 }, "message": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

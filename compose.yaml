@@ -1,0 +1,5 @@
+# `docker compose up -d` from the repo root starts the demo:
+# RustFS, seed, api1, api2 and the load balancer on http://localhost:8080.
+name: zonalstats
+include:
+  - deploy/docker-compose.yml

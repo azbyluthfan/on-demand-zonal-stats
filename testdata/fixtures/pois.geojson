@@ -1,0 +1,8197 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0001",
+"name": "POI 1",
+"category": "cafe",
+"note": "on V001|V002 border -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.819
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0002",
+"name": "POI 2",
+"category": "cafe",
+"note": "on V001|V002 border -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.815
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0003",
+"name": "POI 3",
+"category": "cafe",
+"note": "on V001|V002 border -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.81
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0004",
+"name": "POI 4",
+"category": "cafe",
+"note": "on V001|V002 border -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.805
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0005",
+"name": "POI 5",
+"category": "cafe",
+"note": "on V001|V002 border -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.801
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0006",
+"name": "POI 6",
+"category": "cafe",
+"note": "on V001|V002 shared corner -> V001"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.32,
+-7.8
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0007",
+"name": "POI 7",
+"category": "cafe",
+"note": "inside V004 hole -> unassigned"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.38,
+-7.82
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0008",
+"name": "POI 8",
+"category": "cafe",
+"note": "on V004 hole edge -> V004"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.37,
+-7.82
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0009",
+"name": "POI 9",
+"category": "coffee_shop",
+"note": "inside tiny V005"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4201,
+-7.8004
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0010",
+"name": "POI 10",
+"category": "restaurant",
+"note": "second island of V006"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.465,
+-7.815
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0011",
+"name": "POI 11",
+"category": "restaurant",
+"note": "between V006 islands -> unassigned"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.455,
+-7.815
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0012",
+"name": "POI 12",
+"category": "school",
+"note": "far outside everything -> unassigned"
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.6,
+-7.9
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0013",
+"name": "POI 13",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4114911,
+-7.8679991
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0014",
+"name": "POI 14",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3365295,
+-7.858837
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0015",
+"name": "POI 15",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4185729,
+-7.7986256
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0016",
+"name": "POI 16",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4021936,
+-7.8674574
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0017",
+"name": "POI 17",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3315412,
+-7.8295716
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0018",
+"name": "POI 18",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3966366,
+-7.8127184
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0019",
+"name": "POI 19",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3697088,
+-7.8340633
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0020",
+"name": "POI 20",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4437918,
+-7.8694801
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0021",
+"name": "POI 21",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4226465,
+-7.84278
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0022",
+"name": "POI 22",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3309096,
+-7.8089205
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0023",
+"name": "POI 23",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3076217,
+-7.8622627
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0024",
+"name": "POI 24",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4047079,
+-7.8054297
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0025",
+"name": "POI 25",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3918833,
+-7.7921507
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0026",
+"name": "POI 26",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.304972,
+-7.8465457
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0027",
+"name": "POI 27",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4582358,
+-7.8410692
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0028",
+"name": "POI 28",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4238686,
+-7.866334
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0029",
+"name": "POI 29",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.436883,
+-7.7911823
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0030",
+"name": "POI 30",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4546319,
+-7.8395899
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0031",
+"name": "POI 31",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.41078,
+-7.8408134
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0032",
+"name": "POI 32",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3575014,
+-7.816386
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0033",
+"name": "POI 33",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4057349,
+-7.8563089
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0034",
+"name": "POI 34",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3210465,
+-7.8396436
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0035",
+"name": "POI 35",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3317269,
+-7.8440574
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0036",
+"name": "POI 36",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3335191,
+-7.867432
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0037",
+"name": "POI 37",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3662213,
+-7.8647049
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0038",
+"name": "POI 38",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4565098,
+-7.8448258
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0039",
+"name": "POI 39",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3651701,
+-7.7968362
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0040",
+"name": "POI 40",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3171456,
+-7.8588296
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0041",
+"name": "POI 41",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3924057,
+-7.8102389
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0042",
+"name": "POI 42",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4605863,
+-7.838048
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0043",
+"name": "POI 43",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4794919,
+-7.8589335
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0044",
+"name": "POI 44",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3072728,
+-7.8662307
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0045",
+"name": "POI 45",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3190399,
+-7.8572014
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0046",
+"name": "POI 46",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4033177,
+-7.8392186
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0047",
+"name": "POI 47",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4792631,
+-7.8276709
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0048",
+"name": "POI 48",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4535481,
+-7.8690815
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0049",
+"name": "POI 49",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.419525,
+-7.8270424
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0050",
+"name": "POI 50",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4360338,
+-7.842786
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0051",
+"name": "POI 51",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3726054,
+-7.8337021
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0052",
+"name": "POI 52",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4746587,
+-7.809043
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0053",
+"name": "POI 53",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4633993,
+-7.8003585
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0054",
+"name": "POI 54",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4499172,
+-7.829387
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0055",
+"name": "POI 55",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3190395,
+-7.8089991
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0056",
+"name": "POI 56",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.471165,
+-7.7962053
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0057",
+"name": "POI 57",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4037995,
+-7.8309115
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0058",
+"name": "POI 58",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4665287,
+-7.7997022
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0059",
+"name": "POI 59",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3354959,
+-7.8507303
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0060",
+"name": "POI 60",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4699204,
+-7.8631477
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0061",
+"name": "POI 61",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4450444,
+-7.7917612
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0062",
+"name": "POI 62",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4355085,
+-7.8597287
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0063",
+"name": "POI 63",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4699012,
+-7.8567898
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0064",
+"name": "POI 64",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4557623,
+-7.836149
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0065",
+"name": "POI 65",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4664936,
+-7.8095788
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0066",
+"name": "POI 66",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4254603,
+-7.8380806
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0067",
+"name": "POI 67",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.373239,
+-7.8285939
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0068",
+"name": "POI 68",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3371021,
+-7.8648779
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0069",
+"name": "POI 69",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4017787,
+-7.8515908
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0070",
+"name": "POI 70",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2913663,
+-7.8133727
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0071",
+"name": "POI 71",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3334989,
+-7.7975664
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0072",
+"name": "POI 72",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3034629,
+-7.8509596
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0073",
+"name": "POI 73",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.330705,
+-7.8594151
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0074",
+"name": "POI 74",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3994802,
+-7.8505602
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0075",
+"name": "POI 75",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4434244,
+-7.8547672
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0076",
+"name": "POI 76",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4152067,
+-7.8416562
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0077",
+"name": "POI 77",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3787347,
+-7.8116739
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0078",
+"name": "POI 78",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3015164,
+-7.8117429
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0079",
+"name": "POI 79",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3372447,
+-7.8547833
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0080",
+"name": "POI 80",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3166346,
+-7.855321
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0081",
+"name": "POI 81",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3374632,
+-7.7961388
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0082",
+"name": "POI 82",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4435242,
+-7.8015226
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0083",
+"name": "POI 83",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2996118,
+-7.7900574
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0084",
+"name": "POI 84",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4741093,
+-7.7958906
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0085",
+"name": "POI 85",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3215991,
+-7.8311487
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0086",
+"name": "POI 86",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4542836,
+-7.7978046
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0087",
+"name": "POI 87",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3620049,
+-7.7911753
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0088",
+"name": "POI 88",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4660384,
+-7.8071897
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0089",
+"name": "POI 89",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3703714,
+-7.7934146
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0090",
+"name": "POI 90",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4157555,
+-7.8310663
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0091",
+"name": "POI 91",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3463745,
+-7.7925033
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0092",
+"name": "POI 92",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4297901,
+-7.8651234
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0093",
+"name": "POI 93",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3008614,
+-7.8232658
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0094",
+"name": "POI 94",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4646836,
+-7.8275099
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0095",
+"name": "POI 95",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.472548,
+-7.8635911
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0096",
+"name": "POI 96",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3030191,
+-7.8645631
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0097",
+"name": "POI 97",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3667174,
+-7.7946723
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0098",
+"name": "POI 98",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3367809,
+-7.8224385
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0099",
+"name": "POI 99",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3055768,
+-7.8174101
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0100",
+"name": "POI 100",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3893287,
+-7.7952235
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0101",
+"name": "POI 101",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4172479,
+-7.8448653
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0102",
+"name": "POI 102",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3651993,
+-7.8162648
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0103",
+"name": "POI 103",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3768727,
+-7.7956785
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0104",
+"name": "POI 104",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2917699,
+-7.8203073
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0105",
+"name": "POI 105",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4792583,
+-7.8641391
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0106",
+"name": "POI 106",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3861181,
+-7.8594035
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0107",
+"name": "POI 107",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4573642,
+-7.7996584
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0108",
+"name": "POI 108",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3441476,
+-7.8349452
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0109",
+"name": "POI 109",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4236726,
+-7.8210658
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0110",
+"name": "POI 110",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2914864,
+-7.8046317
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0111",
+"name": "POI 111",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4670336,
+-7.8617131
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0112",
+"name": "POI 112",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3402485,
+-7.798823
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0113",
+"name": "POI 113",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3195351,
+-7.8474595
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0114",
+"name": "POI 114",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4263463,
+-7.8537122
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0115",
+"name": "POI 115",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3860277,
+-7.8499103
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0116",
+"name": "POI 116",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3075367,
+-7.8361139
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0117",
+"name": "POI 117",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2983765,
+-7.8433155
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0118",
+"name": "POI 118",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4110515,
+-7.8490436
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0119",
+"name": "POI 119",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3948193,
+-7.835785
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0120",
+"name": "POI 120",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.311256,
+-7.7943959
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0121",
+"name": "POI 121",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3936622,
+-7.8032324
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0122",
+"name": "POI 122",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3949798,
+-7.8356171
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0123",
+"name": "POI 123",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3485691,
+-7.7980815
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0124",
+"name": "POI 124",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4607957,
+-7.8531939
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0125",
+"name": "POI 125",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4167173,
+-7.8417057
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0126",
+"name": "POI 126",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4579856,
+-7.8374898
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0127",
+"name": "POI 127",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4324007,
+-7.7959389
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0128",
+"name": "POI 128",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4542751,
+-7.7919035
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0129",
+"name": "POI 129",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4574691,
+-7.8680171
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0130",
+"name": "POI 130",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4386534,
+-7.8370629
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0131",
+"name": "POI 131",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3406931,
+-7.80701
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0132",
+"name": "POI 132",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3626829,
+-7.866902
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0133",
+"name": "POI 133",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3322624,
+-7.8046731
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0134",
+"name": "POI 134",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3564351,
+-7.8043571
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0135",
+"name": "POI 135",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3323555,
+-7.8171973
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0136",
+"name": "POI 136",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3523698,
+-7.8008518
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0137",
+"name": "POI 137",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3567178,
+-7.8292475
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0138",
+"name": "POI 138",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3529185,
+-7.867792
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0139",
+"name": "POI 139",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3239279,
+-7.7929973
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0140",
+"name": "POI 140",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2972689,
+-7.8222743
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0141",
+"name": "POI 141",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4284236,
+-7.8449058
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0142",
+"name": "POI 142",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4770048,
+-7.8607483
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0143",
+"name": "POI 143",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.326115,
+-7.8664491
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0144",
+"name": "POI 144",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2903213,
+-7.795954
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0145",
+"name": "POI 145",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4205029,
+-7.794779
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0146",
+"name": "POI 146",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3592021,
+-7.8644021
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0147",
+"name": "POI 147",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4083995,
+-7.816929
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0148",
+"name": "POI 148",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4267533,
+-7.8459742
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0149",
+"name": "POI 149",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4167097,
+-7.8439054
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0150",
+"name": "POI 150",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3953384,
+-7.8546528
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0151",
+"name": "POI 151",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4186904,
+-7.7977756
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0152",
+"name": "POI 152",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.39813,
+-7.837514
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0153",
+"name": "POI 153",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3477362,
+-7.8531854
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0154",
+"name": "POI 154",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4052657,
+-7.8442201
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0155",
+"name": "POI 155",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3740104,
+-7.8529039
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0156",
+"name": "POI 156",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4408097,
+-7.7932134
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0157",
+"name": "POI 157",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4151816,
+-7.8472971
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0158",
+"name": "POI 158",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3536858,
+-7.8045261
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0159",
+"name": "POI 159",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4178312,
+-7.8520287
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0160",
+"name": "POI 160",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3179973,
+-7.8663029
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0161",
+"name": "POI 161",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4061421,
+-7.8085209
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0162",
+"name": "POI 162",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3687438,
+-7.8196188
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0163",
+"name": "POI 163",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4264857,
+-7.8392817
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0164",
+"name": "POI 164",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.336357,
+-7.8175154
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0165",
+"name": "POI 165",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4596054,
+-7.8011648
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0166",
+"name": "POI 166",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4378999,
+-7.8524927
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0167",
+"name": "POI 167",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3782645,
+-7.8254075
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0168",
+"name": "POI 168",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3767277,
+-7.8058867
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0169",
+"name": "POI 169",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4776996,
+-7.8223638
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0170",
+"name": "POI 170",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4064039,
+-7.8124581
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0171",
+"name": "POI 171",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3710807,
+-7.7974516
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0172",
+"name": "POI 172",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4604695,
+-7.8105076
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0173",
+"name": "POI 173",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3755133,
+-7.8098579
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0174",
+"name": "POI 174",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4355046,
+-7.828296
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0175",
+"name": "POI 175",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3421735,
+-7.8638013
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0176",
+"name": "POI 176",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3345538,
+-7.8431322
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0177",
+"name": "POI 177",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3053098,
+-7.8579335
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0178",
+"name": "POI 178",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4218505,
+-7.8134865
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0179",
+"name": "POI 179",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3688249,
+-7.8435295
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0180",
+"name": "POI 180",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3689971,
+-7.8534532
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0181",
+"name": "POI 181",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3640006,
+-7.8084163
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0182",
+"name": "POI 182",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4527791,
+-7.8087524
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0183",
+"name": "POI 183",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3806261,
+-7.7945807
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0184",
+"name": "POI 184",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4331603,
+-7.8017242
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0185",
+"name": "POI 185",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3922619,
+-7.8112293
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0186",
+"name": "POI 186",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4605842,
+-7.8309416
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0187",
+"name": "POI 187",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3728088,
+-7.867678
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0188",
+"name": "POI 188",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.417086,
+-7.8061486
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0189",
+"name": "POI 189",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4496961,
+-7.7964367
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0190",
+"name": "POI 190",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3914835,
+-7.7974457
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0191",
+"name": "POI 191",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3972345,
+-7.8678318
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0192",
+"name": "POI 192",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3157829,
+-7.8330641
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0193",
+"name": "POI 193",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3394297,
+-7.8438118
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0194",
+"name": "POI 194",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3521007,
+-7.8091016
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0195",
+"name": "POI 195",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3428688,
+-7.7939037
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0196",
+"name": "POI 196",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3379316,
+-7.8634475
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0197",
+"name": "POI 197",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4323146,
+-7.8658332
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0198",
+"name": "POI 198",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3326022,
+-7.8645105
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0199",
+"name": "POI 199",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4333043,
+-7.7940311
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0200",
+"name": "POI 200",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4494535,
+-7.8202931
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0201",
+"name": "POI 201",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.313982,
+-7.8164433
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0202",
+"name": "POI 202",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4700738,
+-7.8327973
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0203",
+"name": "POI 203",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4357106,
+-7.8565769
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0204",
+"name": "POI 204",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4731096,
+-7.8125314
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0205",
+"name": "POI 205",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4732969,
+-7.8613521
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0206",
+"name": "POI 206",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4664886,
+-7.8239363
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0207",
+"name": "POI 207",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3653643,
+-7.8127988
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0208",
+"name": "POI 208",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4024986,
+-7.8035543
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0209",
+"name": "POI 209",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3093612,
+-7.8082015
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0210",
+"name": "POI 210",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4430503,
+-7.8063018
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0211",
+"name": "POI 211",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4387007,
+-7.8422237
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0212",
+"name": "POI 212",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4156891,
+-7.8644835
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0213",
+"name": "POI 213",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2924039,
+-7.8363953
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0214",
+"name": "POI 214",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3100524,
+-7.793137
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0215",
+"name": "POI 215",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4243886,
+-7.835161
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0216",
+"name": "POI 216",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.47344,
+-7.8483934
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0217",
+"name": "POI 217",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4371819,
+-7.8328101
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0218",
+"name": "POI 218",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3409952,
+-7.8018629
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0219",
+"name": "POI 219",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3429964,
+-7.8339358
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0220",
+"name": "POI 220",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3982714,
+-7.8165449
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0221",
+"name": "POI 221",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.295453,
+-7.8019238
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0222",
+"name": "POI 222",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3826345,
+-7.841614
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0223",
+"name": "POI 223",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3546644,
+-7.7995744
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0224",
+"name": "POI 224",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3956003,
+-7.8286698
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0225",
+"name": "POI 225",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3062665,
+-7.812394
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0226",
+"name": "POI 226",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3954835,
+-7.8507741
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0227",
+"name": "POI 227",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4127216,
+-7.8307343
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0228",
+"name": "POI 228",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3076801,
+-7.8522723
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0229",
+"name": "POI 229",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3481791,
+-7.8234756
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0230",
+"name": "POI 230",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3951599,
+-7.8424994
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0231",
+"name": "POI 231",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3528503,
+-7.8137716
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0232",
+"name": "POI 232",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3482584,
+-7.851557
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0233",
+"name": "POI 233",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3499541,
+-7.8105695
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0234",
+"name": "POI 234",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3263928,
+-7.8109116
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0235",
+"name": "POI 235",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4276712,
+-7.7918714
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0236",
+"name": "POI 236",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4033902,
+-7.7915591
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0237",
+"name": "POI 237",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3462868,
+-7.8411295
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0238",
+"name": "POI 238",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2926882,
+-7.8272692
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0239",
+"name": "POI 239",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.298648,
+-7.8656379
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0240",
+"name": "POI 240",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4225093,
+-7.8598976
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0241",
+"name": "POI 241",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3094917,
+-7.8690188
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0242",
+"name": "POI 242",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3791854,
+-7.8347625
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0243",
+"name": "POI 243",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4734446,
+-7.8498017
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0244",
+"name": "POI 244",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3116766,
+-7.8647725
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0245",
+"name": "POI 245",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3040756,
+-7.8196443
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0246",
+"name": "POI 246",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3188281,
+-7.8051086
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0247",
+"name": "POI 247",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3061844,
+-7.8501447
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0248",
+"name": "POI 248",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4352443,
+-7.8214946
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0249",
+"name": "POI 249",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3328806,
+-7.8281942
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0250",
+"name": "POI 250",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4626158,
+-7.8462117
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0251",
+"name": "POI 251",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4781059,
+-7.8455696
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0252",
+"name": "POI 252",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3014438,
+-7.7931913
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0253",
+"name": "POI 253",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4700421,
+-7.853377
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0254",
+"name": "POI 254",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3402828,
+-7.863505
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0255",
+"name": "POI 255",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3230246,
+-7.8639948
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0256",
+"name": "POI 256",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3676183,
+-7.8148503
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0257",
+"name": "POI 257",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3453393,
+-7.8514819
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0258",
+"name": "POI 258",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4235676,
+-7.8336775
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0259",
+"name": "POI 259",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4655431,
+-7.8069738
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0260",
+"name": "POI 260",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4156248,
+-7.7953065
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0261",
+"name": "POI 261",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3118075,
+-7.8520152
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0262",
+"name": "POI 262",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4625982,
+-7.8038695
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0263",
+"name": "POI 263",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3013312,
+-7.8065897
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0264",
+"name": "POI 264",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.432302,
+-7.8244634
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0265",
+"name": "POI 265",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3734392,
+-7.8325042
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0266",
+"name": "POI 266",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4229494,
+-7.7945859
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0267",
+"name": "POI 267",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3925965,
+-7.8349793
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0268",
+"name": "POI 268",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2975735,
+-7.8354377
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0269",
+"name": "POI 269",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4047056,
+-7.8679308
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0270",
+"name": "POI 270",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4727631,
+-7.8031233
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0271",
+"name": "POI 271",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4015534,
+-7.8683404
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0272",
+"name": "POI 272",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3994869,
+-7.8089513
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0273",
+"name": "POI 273",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3793952,
+-7.8178792
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0274",
+"name": "POI 274",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3244829,
+-7.8231736
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0275",
+"name": "POI 275",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4741205,
+-7.8323992
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0276",
+"name": "POI 276",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3533286,
+-7.8163893
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0277",
+"name": "POI 277",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3526627,
+-7.8145061
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0278",
+"name": "POI 278",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4158909,
+-7.8379638
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0279",
+"name": "POI 279",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2969725,
+-7.8629552
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0280",
+"name": "POI 280",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.351422,
+-7.7923852
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0281",
+"name": "POI 281",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.454333,
+-7.8040058
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0282",
+"name": "POI 282",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4149555,
+-7.8265925
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0283",
+"name": "POI 283",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3002988,
+-7.8285248
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0284",
+"name": "POI 284",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4337242,
+-7.8199673
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0285",
+"name": "POI 285",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3286761,
+-7.8260624
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0286",
+"name": "POI 286",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3732421,
+-7.81414
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0287",
+"name": "POI 287",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2954852,
+-7.8195982
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0288",
+"name": "POI 288",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4248587,
+-7.84514
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0289",
+"name": "POI 289",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3949278,
+-7.8625433
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0290",
+"name": "POI 290",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3776751,
+-7.8606027
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0291",
+"name": "POI 291",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3846913,
+-7.8126717
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0292",
+"name": "POI 292",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4240282,
+-7.8367608
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0293",
+"name": "POI 293",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4762465,
+-7.8505015
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0294",
+"name": "POI 294",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.317482,
+-7.8547512
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0295",
+"name": "POI 295",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3865658,
+-7.7996539
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0296",
+"name": "POI 296",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.342487,
+-7.8067995
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0297",
+"name": "POI 297",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3545763,
+-7.8069826
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0298",
+"name": "POI 298",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4459044,
+-7.8473729
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0299",
+"name": "POI 299",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4491204,
+-7.8236061
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0300",
+"name": "POI 300",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4543995,
+-7.8342762
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0301",
+"name": "POI 301",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3555735,
+-7.8258466
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0302",
+"name": "POI 302",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3616699,
+-7.7953718
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0303",
+"name": "POI 303",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4763472,
+-7.8508956
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0304",
+"name": "POI 304",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3343769,
+-7.8079564
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0305",
+"name": "POI 305",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3504535,
+-7.8321619
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0306",
+"name": "POI 306",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.363355,
+-7.8169049
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0307",
+"name": "POI 307",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3841124,
+-7.8670384
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0308",
+"name": "POI 308",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4734172,
+-7.8434404
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0309",
+"name": "POI 309",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4560962,
+-7.8347755
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0310",
+"name": "POI 310",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4629839,
+-7.8687722
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0311",
+"name": "POI 311",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3678959,
+-7.8176175
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0312",
+"name": "POI 312",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3042174,
+-7.807478
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0313",
+"name": "POI 313",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3543266,
+-7.8145836
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0314",
+"name": "POI 314",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4518354,
+-7.8018127
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0315",
+"name": "POI 315",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3622018,
+-7.8446671
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0316",
+"name": "POI 316",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4557528,
+-7.8671281
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0317",
+"name": "POI 317",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3346063,
+-7.815248
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0318",
+"name": "POI 318",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4795109,
+-7.8102587
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0319",
+"name": "POI 319",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4758842,
+-7.8091704
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0320",
+"name": "POI 320",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3742989,
+-7.8144799
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0321",
+"name": "POI 321",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2987383,
+-7.8063085
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0322",
+"name": "POI 322",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.358108,
+-7.8355451
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0323",
+"name": "POI 323",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3909216,
+-7.8247258
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0324",
+"name": "POI 324",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3222969,
+-7.8636825
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0325",
+"name": "POI 325",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.407745,
+-7.8507336
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0326",
+"name": "POI 326",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3171924,
+-7.833108
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0327",
+"name": "POI 327",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3773184,
+-7.8166527
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0328",
+"name": "POI 328",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4612298,
+-7.8157911
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0329",
+"name": "POI 329",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3040338,
+-7.7943811
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0330",
+"name": "POI 330",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3468393,
+-7.7930377
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0331",
+"name": "POI 331",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3767988,
+-7.8458303
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0332",
+"name": "POI 332",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4521337,
+-7.8614677
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0333",
+"name": "POI 333",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3986653,
+-7.824015
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0334",
+"name": "POI 334",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2941685,
+-7.803597
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0335",
+"name": "POI 335",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3421513,
+-7.8247257
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0336",
+"name": "POI 336",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4630172,
+-7.8103862
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0337",
+"name": "POI 337",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4373908,
+-7.8515905
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0338",
+"name": "POI 338",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3316109,
+-7.8547894
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0339",
+"name": "POI 339",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4187752,
+-7.8123257
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0340",
+"name": "POI 340",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4093671,
+-7.7977277
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0341",
+"name": "POI 341",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3486972,
+-7.8347341
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0342",
+"name": "POI 342",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3593236,
+-7.8594871
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0343",
+"name": "POI 343",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3520766,
+-7.8367598
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0344",
+"name": "POI 344",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3151104,
+-7.8268474
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0345",
+"name": "POI 345",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.390862,
+-7.796921
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0346",
+"name": "POI 346",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3388243,
+-7.8040248
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0347",
+"name": "POI 347",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.473803,
+-7.8463887
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0348",
+"name": "POI 348",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4428042,
+-7.8325335
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0349",
+"name": "POI 349",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3167438,
+-7.79268
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0350",
+"name": "POI 350",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4737813,
+-7.805633
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0351",
+"name": "POI 351",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3071575,
+-7.838434
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0352",
+"name": "POI 352",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3919487,
+-7.8336171
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0353",
+"name": "POI 353",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4010664,
+-7.8042066
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0354",
+"name": "POI 354",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3105858,
+-7.8512942
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0355",
+"name": "POI 355",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4077139,
+-7.7945465
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0356",
+"name": "POI 356",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4638986,
+-7.8522906
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0357",
+"name": "POI 357",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4107267,
+-7.8328586
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0358",
+"name": "POI 358",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4133555,
+-7.8606659
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0359",
+"name": "POI 359",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4697897,
+-7.8456508
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0360",
+"name": "POI 360",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3120629,
+-7.851216
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0361",
+"name": "POI 361",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3157762,
+-7.8337085
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0362",
+"name": "POI 362",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3696341,
+-7.8106185
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0363",
+"name": "POI 363",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4582286,
+-7.8176062
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0364",
+"name": "POI 364",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4069739,
+-7.7948758
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0365",
+"name": "POI 365",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2962161,
+-7.8403576
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0366",
+"name": "POI 366",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3744922,
+-7.851111
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0367",
+"name": "POI 367",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3088774,
+-7.8151456
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0368",
+"name": "POI 368",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4613223,
+-7.8184139
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0369",
+"name": "POI 369",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3656465,
+-7.8548153
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0370",
+"name": "POI 370",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.470312,
+-7.8040647
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0371",
+"name": "POI 371",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4159261,
+-7.8186636
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0372",
+"name": "POI 372",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4745077,
+-7.8659537
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0373",
+"name": "POI 373",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3362781,
+-7.8599261
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0374",
+"name": "POI 374",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3289891,
+-7.8036146
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0375",
+"name": "POI 375",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3293599,
+-7.8527239
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0376",
+"name": "POI 376",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3524263,
+-7.8581957
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0377",
+"name": "POI 377",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2905388,
+-7.8013275
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0378",
+"name": "POI 378",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4776302,
+-7.8267828
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0379",
+"name": "POI 379",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.310886,
+-7.8006842
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0380",
+"name": "POI 380",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2928235,
+-7.8068012
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0381",
+"name": "POI 381",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4018821,
+-7.8687375
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0382",
+"name": "POI 382",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2999558,
+-7.8106626
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0383",
+"name": "POI 383",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3115934,
+-7.8649154
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0384",
+"name": "POI 384",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4378232,
+-7.828941
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0385",
+"name": "POI 385",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.375881,
+-7.852276
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0386",
+"name": "POI 386",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2982394,
+-7.8073418
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0387",
+"name": "POI 387",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3473098,
+-7.8185327
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0388",
+"name": "POI 388",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3015568,
+-7.8316814
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0389",
+"name": "POI 389",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.370992,
+-7.8613631
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0390",
+"name": "POI 390",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3039632,
+-7.8635368
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0391",
+"name": "POI 391",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3181834,
+-7.8599047
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0392",
+"name": "POI 392",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4102846,
+-7.8261315
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0393",
+"name": "POI 393",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3623718,
+-7.8222087
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0394",
+"name": "POI 394",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3762059,
+-7.8215659
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0395",
+"name": "POI 395",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4406883,
+-7.8608469
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0396",
+"name": "POI 396",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4269596,
+-7.8527982
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0397",
+"name": "POI 397",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4587373,
+-7.8368949
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0398",
+"name": "POI 398",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3657587,
+-7.811631
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0399",
+"name": "POI 399",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3710852,
+-7.8167914
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0400",
+"name": "POI 400",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4711826,
+-7.8150543
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0401",
+"name": "POI 401",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3027553,
+-7.8034582
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0402",
+"name": "POI 402",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3720565,
+-7.8104329
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0403",
+"name": "POI 403",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4442362,
+-7.8254903
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0404",
+"name": "POI 404",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4717587,
+-7.8250653
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0405",
+"name": "POI 405",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3680536,
+-7.8001114
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0406",
+"name": "POI 406",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4549375,
+-7.8123151
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0407",
+"name": "POI 407",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4040779,
+-7.8418683
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0408",
+"name": "POI 408",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3864084,
+-7.8576216
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0409",
+"name": "POI 409",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3326065,
+-7.8613425
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0410",
+"name": "POI 410",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3598366,
+-7.8089915
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0411",
+"name": "POI 411",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3329702,
+-7.835671
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0412",
+"name": "POI 412",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4751639,
+-7.8045259
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0413",
+"name": "POI 413",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4182456,
+-7.8254608
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0414",
+"name": "POI 414",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.466526,
+-7.8036431
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0415",
+"name": "POI 415",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2955011,
+-7.8481384
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0416",
+"name": "POI 416",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4650921,
+-7.8419181
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0417",
+"name": "POI 417",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4552739,
+-7.8246943
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0418",
+"name": "POI 418",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3032212,
+-7.8107225
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0419",
+"name": "POI 419",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.307434,
+-7.8275614
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0420",
+"name": "POI 420",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3697682,
+-7.8427283
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0421",
+"name": "POI 421",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3492111,
+-7.8440494
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0422",
+"name": "POI 422",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4032825,
+-7.7993326
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0423",
+"name": "POI 423",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3199079,
+-7.8205729
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0424",
+"name": "POI 424",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3416995,
+-7.8170449
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0425",
+"name": "POI 425",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4053444,
+-7.8368653
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0426",
+"name": "POI 426",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4334392,
+-7.8608946
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0427",
+"name": "POI 427",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3110691,
+-7.8157426
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0428",
+"name": "POI 428",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3824602,
+-7.8166294
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0429",
+"name": "POI 429",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3318985,
+-7.7912443
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0430",
+"name": "POI 430",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2914605,
+-7.8458865
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0431",
+"name": "POI 431",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4357964,
+-7.8088671
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0432",
+"name": "POI 432",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3523432,
+-7.8693816
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0433",
+"name": "POI 433",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.323382,
+-7.8395834
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0434",
+"name": "POI 434",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3850498,
+-7.8033317
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0435",
+"name": "POI 435",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3036943,
+-7.8010589
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0436",
+"name": "POI 436",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3728817,
+-7.8332197
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0437",
+"name": "POI 437",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4538009,
+-7.8239393
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0438",
+"name": "POI 438",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3668403,
+-7.8187887
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0439",
+"name": "POI 439",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3118829,
+-7.8683315
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0440",
+"name": "POI 440",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3226559,
+-7.7941909
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0441",
+"name": "POI 441",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4480849,
+-7.7964184
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0442",
+"name": "POI 442",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3729752,
+-7.8615309
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0443",
+"name": "POI 443",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4018855,
+-7.828083
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0444",
+"name": "POI 444",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4553996,
+-7.8103356
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0445",
+"name": "POI 445",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.353283,
+-7.8565494
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0446",
+"name": "POI 446",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4103127,
+-7.8275516
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0447",
+"name": "POI 447",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4621253,
+-7.84205
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0448",
+"name": "POI 448",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3348911,
+-7.8582845
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0449",
+"name": "POI 449",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3229648,
+-7.8577704
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0450",
+"name": "POI 450",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3236578,
+-7.8081722
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0451",
+"name": "POI 451",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3781511,
+-7.8249012
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0452",
+"name": "POI 452",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.375292,
+-7.7960677
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0453",
+"name": "POI 453",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4121684,
+-7.7910774
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0454",
+"name": "POI 454",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4542069,
+-7.8198226
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0455",
+"name": "POI 455",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3735549,
+-7.8324863
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0456",
+"name": "POI 456",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4413026,
+-7.8226864
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0457",
+"name": "POI 457",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.386394,
+-7.8451674
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0458",
+"name": "POI 458",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2971454,
+-7.840501
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0459",
+"name": "POI 459",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3045789,
+-7.80086
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0460",
+"name": "POI 460",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4068516,
+-7.8294346
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0461",
+"name": "POI 461",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4002626,
+-7.7936615
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0462",
+"name": "POI 462",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3754494,
+-7.8052147
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0463",
+"name": "POI 463",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3510901,
+-7.8319497
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0464",
+"name": "POI 464",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4719672,
+-7.8339582
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0465",
+"name": "POI 465",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4766533,
+-7.8632537
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0466",
+"name": "POI 466",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.297437,
+-7.8133903
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0467",
+"name": "POI 467",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.389573,
+-7.8212156
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0468",
+"name": "POI 468",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3608419,
+-7.8473685
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0469",
+"name": "POI 469",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4371483,
+-7.8156882
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0470",
+"name": "POI 470",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4399531,
+-7.8182156
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0471",
+"name": "POI 471",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3526412,
+-7.8253629
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0472",
+"name": "POI 472",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3439879,
+-7.8121013
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0473",
+"name": "POI 473",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4559231,
+-7.843331
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0474",
+"name": "POI 474",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4160863,
+-7.7966603
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0475",
+"name": "POI 475",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4738623,
+-7.8141216
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0476",
+"name": "POI 476",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3145008,
+-7.8132933
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0477",
+"name": "POI 477",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3488206,
+-7.8398657
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0478",
+"name": "POI 478",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4445051,
+-7.8163907
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0479",
+"name": "POI 479",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3077561,
+-7.8163635
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0480",
+"name": "POI 480",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3587473,
+-7.8409922
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0481",
+"name": "POI 481",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4707222,
+-7.8426614
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0482",
+"name": "POI 482",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.326481,
+-7.7900019
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0483",
+"name": "POI 483",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3046614,
+-7.8024457
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0484",
+"name": "POI 484",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.386461,
+-7.8268183
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0485",
+"name": "POI 485",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.297172,
+-7.8430589
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0486",
+"name": "POI 486",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3148993,
+-7.8398624
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0487",
+"name": "POI 487",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3243607,
+-7.8145723
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0488",
+"name": "POI 488",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4437183,
+-7.8567569
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0489",
+"name": "POI 489",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2983016,
+-7.840856
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0490",
+"name": "POI 490",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4742218,
+-7.8211524
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0491",
+"name": "POI 491",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3344606,
+-7.8508665
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0492",
+"name": "POI 492",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4617551,
+-7.8544787
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0493",
+"name": "POI 493",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4770436,
+-7.8330656
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0494",
+"name": "POI 494",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4378436,
+-7.8297675
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0495",
+"name": "POI 495",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4735909,
+-7.8046487
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0496",
+"name": "POI 496",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3162957,
+-7.8499997
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0497",
+"name": "POI 497",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4560822,
+-7.8256367
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0498",
+"name": "POI 498",
+"category": "cafe",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4251662,
+-7.8287272
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0499",
+"name": "POI 499",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.344162,
+-7.8089507
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0500",
+"name": "POI 500",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3753707,
+-7.8289318
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0501",
+"name": "POI 501",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3074256,
+-7.7971596
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0502",
+"name": "POI 502",
+"category": "school",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4580797,
+-7.7955622
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0503",
+"name": "POI 503",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3001188,
+-7.8298394
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0504",
+"name": "POI 504",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3633716,
+-7.8634716
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0505",
+"name": "POI 505",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2953556,
+-7.7955339
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0506",
+"name": "POI 506",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4403623,
+-7.858992
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0507",
+"name": "POI 507",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4643053,
+-7.8322036
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0508",
+"name": "POI 508",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.4341798,
+-7.8324712
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0509",
+"name": "POI 509",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.2909977,
+-7.8636619
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0510",
+"name": "POI 510",
+"category": "mosque",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3309744,
+-7.8580384
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0511",
+"name": "POI 511",
+"category": "restaurant",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3902766,
+-7.8611051
+]
+}
+},
+{
+"type": "Feature",
+"properties": {
+"poi_id": "P0512",
+"name": "POI 512",
+"category": "coffee_shop",
+"note": ""
+},
+"geometry": {
+"type": "Point",
+"coordinates": [
+110.3351516,
+-7.8602521
+]
+}
+}
+]
+}

@@ -1,0 +1,142 @@
+// Package release defines a data release's layout and manifest, shared by
+// prep (writer) and serving (reader). Paths are relative to the release
+// root: s3://<bucket>/releases/<release_id>/ or a local directory.
+package release
+
+import (
+	"fmt"
+	"path"
+)
+
+// NoProvince is the POI partition for points that touch no village.
+const NoProvince = "_none"
+
+// Layout paths.
+const (
+	VillagesPath   = "boundaries/villages.parquet"
+	CategoriesPath = "categories.json"
+	ManifestPath   = "manifest.json"
+)
+
+// VillageH3Path is the village_h3 partition for one province.
+func VillageH3Path(province string) string {
+	return path.Join("village_h3", "province_code="+province, "part-0.parquet")
+}
+
+// POIPath is the POI partition for one province.
+func POIPath(poiRelease, province string) string {
+	return path.Join("pois", "release="+poiRelease, "province_code="+province, "part-0.parquet")
+}
+
+// RasterPath is a raster layer's COG.
+func RasterPath(id string) string { return path.Join("rasters", id+".tif") }
+
+// RasterInfoPath is a raster layer's companion JSON.
+func RasterInfoPath(id string) string { return path.Join("rasters", id+".json") }
+
+// Source is provenance recorded in the manifest.
+type Source struct {
+	Name        string `json:"name"`
+	URL         string `json:"url,omitempty"`
+	Version     string `json:"version,omitempty"`
+	License     string `json:"license"`
+	Attribution string `json:"attribution,omitempty"`
+}
+
+// QCResult is one prep QC check.
+type QCResult struct {
+	Name     string `json:"name"`
+	Blocking bool   `json:"blocking"`
+	Passed   bool   `json:"passed"`
+	Value    any    `json:"value,omitempty"`
+	Detail   any    `json:"detail,omitempty"`
+	Error    string `json:"error,omitempty"`
+}
+
+// SourceRecord is a source with its local checksum when available.
+type SourceRecord struct {
+	Kind string `json:"kind"` // boundaries | pois | raster:<id>
+	Source
+	Path   string `json:"path"`
+	SHA256 string `json:"sha256,omitempty"`
+}
+
+// Artifact is one file in the release.
+type Artifact struct {
+	Path   string `json:"path"`
+	Bytes  int64  `json:"bytes"`
+	SHA256 string `json:"sha256"`
+	Rows   *int64 `json:"rows,omitempty"`
+}
+
+// RasterInfo is the companion <id>.json of a raster layer.
+type RasterInfo struct {
+	ID          string     `json:"id"`
+	Path        string     `json:"path"`
+	CRS         string     `json:"crs"`
+	Width       int        `json:"width"`
+	Height      int        `json:"height"`
+	OriginX     float64    `json:"origin_x"` // upper-left corner, full precision
+	OriginY     float64    `json:"origin_y"`
+	PixelWidth  float64    `json:"pixel_width"`
+	PixelHeight float64    `json:"pixel_height"` // positive; rows go south
+	DataType    string     `json:"data_type"`
+	Nodata      *float64   `json:"nodata"`
+	Units       string     `json:"units"`
+	Year        int        `json:"year,omitempty"`
+	BlockSize   [2]int     `json:"block_size"`
+	Overviews   int        `json:"overviews"`
+	Sum         float64    `json:"sum"`
+	ValidPixels int64      `json:"valid_pixels"`
+	Bounds      [4]float64 `json:"bounds"` // xmin, ymin, xmax, ymax
+	Source      Source     `json:"source"`
+}
+
+// Manifest is manifest.json.
+type Manifest struct {
+	ReleaseID       string         `json:"release_id"`
+	CreatedAt       string         `json:"created_at"`
+	Status          string         `json:"status"` // "ok" or "failed"
+	H3Resolution    int            `json:"h3_resolution"`
+	BoundaryVersion string         `json:"boundary_version"`
+	POIRelease      string         `json:"poi_release"`
+	ProvinceCodes   []string       `json:"province_codes"`
+	Tools           map[string]any `json:"tools"`
+	Sources         []SourceRecord `json:"sources"`
+	Artifacts       []Artifact     `json:"artifacts"`
+	Rasters         []RasterInfo   `json:"rasters"`
+	QC              []QCResult     `json:"qc"`
+}
+
+// Has reports whether the manifest lists the artifact path.
+func (m *Manifest) Has(p string) bool {
+	for _, a := range m.Artifacts {
+		if a.Path == p {
+			return true
+		}
+	}
+	return false
+}
+
+// Raster returns the raster layer with the given ID.
+func (m *Manifest) Raster(id string) (*RasterInfo, bool) {
+	for i := range m.Rasters {
+		if m.Rasters[i].ID == id {
+			return &m.Rasters[i], true
+		}
+	}
+	return nil, false
+}
+
+// Validate checks the manifest is servable.
+func (m *Manifest) Validate() error {
+	switch {
+	case m.Status != "ok":
+		return fmt.Errorf("release %s has status %q", m.ReleaseID, m.Status)
+	case m.H3Resolution < 0 || m.H3Resolution > 15:
+		return fmt.Errorf("release %s: bad h3_resolution %d", m.ReleaseID, m.H3Resolution)
+	case !m.Has(VillagesPath):
+		return fmt.Errorf("release %s: manifest lists no %s", m.ReleaseID, VillagesPath)
+	}
+	return nil
+}

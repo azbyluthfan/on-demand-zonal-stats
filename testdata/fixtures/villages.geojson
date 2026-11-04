@@ -1,0 +1,303 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V001",
+    "village_name": "Square West",
+    "district_code": "340401",
+    "district_name": "Kapanewon Barat",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "square"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       110.3,
+       -7.82
+      ],
+      [
+       110.32,
+       -7.82
+      ],
+      [
+       110.32,
+       -7.8
+      ],
+      [
+       110.3,
+       -7.8
+      ],
+      [
+       110.3,
+       -7.82
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V002",
+    "village_name": "Square East",
+    "district_code": "340401",
+    "district_name": "Kapanewon Barat",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "square, shares the x=110.32 border with V001"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       110.32,
+       -7.82
+      ],
+      [
+       110.34,
+       -7.82
+      ],
+      [
+       110.34,
+       -7.8
+      ],
+      [
+       110.32,
+       -7.8
+      ],
+      [
+       110.32,
+       -7.82
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V003",
+    "village_name": "L Shape",
+    "district_code": "340402",
+    "district_name": "Kapanewon Selatan",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "concave L"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       110.3,
+       -7.86
+      ],
+      [
+       110.34,
+       -7.86
+      ],
+      [
+       110.34,
+       -7.85
+      ],
+      [
+       110.31,
+       -7.85
+      ],
+      [
+       110.31,
+       -7.83
+      ],
+      [
+       110.3,
+       -7.83
+      ],
+      [
+       110.3,
+       -7.86
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V004",
+    "village_name": "Ring",
+    "district_code": "340403",
+    "district_name": "Kapanewon Timur",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "square with square hole"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       110.36,
+       -7.84
+      ],
+      [
+       110.4,
+       -7.84
+      ],
+      [
+       110.4,
+       -7.8
+      ],
+      [
+       110.36,
+       -7.8
+      ],
+      [
+       110.36,
+       -7.84
+      ]
+     ],
+     [
+      [
+       110.37,
+       -7.83
+      ],
+      [
+       110.37,
+       -7.81
+      ],
+      [
+       110.39,
+       -7.81
+      ],
+      [
+       110.39,
+       -7.83
+      ],
+      [
+       110.37,
+       -7.83
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V005",
+    "village_name": "Tiny",
+    "district_code": "340403",
+    "district_name": "Kapanewon Timur",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "triangle smaller than one res-9 cell"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       110.42,
+       -7.8005
+      ],
+      [
+       110.4205,
+       -7.8005
+      ],
+      [
+       110.42,
+       -7.8
+      ],
+      [
+       110.42,
+       -7.8005
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "village_id": "V006",
+    "village_name": "Islands",
+    "district_code": "340403",
+    "district_name": "Kapanewon Timur",
+    "regency_code": "3404",
+    "regency_name": "Fixture Regency",
+    "province_code": "34",
+    "province_name": "Fixture Province",
+    "shape": "multipolygon, two separate squares"
+   },
+   "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+     [
+      [
+       [
+        110.44,
+        -7.82
+       ],
+       [
+        110.45,
+        -7.82
+       ],
+       [
+        110.45,
+        -7.81
+       ],
+       [
+        110.44,
+        -7.81
+       ],
+       [
+        110.44,
+        -7.82
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        110.46,
+        -7.82
+       ],
+       [
+        110.47,
+        -7.82
+       ],
+       [
+        110.47,
+        -7.81
+       ],
+       [
+        110.46,
+        -7.81
+       ],
+       [
+        110.46,
+        -7.82
+       ]
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

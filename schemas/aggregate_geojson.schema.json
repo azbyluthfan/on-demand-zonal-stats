@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aggregate_geojson.schema.json",
+  "title": "POST /v1/aggregate response (include_geometry=true): GeoJSON FeatureCollection",
+  "type": "object",
+  "required": ["type", "features", "release_id", "boundary_version", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "type": { "const": "FeatureCollection" },
+    "release_id": { "type": "string", "minLength": 1 },
+    "boundary_version": { "type": "string", "minLength": 1 },
+    "summary": { "$ref": "aggregate_response.schema.json#/$defs/summary" },
+    "diagnostics": { "$ref": "aggregate_response.schema.json#/$defs/diagnostics" },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "geometry", "properties"],
+        "additionalProperties": false,
+        "properties": {
+          "type": { "const": "Feature" },
+          "id": { "type": "string", "minLength": 1 },
+          "properties": { "$ref": "aggregate_response.schema.json#/$defs/village" },
+          "geometry": {
+            "type": "object",
+            "required": ["type", "coordinates"],
+            "properties": {
+              "type": { "enum": ["Polygon", "MultiPolygon"] },
+              "coordinates": { "type": "array", "minItems": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

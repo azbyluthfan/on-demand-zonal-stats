@@ -1,0 +1,35 @@
+{
+  "id": "population_2020",
+  "path": "rasters/population_2020.tif",
+  "crs": "EPSG:4326",
+  "width": 1002,
+  "height": 799,
+  "origin_x": 110.00124959624206,
+  "origin_y": -7.539583101539147,
+  "pixel_width": 0.000833333330001,
+  "pixel_height": 0.0008333333300046,
+  "data_type": "Float32",
+  "nodata": -99999,
+  "units": "people",
+  "year": 2020,
+  "block_size": [
+    512,
+    512
+  ],
+  "overviews": 1,
+  "sum": 6829236.489706039,
+  "valid_pixels": 195510,
+  "bounds": [
+    110.00124959624206,
+    -8.205416432212823,
+    110.83624959290306,
+    -7.539583101539147
+  ],
+  "source": {
+    "name": "WorldPop Indonesia 2020, constrained, 100 m (ppp)",
+    "url": "https://hub.worldpop.org/geodata/summary?id=49730",
+    "version": "Global_2000_2020_Constrained BSGM",
+    "license": "CC BY 4.0",
+    "attribution": "WorldPop (www.worldpop.org), University of Southampton"
+  }
+}

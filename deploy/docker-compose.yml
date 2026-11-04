@@ -1,0 +1,175 @@
+# Demo stack: RustFS + seed (bundled sample release) + two API replicas
+# behind an nginx load balancer on :8080. Also: the prep CLI (profile
+# "prep") and the verification spike (profile "spike", docs/spikes.md).
+#
+#   docker compose up -d        (from the repo root; see compose.yaml)
+name: zonalstats
+
+services:
+  rustfs:
+    # Pinned version, see docs/spikes.md §4.
+    image: rustfs/rustfs:${RUSTFS_TAG:-1.0.4}
+    command: ["/data"]
+    environment:
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS_KEY:-rustfsadmin}
+      RUSTFS_SECRET_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      RUSTFS_CONSOLE_ENABLE: "true"
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # web console
+    volumes:
+      - rustfs-data:/data
+
+  # Builds a small Float32 COG fixture (GDAL is allowed in prep only).
+  make-cog:
+    image: ghcr.io/osgeo/gdal:ubuntu-small-3.10.3
+    profiles: ["spike"]
+    volumes:
+      - seed:/seed
+    entrypoint: ["sh", "-ec"]
+    command:
+      - |
+        gdal_create -of GTiff -outsize 2048 2048 -bands 1 -ot Float32 -burn 1 \
+          -a_srs EPSG:4326 -a_ullr 110 -7 110.2 -7.2 -a_nodata -99999 /seed/raw.tif
+        gdal_translate -of COG -co BLOCKSIZE=512 -co COMPRESS=DEFLATE -co OVERVIEWS=AUTO \
+          /seed/raw.tif /seed/fixture_cog.tif
+        gdalinfo /seed/fixture_cog.tif | head -40
+
+  # Creates the bucket and uploads seed files. Retries until RustFS is up.
+  bucket-init:
+    image: amazon/aws-cli:2.17.0
+    profiles: ["spike"]
+    depends_on:
+      rustfs: { condition: service_started }
+      make-cog: { condition: service_completed_successfully }
+    environment:
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-rustfsadmin}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      AWS_DEFAULT_REGION: us-east-1
+    volumes:
+      - seed:/seed
+    entrypoint: ["sh", "-ec"]
+    command:
+      - |
+        S3="aws --endpoint-url http://rustfs:9000 s3"
+        for i in $$(seq 1 30); do $$S3 ls >/dev/null 2>&1 && break; sleep 1; done
+        $$S3 mb s3://${S3_BUCKET:-villagestat} 2>/dev/null || true
+        $$S3 cp /seed/fixture_cog.tif s3://${S3_BUCKET:-villagestat}/spike/fixture_cog.tif
+        $$S3 ls s3://${S3_BUCKET:-villagestat}/spike/
+
+  spike:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.spike
+    profiles: ["spike"]
+    depends_on:
+      bucket-init: { condition: service_completed_successfully }
+    environment:
+      S3_ENDPOINT: rustfs:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-rustfsadmin}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      S3_BUCKET: ${S3_BUCKET:-villagestat}
+      S3_USE_SSL: "false"
+      # The cog extension uses its own Rust object_store client, not DuckDB secrets.
+      AWS_ENDPOINT: http://rustfs:9000
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-rustfsadmin}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      AWS_REGION: us-east-1
+      AWS_ALLOW_HTTP: "true"
+      AWS_VIRTUAL_HOSTED_STYLE_REQUEST: "false"
+      AWS_EC2_METADATA_DISABLED: "true"
+      DUCKDB_MEMORY_LIMIT: 2GB
+      DUCKDB_THREADS: "4"
+
+  # Uploads sample/releases/* to the bucket once (idempotent), then exits.
+  seed:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.api
+    image: zonalstats-api
+    entrypoint: ["seed", "-dir", "/sample/releases"]
+    depends_on:
+      rustfs: { condition: service_started }
+    environment:
+      S3_ENDPOINT: rustfs:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-rustfsadmin}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      S3_BUCKET: ${S3_BUCKET:-villagestat}
+    volumes:
+      - ../sample:/sample:ro
+    restart: "no"
+
+  # Two stateless API replicas reading the same release from RustFS.
+  api1: &api
+    image: zonalstats-api
+    depends_on:
+      seed: { condition: service_completed_successfully }
+    environment: &api-env
+      RELEASE_ID: ${RELEASE_ID:-diy-2026-11-a}
+      S3_BUCKET: ${S3_BUCKET:-villagestat}
+      S3_ENDPOINT: rustfs:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-rustfsadmin}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      S3_USE_SSL: "false"
+      # cog extension's own S3 client (docs/spikes.md §2), for raster reads
+      AWS_ENDPOINT: http://rustfs:9000
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-rustfsadmin}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      AWS_REGION: us-east-1
+      AWS_ALLOW_HTTP: "true"
+      AWS_EC2_METADATA_DISABLED: "true"
+      DUCKDB_MEMORY_LIMIT: ${DUCKDB_MEMORY_LIMIT:-2GB}
+      DUCKDB_THREADS: ${DUCKDB_THREADS:-4}
+      MAX_VILLAGES: ${MAX_VILLAGES:-10000}
+      QUERY_TIMEOUT: ${QUERY_TIMEOUT:-30s}
+      RESULT_CACHE_ENTRIES: ${RESULT_CACHE_ENTRIES:-2000000}
+      BLOCK_CACHE_MB: ${BLOCK_CACHE_MB:-256}
+      REF_CACHE_PROVINCES: ${REF_CACHE_PROVINCES:-4}
+    ports:
+      - "8081:8080"
+    mem_limit: 3g
+    restart: unless-stopped
+
+  api2:
+    <<: *api
+    ports:
+      - "8082:8080"
+
+  # Single entry point: round-robin over the replicas, frontend included.
+  lb:
+    image: nginx:1.27-alpine
+    depends_on:
+      api1: { condition: service_healthy }
+      api2: { condition: service_healthy }
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  # Prep CLI with GDAL. Repo is mounted at /work; outputs go to /work/out.
+  #   docker compose run --rm prep build -config configs/fixture.json
+  prep:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.prep
+    profiles: ["prep"]
+    volumes:
+      - ..:/work
+    environment:
+      S3_ENDPOINT: rustfs:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-rustfsadmin}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      S3_BUCKET: ${S3_BUCKET:-villagestat}
+      # cog extension's own S3 client (docs/spikes.md §2)
+      AWS_ENDPOINT: http://rustfs:9000
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-rustfsadmin}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-rustfsadmin}
+      AWS_REGION: us-east-1
+      AWS_ALLOW_HTTP: "true"
+      AWS_EC2_METADATA_DISABLED: "true"
+      DUCKDB_MEMORY_LIMIT: ${PREP_MEMORY_LIMIT:-6GB}
+
+volumes:
+  rustfs-data:
+  seed:

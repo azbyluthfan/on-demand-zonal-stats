@@ -1,0 +1,3280 @@
+{
+  "categories": [
+    {
+      "category": "restaurant",
+      "count": 5860
+    },
+    {
+      "category": "indonesian_restaurant",
+      "count": 3975
+    },
+    {
+      "category": "muslim_place_of_worship",
+      "count": 3032
+    },
+    {
+      "category": "hotel",
+      "count": 2951
+    },
+    {
+      "category": "shopping",
+      "count": 2639
+    },
+    {
+      "category": "clothing_store",
+      "count": 2533
+    },
+    {
+      "category": "coffee_shop",
+      "count": 2354
+    },
+    {
+      "category": "party_and_event_planning",
+      "count": 2034
+    },
+    {
+      "category": "cafe",
+      "count": 1873
+    },
+    {
+      "category": "professional_service",
+      "count": 1864
+    },
+    {
+      "category": "government_office",
+      "count": 1811
+    },
+    {
+      "category": "school",
+      "count": 1623
+    },
+    {
+      "category": "elementary_school",
+      "count": 1566
+    },
+    {
+      "category": "education",
+      "count": 1554
+    },
+    {
+      "category": "lodging",
+      "count": 1553
+    },
+    {
+      "category": "historic_site",
+      "count": 1446
+    },
+    {
+      "category": "grocery_store",
+      "count": 1318
+    },
+    {
+      "category": "college_university",
+      "count": 1305
+    },
+    {
+      "category": "travel_service",
+      "count": 1130
+    },
+    {
+      "category": "automotive_repair",
+      "count": 1101
+    },
+    {
+      "category": "real_estate_service",
+      "count": 1050
+    },
+    {
+      "category": "social_or_community_service",
+      "count": 1036
+    },
+    {
+      "category": "convenience_store",
+      "count": 1002
+    },
+    {
+      "category": "beauty_salon",
+      "count": 1000
+    },
+    {
+      "category": "chicken_restaurant",
+      "count": 907
+    },
+    {
+      "category": "hospital",
+      "count": 896
+    },
+    {
+      "category": "christian_place_of_worship",
+      "count": 884
+    },
+    {
+      "category": "bank_or_credit_union",
+      "count": 871
+    },
+    {
+      "category": "diner",
+      "count": 839
+    },
+    {
+      "category": "ramen_restaurant",
+      "count": 829
+    },
+    {
+      "category": "bakery",
+      "count": 790
+    },
+    {
+      "category": "tour_operator",
+      "count": 778
+    },
+    {
+      "category": "auto_dealer",
+      "count": 764
+    },
+    {
+      "category": "furniture_store",
+      "count": 735
+    },
+    {
+      "category": "printing_service",
+      "count": 715
+    },
+    {
+      "category": "community_and_government",
+      "count": 711
+    },
+    {
+      "category": "mobile_phone_store",
+      "count": 693
+    },
+    {
+      "category": "preschool",
+      "count": 660
+    },
+    {
+      "category": "electronics_store",
+      "count": 639
+    },
+    {
+      "category": "shopping_mall",
+      "count": 639
+    },
+    {
+      "category": "asian_restaurant",
+      "count": 630
+    },
+    {
+      "category": "motorcycle_repair",
+      "count": 627
+    },
+    {
+      "category": "pharmacy",
+      "count": 612
+    },
+    {
+      "category": "food_and_drink",
+      "count": 553
+    },
+    {
+      "category": "arts_and_entertainment",
+      "count": 551
+    },
+    {
+      "category": "spa",
+      "count": 524
+    },
+    {
+      "category": "motorcycle_dealer",
+      "count": 513
+    },
+    {
+      "category": "religious_organization",
+      "count": 507
+    },
+    {
+      "category": "car_rental_service",
+      "count": 505
+    },
+    {
+      "category": "computer_store",
+      "count": 479
+    },
+    {
+      "category": "arts_crafts_and_hobby_store",
+      "count": 469
+    },
+    {
+      "category": "barber",
+      "count": 461
+    },
+    {
+      "category": "fast_food_restaurant",
+      "count": 456
+    },
+    {
+      "category": "high_school",
+      "count": 448
+    },
+    {
+      "category": "travel_and_transportation",
+      "count": 443
+    },
+    {
+      "category": "manufacturer",
+      "count": 431
+    },
+    {
+      "category": "automotive_service",
+      "count": 428
+    },
+    {
+      "category": "flowers_and_gifts_store",
+      "count": 423
+    },
+    {
+      "category": "park",
+      "count": 413
+    },
+    {
+      "category": "middle_school",
+      "count": 407
+    },
+    {
+      "category": "health_care",
+      "count": 405
+    },
+    {
+      "category": "farm",
+      "count": 392
+    },
+    {
+      "category": "auto_parts_store",
+      "count": 380
+    },
+    {
+      "category": "river",
+      "count": 372
+    },
+    {
+      "category": "breakfast_and_brunch_restaurant",
+      "count": 362
+    },
+    {
+      "category": "campus_building",
+      "count": 349
+    },
+    {
+      "category": "bookstore",
+      "count": 344
+    },
+    {
+      "category": "beauty_supply_store",
+      "count": 327
+    },
+    {
+      "category": "soup_restaurant",
+      "count": 322
+    },
+    {
+      "category": "home_goods_store",
+      "count": 312
+    },
+    {
+      "category": "laundromat",
+      "count": 309
+    },
+    {
+      "category": "caterer",
+      "count": 305
+    },
+    {
+      "category": "womens_clothing_store",
+      "count": 302
+    },
+    {
+      "category": "art_gallery",
+      "count": 301
+    },
+    {
+      "category": "food_truck_stand",
+      "count": 299
+    },
+    {
+      "category": "gym",
+      "count": 298
+    },
+    {
+      "category": "music_venue",
+      "count": 295
+    },
+    {
+      "category": "home_developer",
+      "count": 287
+    },
+    {
+      "category": "contractor",
+      "count": 285
+    },
+    {
+      "category": "building_supply_store",
+      "count": 283
+    },
+    {
+      "category": "seafood_restaurant",
+      "count": 282
+    },
+    {
+      "category": "shoe_store",
+      "count": 279
+    },
+    {
+      "category": "fashion_and_apparel_store",
+      "count": 277
+    },
+    {
+      "category": "building_or_construction_service",
+      "count": 276
+    },
+    {
+      "category": "it_service_and_computer_repair",
+      "count": 268
+    },
+    {
+      "category": "t_shirt_printing_service",
+      "count": 266
+    },
+    {
+      "category": "health_food_store",
+      "count": 265
+    },
+    {
+      "category": "holiday_rental_home",
+      "count": 262
+    },
+    {
+      "category": "beach",
+      "count": 259
+    },
+    {
+      "category": "outpatient_care_facility",
+      "count": 257
+    },
+    {
+      "category": "pet_store",
+      "count": 257
+    },
+    {
+      "category": "jewelry_store",
+      "count": 254
+    },
+    {
+      "category": "lodge",
+      "count": 253
+    },
+    {
+      "category": "financial_service",
+      "count": 250
+    },
+    {
+      "category": "gas_station",
+      "count": 238
+    },
+    {
+      "category": "religious_school",
+      "count": 238
+    },
+    {
+      "category": "property_management",
+      "count": 237
+    },
+    {
+      "category": "money_transfer_service",
+      "count": 230
+    },
+    {
+      "category": "nursery_and_gardening_store",
+      "count": 225
+    },
+    {
+      "category": "lake",
+      "count": 221
+    },
+    {
+      "category": "freight_and_cargo_service",
+      "count": 219
+    },
+    {
+      "category": "eyewear_store",
+      "count": 215
+    },
+    {
+      "category": "hardware_store",
+      "count": 214
+    },
+    {
+      "category": "sport_or_fitness_facility",
+      "count": 213
+    },
+    {
+      "category": "home_improvement_store",
+      "count": 211
+    },
+    {
+      "category": "soccer_field",
+      "count": 208
+    },
+    {
+      "category": "hostel",
+      "count": 206
+    },
+    {
+      "category": "event_photography_service",
+      "count": 203
+    },
+    {
+      "category": "childrens_clothing_store",
+      "count": 201
+    },
+    {
+      "category": "library",
+      "count": 200
+    },
+    {
+      "category": "geographic_entities",
+      "count": 199
+    },
+    {
+      "category": "warehouse_club_store",
+      "count": 194
+    },
+    {
+      "category": "doctors_office",
+      "count": 193
+    },
+    {
+      "category": "auto_detailing",
+      "count": 192
+    },
+    {
+      "category": "police_station",
+      "count": 192
+    },
+    {
+      "category": "rental_service",
+      "count": 190
+    },
+    {
+      "category": "dental_clinic",
+      "count": 187
+    },
+    {
+      "category": "bar",
+      "count": 183
+    },
+    {
+      "category": "car_wash",
+      "count": 177
+    },
+    {
+      "category": "pet_breeder",
+      "count": 177
+    },
+    {
+      "category": "swimming_pool",
+      "count": 175
+    },
+    {
+      "category": "museum",
+      "count": 170
+    },
+    {
+      "category": "hair_salon",
+      "count": 165
+    },
+    {
+      "category": "wedding_planning",
+      "count": 165
+    },
+    {
+      "category": "food_beverage_distributor",
+      "count": 164
+    },
+    {
+      "category": "chinese_restaurant",
+      "count": 163
+    },
+    {
+      "category": "community_center",
+      "count": 162
+    },
+    {
+      "category": "publisher",
+      "count": 161
+    },
+    {
+      "category": "fashion_accessories_store",
+      "count": 160
+    },
+    {
+      "category": "bank",
+      "count": 159
+    },
+    {
+      "category": "naturopathic_medicine",
+      "count": 159
+    },
+    {
+      "category": "toy_store",
+      "count": 157
+    },
+    {
+      "category": "interior_design",
+      "count": 156
+    },
+    {
+      "category": "sporting_goods_store",
+      "count": 156
+    },
+    {
+      "category": "sports_and_recreation",
+      "count": 152
+    },
+    {
+      "category": "architectural_designer",
+      "count": 151
+    },
+    {
+      "category": "steakhouse",
+      "count": 148
+    },
+    {
+      "category": "credit_union",
+      "count": 144
+    },
+    {
+      "category": "japanese_restaurant",
+      "count": 144
+    },
+    {
+      "category": "non_governmental_association",
+      "count": 144
+    },
+    {
+      "category": "advertising_agency",
+      "count": 143
+    },
+    {
+      "category": "atm",
+      "count": 142
+    },
+    {
+      "category": "fashion_boutique",
+      "count": 139
+    },
+    {
+      "category": "educational_service",
+      "count": 138
+    },
+    {
+      "category": "mountain",
+      "count": 135
+    },
+    {
+      "category": "shipping_center",
+      "count": 134
+    },
+    {
+      "category": "fishmonger",
+      "count": 132
+    },
+    {
+      "category": "souvenir_store",
+      "count": 132
+    },
+    {
+      "category": "delicatessen",
+      "count": 131
+    },
+    {
+      "category": "graphic_designer",
+      "count": 131
+    },
+    {
+      "category": "industrial_equipment_manufacturer",
+      "count": 131
+    },
+    {
+      "category": "musical_instrument_store",
+      "count": 131
+    },
+    {
+      "category": "travel_company",
+      "count": 130
+    },
+    {
+      "category": "department_store",
+      "count": 128
+    },
+    {
+      "category": "web_designer",
+      "count": 127
+    },
+    {
+      "category": "real_estate_agent",
+      "count": 126
+    },
+    {
+      "category": "fabric_store",
+      "count": 124
+    },
+    {
+      "category": "animal_or_pet_service",
+      "count": 123
+    },
+    {
+      "category": "post_office",
+      "count": 123
+    },
+    {
+      "category": "pizza_restaurant",
+      "count": 122
+    },
+    {
+      "category": "cupcake_shop",
+      "count": 121
+    },
+    {
+      "category": "bike_store",
+      "count": 120
+    },
+    {
+      "category": "produce_store",
+      "count": 117
+    },
+    {
+      "category": "agriculture",
+      "count": 113
+    },
+    {
+      "category": "corporate_or_business_office",
+      "count": 113
+    },
+    {
+      "category": "internet_service_provider",
+      "count": 111
+    },
+    {
+      "category": "skin_care_and_makeup",
+      "count": 111
+    },
+    {
+      "category": "attorney_or_law_firm",
+      "count": 109
+    },
+    {
+      "category": "auditorium",
+      "count": 109
+    },
+    {
+      "category": "ice_cream_shop",
+      "count": 109
+    },
+    {
+      "category": "stadium_arena",
+      "count": 107
+    },
+    {
+      "category": "sport_league",
+      "count": 106
+    },
+    {
+      "category": "language_school",
+      "count": 105
+    },
+    {
+      "category": "telecommunications_company",
+      "count": 104
+    },
+    {
+      "category": "textile_manufacturer",
+      "count": 102
+    },
+    {
+      "category": "industrial_company",
+      "count": 101
+    },
+    {
+      "category": "tire_dealer_and_repair",
+      "count": 99
+    },
+    {
+      "category": "auto_company",
+      "count": 98
+    },
+    {
+      "category": "b2b_advertising_and_marketing_service",
+      "count": 95
+    },
+    {
+      "category": "information_technology_company",
+      "count": 93
+    },
+    {
+      "category": "sewing_and_alterations",
+      "count": 93
+    },
+    {
+      "category": "music_production",
+      "count": 91
+    },
+    {
+      "category": "storage_facility",
+      "count": 91
+    },
+    {
+      "category": "tea_room",
+      "count": 91
+    },
+    {
+      "category": "dry_cleaning",
+      "count": 90
+    },
+    {
+      "category": "fish_farm",
+      "count": 88
+    },
+    {
+      "category": "bridge",
+      "count": 87
+    },
+    {
+      "category": "marketing_agency",
+      "count": 87
+    },
+    {
+      "category": "arcade",
+      "count": 86
+    },
+    {
+      "category": "military_site",
+      "count": 86
+    },
+    {
+      "category": "luggage_store",
+      "count": 85
+    },
+    {
+      "category": "tutoring_service",
+      "count": 85
+    },
+    {
+      "category": "farmers_market",
+      "count": 84
+    },
+    {
+      "category": "veterinarian",
+      "count": 84
+    },
+    {
+      "category": "hobby_shop",
+      "count": 83
+    },
+    {
+      "category": "office_supply_store",
+      "count": 81
+    },
+    {
+      "category": "town_hall",
+      "count": 81
+    },
+    {
+      "category": "campground",
+      "count": 80
+    },
+    {
+      "category": "notary_public",
+      "count": 80
+    },
+    {
+      "category": "internet_marketing_service",
+      "count": 79
+    },
+    {
+      "category": "software_development",
+      "count": 79
+    },
+    {
+      "category": "day_care_preschool",
+      "count": 78
+    },
+    {
+      "category": "hvac_service",
+      "count": 78
+    },
+    {
+      "category": "broadcasting_media_production",
+      "count": 76
+    },
+    {
+      "category": "camera_and_photography_store",
+      "count": 75
+    },
+    {
+      "category": "commercial_industrial",
+      "count": 75
+    },
+    {
+      "category": "physical_therapy",
+      "count": 75
+    },
+    {
+      "category": "roman_catholic_place_of_worship",
+      "count": 75
+    },
+    {
+      "category": "smoke_and_vape_store",
+      "count": 75
+    },
+    {
+      "category": "smoothie_juice_bar",
+      "count": 75
+    },
+    {
+      "category": "internet_cafe",
+      "count": 73
+    },
+    {
+      "category": "resort",
+      "count": 73
+    },
+    {
+      "category": "home_service",
+      "count": 72
+    },
+    {
+      "category": "machine_shop",
+      "count": 72
+    },
+    {
+      "category": "amusement_park",
+      "count": 71
+    },
+    {
+      "category": "bus_station",
+      "count": 71
+    },
+    {
+      "category": "youth_organization",
+      "count": 71
+    },
+    {
+      "category": "barbecue_restaurant",
+      "count": 70
+    },
+    {
+      "category": "makeup_artist",
+      "count": 70
+    },
+    {
+      "category": "dessert_shop",
+      "count": 69
+    },
+    {
+      "category": "parking",
+      "count": 69
+    },
+    {
+      "category": "aquatic_pet_store",
+      "count": 68
+    },
+    {
+      "category": "halal_restaurant",
+      "count": 67
+    },
+    {
+      "category": "tattoo_and_piercing",
+      "count": 67
+    },
+    {
+      "category": "food_and_beverage_store",
+      "count": 66
+    },
+    {
+      "category": "playground",
+      "count": 66
+    },
+    {
+      "category": "tobacco_shop",
+      "count": 66
+    },
+    {
+      "category": "appliance_repair_service",
+      "count": 65
+    },
+    {
+      "category": "theme_restaurant",
+      "count": 65
+    },
+    {
+      "category": "insurance_agency",
+      "count": 64
+    },
+    {
+      "category": "pawn_shop",
+      "count": 64
+    },
+    {
+      "category": "metal_fabricator",
+      "count": 63
+    },
+    {
+      "category": "sportswear_store",
+      "count": 63
+    },
+    {
+      "category": "antique_store",
+      "count": 61
+    },
+    {
+      "category": "charity_organization",
+      "count": 61
+    },
+    {
+      "category": "karaoke_venue",
+      "count": 60
+    },
+    {
+      "category": "engineering_service",
+      "count": 59
+    },
+    {
+      "category": "hunting_and_fishing_store",
+      "count": 59
+    },
+    {
+      "category": "burger_restaurant",
+      "count": 58
+    },
+    {
+      "category": "cottage",
+      "count": 58
+    },
+    {
+      "category": "music_school",
+      "count": 58
+    },
+    {
+      "category": "bed_and_breakfast",
+      "count": 57
+    },
+    {
+      "category": "public_relations",
+      "count": 57
+    },
+    {
+      "category": "shoe_repair",
+      "count": 57
+    },
+    {
+      "category": "massage_therapy",
+      "count": 56
+    },
+    {
+      "category": "mens_clothing_store",
+      "count": 56
+    },
+    {
+      "category": "clothing_company",
+      "count": 55
+    },
+    {
+      "category": "train_station",
+      "count": 55
+    },
+    {
+      "category": "legal_service",
+      "count": 54
+    },
+    {
+      "category": "media_agency",
+      "count": 54
+    },
+    {
+      "category": "home_cleaning",
+      "count": 53
+    },
+    {
+      "category": "martial_arts_club",
+      "count": 53
+    },
+    {
+      "category": "medical_service_organization",
+      "count": 52
+    },
+    {
+      "category": "installment_loans",
+      "count": 51
+    },
+    {
+      "category": "vocational_and_technical_school",
+      "count": 51
+    },
+    {
+      "category": "chemical_plant",
+      "count": 49
+    },
+    {
+      "category": "laboratory_testing",
+      "count": 48
+    },
+    {
+      "category": "specialty_school",
+      "count": 47
+    },
+    {
+      "category": "donut_shop",
+      "count": 46
+    },
+    {
+      "category": "airport",
+      "count": 45
+    },
+    {
+      "category": "carpet_store",
+      "count": 45
+    },
+    {
+      "category": "hindu_place_of_worship",
+      "count": 45
+    },
+    {
+      "category": "movie_theater",
+      "count": 45
+    },
+    {
+      "category": "outlet_store",
+      "count": 45
+    },
+    {
+      "category": "water_park",
+      "count": 45
+    },
+    {
+      "category": "butcher_shop",
+      "count": 44
+    },
+    {
+      "category": "bottled_water_company",
+      "count": 43
+    },
+    {
+      "category": "hair_supply_store",
+      "count": 43
+    },
+    {
+      "category": "carpenter",
+      "count": 42
+    },
+    {
+      "category": "korean_restaurant",
+      "count": 42
+    },
+    {
+      "category": "lounge",
+      "count": 42
+    },
+    {
+      "category": "poultry_farm",
+      "count": 42
+    },
+    {
+      "category": "salad_bar",
+      "count": 42
+    },
+    {
+      "category": "sign_making",
+      "count": 42
+    },
+    {
+      "category": "hiking_trail",
+      "count": 41
+    },
+    {
+      "category": "monument",
+      "count": 41
+    },
+    {
+      "category": "computer_coaching",
+      "count": 40
+    },
+    {
+      "category": "dance_club",
+      "count": 40
+    },
+    {
+      "category": "paint_store",
+      "count": 40
+    },
+    {
+      "category": "tennis_court",
+      "count": 40
+    },
+    {
+      "category": "b2b_science_and_technology_service",
+      "count": 39
+    },
+    {
+      "category": "computer_hardware_company",
+      "count": 39
+    },
+    {
+      "category": "buddhist_place_of_worship",
+      "count": 38
+    },
+    {
+      "category": "counseling",
+      "count": 38
+    },
+    {
+      "category": "plastic_manufacturer",
+      "count": 38
+    },
+    {
+      "category": "public_school",
+      "count": 38
+    },
+    {
+      "category": "vitamin_and_supplement_store",
+      "count": 37
+    },
+    {
+      "category": "bridal_shop",
+      "count": 36
+    },
+    {
+      "category": "family_practice",
+      "count": 36
+    },
+    {
+      "category": "health_spa",
+      "count": 36
+    },
+    {
+      "category": "history_museum",
+      "count": 36
+    },
+    {
+      "category": "media_service",
+      "count": 36
+    },
+    {
+      "category": "nail_salon",
+      "count": 36
+    },
+    {
+      "category": "used_auto_dealer",
+      "count": 36
+    },
+    {
+      "category": "educational_research_institute",
+      "count": 35
+    },
+    {
+      "category": "fishing_club",
+      "count": 35
+    },
+    {
+      "category": "private_school",
+      "count": 35
+    },
+    {
+      "category": "retirement_home",
+      "count": 35
+    },
+    {
+      "category": "vegetarian_restaurant",
+      "count": 35
+    },
+    {
+      "category": "apparel_manufacturer",
+      "count": 34
+    },
+    {
+      "category": "commercial_real_estate",
+      "count": 34
+    },
+    {
+      "category": "environmental_conservation_organization",
+      "count": 34
+    },
+    {
+      "category": "italian_restaurant",
+      "count": 33
+    },
+    {
+      "category": "mattress_store",
+      "count": 33
+    },
+    {
+      "category": "appliance_store",
+      "count": 32
+    },
+    {
+      "category": "audio_visual_equipment_store",
+      "count": 32
+    },
+    {
+      "category": "bike_repair_maintenance",
+      "count": 32
+    },
+    {
+      "category": "buffet_restaurant",
+      "count": 32
+    },
+    {
+      "category": "employment_agency",
+      "count": 32
+    },
+    {
+      "category": "media_news_company",
+      "count": 32
+    },
+    {
+      "category": "video_game_store",
+      "count": 32
+    },
+    {
+      "category": "agricultural_service",
+      "count": 31
+    },
+    {
+      "category": "driving_school",
+      "count": 31
+    },
+    {
+      "category": "food_delivery_service",
+      "count": 31
+    },
+    {
+      "category": "jewelry_and_watches_manufacturer",
+      "count": 31
+    },
+    {
+      "category": "outdoor_store",
+      "count": 31
+    },
+    {
+      "category": "uniform_store",
+      "count": 31
+    },
+    {
+      "category": "flea_market",
+      "count": 30
+    },
+    {
+      "category": "inn",
+      "count": 30
+    },
+    {
+      "category": "theatre_venue",
+      "count": 30
+    },
+    {
+      "category": "courthouse",
+      "count": 29
+    },
+    {
+      "category": "dim_sum_restaurant",
+      "count": 29
+    },
+    {
+      "category": "electrician",
+      "count": 29
+    },
+    {
+      "category": "motel",
+      "count": 29
+    },
+    {
+      "category": "second_hand_store",
+      "count": 29
+    },
+    {
+      "category": "art_school",
+      "count": 28
+    },
+    {
+      "category": "badminton_court",
+      "count": 28
+    },
+    {
+      "category": "agricultural_cooperative",
+      "count": 27
+    },
+    {
+      "category": "auto_manufacturer",
+      "count": 27
+    },
+    {
+      "category": "metal_supplier",
+      "count": 27
+    },
+    {
+      "category": "music_and_dvd_store",
+      "count": 27
+    },
+    {
+      "category": "psychology",
+      "count": 27
+    },
+    {
+      "category": "volleyball_court",
+      "count": 27
+    },
+    {
+      "category": "animal_shelter",
+      "count": 26
+    },
+    {
+      "category": "car_stereo_store",
+      "count": 26
+    },
+    {
+      "category": "doner_kebab_restaurant",
+      "count": 26
+    },
+    {
+      "category": "health_food_restaurant",
+      "count": 26
+    },
+    {
+      "category": "lighting_store",
+      "count": 26
+    },
+    {
+      "category": "linen_store",
+      "count": 26
+    },
+    {
+      "category": "nature_reserve",
+      "count": 26
+    },
+    {
+      "category": "organic_grocery_store",
+      "count": 26
+    },
+    {
+      "category": "party_supply_store",
+      "count": 26
+    },
+    {
+      "category": "plastics_company",
+      "count": 26
+    },
+    {
+      "category": "chocolatier",
+      "count": 25
+    },
+    {
+      "category": "electric_utility_provider",
+      "count": 25
+    },
+    {
+      "category": "glass_and_mirror_sales_service",
+      "count": 25
+    },
+    {
+      "category": "medical_supply_store",
+      "count": 25
+    },
+    {
+      "category": "urban_farm",
+      "count": 25
+    },
+    {
+      "category": "home_health_care",
+      "count": 24
+    },
+    {
+      "category": "pediatric_clinic",
+      "count": 24
+    },
+    {
+      "category": "pool_billiards",
+      "count": 24
+    },
+    {
+      "category": "basketball_court",
+      "count": 23
+    },
+    {
+      "category": "dance_studio",
+      "count": 23
+    },
+    {
+      "category": "food_tour",
+      "count": 23
+    },
+    {
+      "category": "middle_eastern_restaurant",
+      "count": 23
+    },
+    {
+      "category": "pentecostal_place_of_worship",
+      "count": 23
+    },
+    {
+      "category": "water_utility_provider",
+      "count": 23
+    },
+    {
+      "category": "aquarium",
+      "count": 22
+    },
+    {
+      "category": "b2b_water_treatment_service",
+      "count": 22
+    },
+    {
+      "category": "movie_television_studio",
+      "count": 22
+    },
+    {
+      "category": "political_party_office",
+      "count": 22
+    },
+    {
+      "category": "vending_machine_supplier",
+      "count": 22
+    },
+    {
+      "category": "well_drilling",
+      "count": 22
+    },
+    {
+      "category": "auto_customization",
+      "count": 21
+    },
+    {
+      "category": "costume_store",
+      "count": 21
+    },
+    {
+      "category": "financial_advising",
+      "count": 21
+    },
+    {
+      "category": "media_news_website",
+      "count": 21
+    },
+    {
+      "category": "medical_school",
+      "count": 21
+    },
+    {
+      "category": "motorsports_store",
+      "count": 21
+    },
+    {
+      "category": "oil_change_station",
+      "count": 21
+    },
+    {
+      "category": "optometry",
+      "count": 21
+    },
+    {
+      "category": "bar_and_grill_restaurant",
+      "count": 20
+    },
+    {
+      "category": "football_stadium",
+      "count": 20
+    },
+    {
+      "category": "hardware_home_and_garden_store",
+      "count": 20
+    },
+    {
+      "category": "nursing",
+      "count": 20
+    },
+    {
+      "category": "obstetrics_and_gynecology",
+      "count": 20
+    },
+    {
+      "category": "pharmaceutical_company",
+      "count": 20
+    },
+    {
+      "category": "baseball_field",
+      "count": 19
+    },
+    {
+      "category": "cultural_center",
+      "count": 19
+    },
+    {
+      "category": "funeral_service",
+      "count": 19
+    },
+    {
+      "category": "home_security",
+      "count": 19
+    },
+    {
+      "category": "investing",
+      "count": 19
+    },
+    {
+      "category": "political_organization",
+      "count": 19
+    },
+    {
+      "category": "print_media",
+      "count": 19
+    },
+    {
+      "category": "reflexology",
+      "count": 19
+    },
+    {
+      "category": "sightseeing_tour_agency",
+      "count": 19
+    },
+    {
+      "category": "thai_restaurant",
+      "count": 19
+    },
+    {
+      "category": "windows_installation",
+      "count": 19
+    },
+    {
+      "category": "canoe_and_kayak_hire_service",
+      "count": 18
+    },
+    {
+      "category": "fire_station",
+      "count": 18
+    },
+    {
+      "category": "radio_station",
+      "count": 18
+    },
+    {
+      "category": "wholesale_grocer",
+      "count": 18
+    },
+    {
+      "category": "housing_authority",
+      "count": 17
+    },
+    {
+      "category": "janitorial_service",
+      "count": 17
+    },
+    {
+      "category": "specialty_foods_store",
+      "count": 17
+    },
+    {
+      "category": "accountant",
+      "count": 16
+    },
+    {
+      "category": "auto_body_shop",
+      "count": 16
+    },
+    {
+      "category": "bubble_tea_shop",
+      "count": 16
+    },
+    {
+      "category": "cabin",
+      "count": 16
+    },
+    {
+      "category": "car_window_tinting",
+      "count": 16
+    },
+    {
+      "category": "discount_store",
+      "count": 16
+    },
+    {
+      "category": "key_and_locksmith",
+      "count": 16
+    },
+    {
+      "category": "maternity_center",
+      "count": 16
+    },
+    {
+      "category": "sushi_restaurant",
+      "count": 16
+    },
+    {
+      "category": "auto_glass_service",
+      "count": 15
+    },
+    {
+      "category": "garbage_collection_service",
+      "count": 15
+    },
+    {
+      "category": "pool_cleaning",
+      "count": 15
+    },
+    {
+      "category": "real_estate_investment",
+      "count": 15
+    },
+    {
+      "category": "yoga_studio",
+      "count": 15
+    },
+    {
+      "category": "american_restaurant",
+      "count": 14
+    },
+    {
+      "category": "b2b_surgical_appliances_and_supplies",
+      "count": 14
+    },
+    {
+      "category": "bus_tour",
+      "count": 14
+    },
+    {
+      "category": "emergency_department",
+      "count": 14
+    },
+    {
+      "category": "fitness_trainer",
+      "count": 14
+    },
+    {
+      "category": "public_plaza",
+      "count": 14
+    },
+    {
+      "category": "social_media_agency",
+      "count": 14
+    },
+    {
+      "category": "art_museum",
+      "count": 13
+    },
+    {
+      "category": "electronic_equipment_supplier",
+      "count": 13
+    },
+    {
+      "category": "flight_school",
+      "count": 13
+    },
+    {
+      "category": "gymnastics_center",
+      "count": 13
+    },
+    {
+      "category": "hat_store",
+      "count": 13
+    },
+    {
+      "category": "lumber_store",
+      "count": 13
+    },
+    {
+      "category": "meat_wholesaler",
+      "count": 13
+    },
+    {
+      "category": "trusts",
+      "count": 13
+    },
+    {
+      "category": "day_spa",
+      "count": 12
+    },
+    {
+      "category": "dog_park",
+      "count": 12
+    },
+    {
+      "category": "fish_and_chips_restaurant",
+      "count": 12
+    },
+    {
+      "category": "forest",
+      "count": 12
+    },
+    {
+      "category": "livestock_breeder",
+      "count": 12
+    },
+    {
+      "category": "medical_research_institute",
+      "count": 12
+    },
+    {
+      "category": "race_track",
+      "count": 12
+    },
+    {
+      "category": "restaurant_equipment_and_supply",
+      "count": 12
+    },
+    {
+      "category": "roofing",
+      "count": 12
+    },
+    {
+      "category": "soccer_stadium",
+      "count": 12
+    },
+    {
+      "category": "truck_rental_service",
+      "count": 12
+    },
+    {
+      "category": "auto_restoration_service",
+      "count": 11
+    },
+    {
+      "category": "comfort_food_restaurant",
+      "count": 11
+    },
+    {
+      "category": "currency_exchange",
+      "count": 11
+    },
+    {
+      "category": "gardener",
+      "count": 11
+    },
+    {
+      "category": "handyman",
+      "count": 11
+    },
+    {
+      "category": "indian_restaurant",
+      "count": 11
+    },
+    {
+      "category": "occupational_safety",
+      "count": 11
+    },
+    {
+      "category": "pub",
+      "count": 11
+    },
+    {
+      "category": "sculpture_statue",
+      "count": 11
+    },
+    {
+      "category": "television_service_provider",
+      "count": 11
+    },
+    {
+      "category": "writing_service",
+      "count": 11
+    },
+    {
+      "category": "acupuncture",
+      "count": 10
+    },
+    {
+      "category": "airline",
+      "count": 10
+    },
+    {
+      "category": "cosmetics_and_fragrance_store",
+      "count": 10
+    },
+    {
+      "category": "packing_supply_store",
+      "count": 10
+    },
+    {
+      "category": "pet_groomer",
+      "count": 10
+    },
+    {
+      "category": "superstore",
+      "count": 10
+    },
+    {
+      "category": "towing_service",
+      "count": 10
+    },
+    {
+      "category": "appliance_manufacturer",
+      "count": 9
+    },
+    {
+      "category": "b2b_environmental_service",
+      "count": 9
+    },
+    {
+      "category": "comic_books_store",
+      "count": 9
+    },
+    {
+      "category": "credit_and_debt_counseling",
+      "count": 9
+    },
+    {
+      "category": "dermatology",
+      "count": 9
+    },
+    {
+      "category": "jail_or_prison",
+      "count": 9
+    },
+    {
+      "category": "national_park",
+      "count": 9
+    },
+    {
+      "category": "sandwich_shop",
+      "count": 9
+    },
+    {
+      "category": "swimming_instructor",
+      "count": 9
+    },
+    {
+      "category": "taxi_service",
+      "count": 9
+    },
+    {
+      "category": "travel_agent",
+      "count": 9
+    },
+    {
+      "category": "auto_leasing",
+      "count": 8
+    },
+    {
+      "category": "automation_service",
+      "count": 8
+    },
+    {
+      "category": "bike_rental",
+      "count": 8
+    },
+    {
+      "category": "biotechnology_company",
+      "count": 8
+    },
+    {
+      "category": "candy_store",
+      "count": 8
+    },
+    {
+      "category": "cooking_school",
+      "count": 8
+    },
+    {
+      "category": "energy_company",
+      "count": 8
+    },
+    {
+      "category": "gift_shop",
+      "count": 8
+    },
+    {
+      "category": "malaysian_restaurant",
+      "count": 8
+    },
+    {
+      "category": "merchandising_service",
+      "count": 8
+    },
+    {
+      "category": "plumbing",
+      "count": 8
+    },
+    {
+      "category": "psychic_advising",
+      "count": 8
+    },
+    {
+      "category": "public_fountain",
+      "count": 8
+    },
+    {
+      "category": "videographer",
+      "count": 8
+    },
+    {
+      "category": "archery_store",
+      "count": 7
+    },
+    {
+      "category": "automotive_consultant",
+      "count": 7
+    },
+    {
+      "category": "b2b_energy_and_utility_service",
+      "count": 7
+    },
+    {
+      "category": "b2b_mining",
+      "count": 7
+    },
+    {
+      "category": "baptist_place_of_worship",
+      "count": 7
+    },
+    {
+      "category": "boxing_class",
+      "count": 7
+    },
+    {
+      "category": "environmental_or_ecological_service",
+      "count": 7
+    },
+    {
+      "category": "garage_door_service",
+      "count": 7
+    },
+    {
+      "category": "golf_course",
+      "count": 7
+    },
+    {
+      "category": "halfway_house",
+      "count": 7
+    },
+    {
+      "category": "labor_union",
+      "count": 7
+    },
+    {
+      "category": "landscaping",
+      "count": 7
+    },
+    {
+      "category": "meditation_center",
+      "count": 7
+    },
+    {
+      "category": "motorcycle_rental_service",
+      "count": 7
+    },
+    {
+      "category": "paintball",
+      "count": 7
+    },
+    {
+      "category": "palace",
+      "count": 7
+    },
+    {
+      "category": "railroad_freight",
+      "count": 7
+    },
+    {
+      "category": "rv_rental_service",
+      "count": 7
+    },
+    {
+      "category": "surfing",
+      "count": 7
+    },
+    {
+      "category": "tv_mounting",
+      "count": 7
+    },
+    {
+      "category": "winery",
+      "count": 7
+    },
+    {
+      "category": "archery_range",
+      "count": 6
+    },
+    {
+      "category": "b2b_business_management_service",
+      "count": 6
+    },
+    {
+      "category": "b2b_telemarketing_service",
+      "count": 6
+    },
+    {
+      "category": "botanical_garden",
+      "count": 6
+    },
+    {
+      "category": "cave",
+      "count": 6
+    },
+    {
+      "category": "commercial_refrigeration",
+      "count": 6
+    },
+    {
+      "category": "countertop_installation",
+      "count": 6
+    },
+    {
+      "category": "driving_range",
+      "count": 6
+    },
+    {
+      "category": "food_consultant",
+      "count": 6
+    },
+    {
+      "category": "homeless_shelter",
+      "count": 6
+    },
+    {
+      "category": "logging_service",
+      "count": 6
+    },
+    {
+      "category": "neurology",
+      "count": 6
+    },
+    {
+      "category": "passport_and_visa_service",
+      "count": 6
+    },
+    {
+      "category": "pet_adoption",
+      "count": 6
+    },
+    {
+      "category": "reptile_store",
+      "count": 6
+    },
+    {
+      "category": "vision_or_eye_care_clinic",
+      "count": 6
+    },
+    {
+      "category": "zoo",
+      "count": 6
+    },
+    {
+      "category": "adult_entertainment_venue",
+      "count": 5
+    },
+    {
+      "category": "airport_lounge",
+      "count": 5
+    },
+    {
+      "category": "bags_luggage_company",
+      "count": 5
+    },
+    {
+      "category": "beer_garden",
+      "count": 5
+    },
+    {
+      "category": "career_counseling",
+      "count": 5
+    },
+    {
+      "category": "castle",
+      "count": 5
+    },
+    {
+      "category": "chiropractic",
+      "count": 5
+    },
+    {
+      "category": "disability_services_and_support_organization",
+      "count": 5
+    },
+    {
+      "category": "divorce_and_family_law",
+      "count": 5
+    },
+    {
+      "category": "e_commerce_service",
+      "count": 5
+    },
+    {
+      "category": "educational_supply_store",
+      "count": 5
+    },
+    {
+      "category": "endodontics",
+      "count": 5
+    },
+    {
+      "category": "event_venue",
+      "count": 5
+    },
+    {
+      "category": "florist",
+      "count": 5
+    },
+    {
+      "category": "furniture_assembly",
+      "count": 5
+    },
+    {
+      "category": "gelato_shop",
+      "count": 5
+    },
+    {
+      "category": "internal_medicine",
+      "count": 5
+    },
+    {
+      "category": "life_coach",
+      "count": 5
+    },
+    {
+      "category": "lingerie_store",
+      "count": 5
+    },
+    {
+      "category": "liquor_store",
+      "count": 5
+    },
+    {
+      "category": "nursing_school",
+      "count": 5
+    },
+    {
+      "category": "record_label",
+      "count": 5
+    },
+    {
+      "category": "recycling_center",
+      "count": 5
+    },
+    {
+      "category": "tanning_salon",
+      "count": 5
+    },
+    {
+      "category": "translating_and_interpreting_service",
+      "count": 5
+    },
+    {
+      "category": "animation_studio",
+      "count": 4
+    },
+    {
+      "category": "appraisal_service",
+      "count": 4
+    },
+    {
+      "category": "asian_fusion_restaurant",
+      "count": 4
+    },
+    {
+      "category": "atv_rental_tour",
+      "count": 4
+    },
+    {
+      "category": "auction_house",
+      "count": 4
+    },
+    {
+      "category": "blood_and_plasma_donation_center",
+      "count": 4
+    },
+    {
+      "category": "carpet_cleaning",
+      "count": 4
+    },
+    {
+      "category": "civic_organization",
+      "count": 4
+    },
+    {
+      "category": "cosmetology_school",
+      "count": 4
+    },
+    {
+      "category": "criminal_defense_law",
+      "count": 4
+    },
+    {
+      "category": "fence_and_gate_sales_service",
+      "count": 4
+    },
+    {
+      "category": "ferry_boat_company",
+      "count": 4
+    },
+    {
+      "category": "greek_restaurant",
+      "count": 4
+    },
+    {
+      "category": "guest_house",
+      "count": 4
+    },
+    {
+      "category": "hospice",
+      "count": 4
+    },
+    {
+      "category": "jazz_and_blues_venue",
+      "count": 4
+    },
+    {
+      "category": "laundry_service",
+      "count": 4
+    },
+    {
+      "category": "masonry_concrete",
+      "count": 4
+    },
+    {
+      "category": "medical_spa",
+      "count": 4
+    },
+    {
+      "category": "metal_plating_service",
+      "count": 4
+    },
+    {
+      "category": "mexican_restaurant",
+      "count": 4
+    },
+    {
+      "category": "motorcycle_manufacturer",
+      "count": 4
+    },
+    {
+      "category": "nutrition_service",
+      "count": 4
+    },
+    {
+      "category": "patio_covers",
+      "count": 4
+    },
+    {
+      "category": "pest_control_service",
+      "count": 4
+    },
+    {
+      "category": "private_association",
+      "count": 4
+    },
+    {
+      "category": "rv_park",
+      "count": 4
+    },
+    {
+      "category": "science_museum",
+      "count": 4
+    },
+    {
+      "category": "second_hand_clothing_store",
+      "count": 4
+    },
+    {
+      "category": "shooting_range",
+      "count": 4
+    },
+    {
+      "category": "social_media_company",
+      "count": 4
+    },
+    {
+      "category": "student_union",
+      "count": 4
+    },
+    {
+      "category": "swimwear_store",
+      "count": 4
+    },
+    {
+      "category": "airport_terminal",
+      "count": 3
+    },
+    {
+      "category": "aromatherapy",
+      "count": 3
+    },
+    {
+      "category": "b2b_service",
+      "count": 3
+    },
+    {
+      "category": "basketball_stadium",
+      "count": 3
+    },
+    {
+      "category": "beer_bar",
+      "count": 3
+    },
+    {
+      "category": "brewery",
+      "count": 3
+    },
+    {
+      "category": "cheese_shop",
+      "count": 3
+    },
+    {
+      "category": "civilization_museum",
+      "count": 3
+    },
+    {
+      "category": "commercial_vehicle_dealer",
+      "count": 3
+    },
+    {
+      "category": "dairy_farm",
+      "count": 3
+    },
+    {
+      "category": "damage_restoration",
+      "count": 3
+    },
+    {
+      "category": "department_of_motor_vehicles",
+      "count": 3
+    },
+    {
+      "category": "drive_in_theater",
+      "count": 3
+    },
+    {
+      "category": "educational_camp",
+      "count": 3
+    },
+    {
+      "category": "embassy",
+      "count": 3
+    },
+    {
+      "category": "family_counseling",
+      "count": 3
+    },
+    {
+      "category": "fertility_clinic",
+      "count": 3
+    },
+    {
+      "category": "historical_tour",
+      "count": 3
+    },
+    {
+      "category": "home_inspector",
+      "count": 3
+    },
+    {
+      "category": "horse_riding",
+      "count": 3
+    },
+    {
+      "category": "hot_springs",
+      "count": 3
+    },
+    {
+      "category": "indo_chinese_restaurant",
+      "count": 3
+    },
+    {
+      "category": "lighthouse",
+      "count": 3
+    },
+    {
+      "category": "observatory",
+      "count": 3
+    },
+    {
+      "category": "oncology",
+      "count": 3
+    },
+    {
+      "category": "onsen",
+      "count": 3
+    },
+    {
+      "category": "pancake_house",
+      "count": 3
+    },
+    {
+      "category": "paving_contractor",
+      "count": 3
+    },
+    {
+      "category": "powder_coating_service",
+      "count": 3
+    },
+    {
+      "category": "process_server",
+      "count": 3
+    },
+    {
+      "category": "product_design",
+      "count": 3
+    },
+    {
+      "category": "psychiatry",
+      "count": 3
+    },
+    {
+      "category": "recreational_vehicle_dealer",
+      "count": 3
+    },
+    {
+      "category": "reproductive_perinatal_and_womens_care",
+      "count": 3
+    },
+    {
+      "category": "rock_climbing_spot",
+      "count": 3
+    },
+    {
+      "category": "skate_store",
+      "count": 3
+    },
+    {
+      "category": "ski_resort",
+      "count": 3
+    },
+    {
+      "category": "solar_installation",
+      "count": 3
+    },
+    {
+      "category": "spanish_restaurant",
+      "count": 3
+    },
+    {
+      "category": "trophy_store",
+      "count": 3
+    },
+    {
+      "category": "truck_repair",
+      "count": 3
+    },
+    {
+      "category": "urology",
+      "count": 3
+    },
+    {
+      "category": "vietnamese_restaurant",
+      "count": 3
+    },
+    {
+      "category": "water_heater_installation_repair",
+      "count": 3
+    },
+    {
+      "category": "wholesaler",
+      "count": 3
+    },
+    {
+      "category": "wildlife_sanctuary",
+      "count": 3
+    },
+    {
+      "category": "wills_trusts_and_probate",
+      "count": 3
+    },
+    {
+      "category": "abuse_and_addiction_treatment_center",
+      "count": 2
+    },
+    {
+      "category": "amateur_sport_team",
+      "count": 2
+    },
+    {
+      "category": "b2b_food_products",
+      "count": 2
+    },
+    {
+      "category": "b2b_marketing_consultant",
+      "count": 2
+    },
+    {
+      "category": "bagel_shop",
+      "count": 2
+    },
+    {
+      "category": "book_magazine_distribution",
+      "count": 2
+    },
+    {
+      "category": "boot_camp",
+      "count": 2
+    },
+    {
+      "category": "bowling_alley",
+      "count": 2
+    },
+    {
+      "category": "broker",
+      "count": 2
+    },
+    {
+      "category": "casino",
+      "count": 2
+    },
+    {
+      "category": "childrens_museum",
+      "count": 2
+    },
+    {
+      "category": "clothing_rental",
+      "count": 2
+    },
+    {
+      "category": "collection_agency",
+      "count": 2
+    },
+    {
+      "category": "comedy_club",
+      "count": 2
+    },
+    {
+      "category": "commercial_printer",
+      "count": 2
+    },
+    {
+      "category": "courier_and_delivery_service",
+      "count": 2
+    },
+    {
+      "category": "coworking_space",
+      "count": 2
+    },
+    {
+      "category": "designer_clothing",
+      "count": 2
+    },
+    {
+      "category": "distillery",
+      "count": 2
+    },
+    {
+      "category": "distribution_service",
+      "count": 2
+    },
+    {
+      "category": "diving_center",
+      "count": 2
+    },
+    {
+      "category": "ear_nose_and_throat",
+      "count": 2
+    },
+    {
+      "category": "electrical_supply_store",
+      "count": 2
+    },
+    {
+      "category": "equestrian_facility",
+      "count": 2
+    },
+    {
+      "category": "european_restaurant",
+      "count": 2
+    },
+    {
+      "category": "exhibition_and_trade_fair_venue",
+      "count": 2
+    },
+    {
+      "category": "fairgrounds",
+      "count": 2
+    },
+    {
+      "category": "fire_protection_service",
+      "count": 2
+    },
+    {
+      "category": "fireworks_store",
+      "count": 2
+    },
+    {
+      "category": "fort",
+      "count": 2
+    },
+    {
+      "category": "freight_forwarding_agency",
+      "count": 2
+    },
+    {
+      "category": "french_restaurant",
+      "count": 2
+    },
+    {
+      "category": "frozen_yogurt_shop",
+      "count": 2
+    },
+    {
+      "category": "game_publisher",
+      "count": 2
+    },
+    {
+      "category": "gay_bar",
+      "count": 2
+    },
+    {
+      "category": "general_dentistry",
+      "count": 2
+    },
+    {
+      "category": "glass_manufacturer",
+      "count": 2
+    },
+    {
+      "category": "health_department",
+      "count": 2
+    },
+    {
+      "category": "herb_and_spice_store",
+      "count": 2
+    },
+    {
+      "category": "horse_boarding",
+      "count": 2
+    },
+    {
+      "category": "horseback_riding_service",
+      "count": 2
+    },
+    {
+      "category": "hot_dog_restaurant",
+      "count": 2
+    },
+    {
+      "category": "image_consultant",
+      "count": 2
+    },
+    {
+      "category": "inventory_control_service",
+      "count": 2
+    },
+    {
+      "category": "ip_and_internet_law",
+      "count": 2
+    },
+    {
+      "category": "jehovahs_witness_place_of_worship",
+      "count": 2
+    },
+    {
+      "category": "junkyard",
+      "count": 2
+    },
+    {
+      "category": "land_surveying",
+      "count": 2
+    },
+    {
+      "category": "mattress_manufacturing",
+      "count": 2
+    },
+    {
+      "category": "mediterranean_restaurant",
+      "count": 2
+    },
+    {
+      "category": "mobile_home_dealer",
+      "count": 2
+    },
+    {
+      "category": "painting",
+      "count": 2
+    },
+    {
+      "category": "pilates_studio",
+      "count": 2
+    },
+    {
+      "category": "plastic_and_reconstructive_surgery",
+      "count": 2
+    },
+    {
+      "category": "pop_up_store",
+      "count": 2
+    },
+    {
+      "category": "prenatal_and_perinatal_care",
+      "count": 2
+    },
+    {
+      "category": "psychotherapy",
+      "count": 2
+    },
+    {
+      "category": "public_restroom",
+      "count": 2
+    },
+    {
+      "category": "restaurant_wholesale",
+      "count": 2
+    },
+    {
+      "category": "rheumatology",
+      "count": 2
+    },
+    {
+      "category": "scuba_diving_center",
+      "count": 2
+    },
+    {
+      "category": "self_storage_facility",
+      "count": 2
+    },
+    {
+      "category": "senior_citizen_service",
+      "count": 2
+    },
+    {
+      "category": "skate_park",
+      "count": 2
+    },
+    {
+      "category": "soul_food",
+      "count": 2
+    },
+    {
+      "category": "sunglasses_store",
+      "count": 2
+    },
+    {
+      "category": "turkish_restaurant",
+      "count": 2
+    },
+    {
+      "category": "vehicle_shipping",
+      "count": 2
+    },
+    {
+      "category": "visitor_center",
+      "count": 2
+    },
+    {
+      "category": "weather_station",
+      "count": 2
+    },
+    {
+      "category": "wheel_and_rim_repair",
+      "count": 2
+    },
+    {
+      "category": "adult_store",
+      "count": 1
+    },
+    {
+      "category": "afghani_restaurant",
+      "count": 1
+    },
+    {
+      "category": "aircraft_manufacturer",
+      "count": 1
+    },
+    {
+      "category": "alcohol_and_drug_treatment_center",
+      "count": 1
+    },
+    {
+      "category": "arabian_restaurant",
+      "count": 1
+    },
+    {
+      "category": "argentine_restaurant",
+      "count": 1
+    },
+    {
+      "category": "atv_recreation_park",
+      "count": 1
+    },
+    {
+      "category": "audiology",
+      "count": 1
+    },
+    {
+      "category": "automobile_registration_service",
+      "count": 1
+    },
+    {
+      "category": "automotive_storage_facility",
+      "count": 1
+    },
+    {
+      "category": "automotive_wheel_polishing_service",
+      "count": 1
+    },
+    {
+      "category": "b2b_publicity_service",
+      "count": 1
+    },
+    {
+      "category": "baby_gear_and_nursery_store",
+      "count": 1
+    },
+    {
+      "category": "bank_equipment_service",
+      "count": 1
+    },
+    {
+      "category": "bartender",
+      "count": 1
+    },
+    {
+      "category": "basque_restaurant",
+      "count": 1
+    },
+    {
+      "category": "battery_store",
+      "count": 1
+    },
+    {
+      "category": "bistro",
+      "count": 1
+    },
+    {
+      "category": "boat_parts_store",
+      "count": 1
+    },
+    {
+      "category": "boat_tour",
+      "count": 1
+    },
+    {
+      "category": "business_consulting",
+      "count": 1
+    },
+    {
+      "category": "cardiology",
+      "count": 1
+    },
+    {
+      "category": "cards_and_stationery_store",
+      "count": 1
+    },
+    {
+      "category": "choir",
+      "count": 1
+    },
+    {
+      "category": "cocktail_bar",
+      "count": 1
+    },
+    {
+      "category": "computer_museum",
+      "count": 1
+    },
+    {
+      "category": "computer_wholesaler",
+      "count": 1
+    },
+    {
+      "category": "condominium",
+      "count": 1
+    },
+    {
+      "category": "craft_store",
+      "count": 1
+    },
+    {
+      "category": "custom_clothing_store",
+      "count": 1
+    },
+    {
+      "category": "custom_t_shirt_store",
+      "count": 1
+    },
+    {
+      "category": "cycling_class",
+      "count": 1
+    },
+    {
+      "category": "dialysis_clinic",
+      "count": 1
+    },
+    {
+      "category": "duty_free_store",
+      "count": 1
+    },
+    {
+      "category": "eastern_european_restaurant",
+      "count": 1
+    },
+    {
+      "category": "employment_law",
+      "count": 1
+    },
+    {
+      "category": "festival_venue",
+      "count": 1
+    },
+    {
+      "category": "fishing_charter",
+      "count": 1
+    },
+    {
+      "category": "flooring_contractor",
+      "count": 1
+    },
+    {
+      "category": "food_bank",
+      "count": 1
+    },
+    {
+      "category": "food_court",
+      "count": 1
+    },
+    {
+      "category": "gastropub",
+      "count": 1
+    },
+    {
+      "category": "geological_service",
+      "count": 1
+    },
+    {
+      "category": "georgian_restaurant",
+      "count": 1
+    },
+    {
+      "category": "go_kart_club",
+      "count": 1
+    },
+    {
+      "category": "granite_supplier",
+      "count": 1
+    },
+    {
+      "category": "gun_and_ammo_store",
+      "count": 1
+    },
+    {
+      "category": "gutter_service",
+      "count": 1
+    },
+    {
+      "category": "hair_replacement",
+      "count": 1
+    },
+    {
+      "category": "haunted_house",
+      "count": 1
+    },
+    {
+      "category": "heliport",
+      "count": 1
+    },
+    {
+      "category": "historic_mission",
+      "count": 1
+    },
+    {
+      "category": "home_decor_store",
+      "count": 1
+    },
+    {
+      "category": "home_staging",
+      "count": 1
+    },
+    {
+      "category": "hong_kong_style_cafe",
+      "count": 1
+    },
+    {
+      "category": "hookah_bar",
+      "count": 1
+    },
+    {
+      "category": "hotel_bar",
+      "count": 1
+    },
+    {
+      "category": "hotel_supply_service",
+      "count": 1
+    },
+    {
+      "category": "ice_skating_rink",
+      "count": 1
+    },
+    {
+      "category": "immigration_law",
+      "count": 1
+    },
+    {
+      "category": "import_export_service",
+      "count": 1
+    },
+    {
+      "category": "island",
+      "count": 1
+    },
+    {
+      "category": "jewish_place_of_worship",
+      "count": 1
+    },
+    {
+      "category": "leather_goods_store",
+      "count": 1
+    },
+    {
+      "category": "live_and_raw_food_restaurant",
+      "count": 1
+    },
+    {
+      "category": "marriage_or_relationship_counseling",
+      "count": 1
+    },
+    {
+      "category": "massage_school",
+      "count": 1
+    },
+    {
+      "category": "mobile_phone_repair",
+      "count": 1
+    },
+    {
+      "category": "mortgage_broker",
+      "count": 1
+    },
+    {
+      "category": "nanny_service",
+      "count": 1
+    },
+    {
+      "category": "newspaper_and_magazines_store",
+      "count": 1
+    },
+    {
+      "category": "night_market",
+      "count": 1
+    },
+    {
+      "category": "opera_and_ballet",
+      "count": 1
+    },
+    {
+      "category": "orthodontics",
+      "count": 1
+    },
+    {
+      "category": "pakistani_restaurant",
+      "count": 1
+    },
+    {
+      "category": "panamanian_restaurant",
+      "count": 1
+    },
+    {
+      "category": "park_and_ride",
+      "count": 1
+    },
+    {
+      "category": "performing_arts_venue",
+      "count": 1
+    },
+    {
+      "category": "personal_or_beauty_service",
+      "count": 1
+    },
+    {
+      "category": "pet_boarding",
+      "count": 1
+    },
+    {
+      "category": "pet_sitting",
+      "count": 1
+    },
+    {
+      "category": "petting_zoo",
+      "count": 1
+    },
+    {
+      "category": "pier",
+      "count": 1
+    },
+    {
+      "category": "place_of_worship",
+      "count": 1
+    },
+    {
+      "category": "poke_restaurant",
+      "count": 1
+    },
+    {
+      "category": "private_investigation",
+      "count": 1
+    },
+    {
+      "category": "prosthodontics",
+      "count": 1
+    },
+    {
+      "category": "public_utility",
+      "count": 1
+    },
+    {
+      "category": "radiology",
+      "count": 1
+    },
+    {
+      "category": "ranch",
+      "count": 1
+    },
+    {
+      "category": "real_estate_law",
+      "count": 1
+    },
+    {
+      "category": "recreation_vehicle_repair",
+      "count": 1
+    },
+    {
+      "category": "rehabilitation_center",
+      "count": 1
+    },
+    {
+      "category": "rubber_and_plastics_manufacturer",
+      "count": 1
+    },
+    {
+      "category": "sandblasting_service",
+      "count": 1
+    },
+    {
+      "category": "school_sport_team",
+      "count": 1
+    },
+    {
+      "category": "service_apartment",
+      "count": 1
+    },
+    {
+      "category": "sex_therapy",
+      "count": 1
+    },
+    {
+      "category": "shaved_ice_shop",
+      "count": 1
+    },
+    {
+      "category": "social_and_human_service",
+      "count": 1
+    },
+    {
+      "category": "southern_american_restaurant",
+      "count": 1
+    },
+    {
+      "category": "speakeasy",
+      "count": 1
+    },
+    {
+      "category": "speech_therapy",
+      "count": 1
+    },
+    {
+      "category": "sport_or_recreation_club",
+      "count": 1
+    },
+    {
+      "category": "sports_bar",
+      "count": 1
+    },
+    {
+      "category": "sports_school",
+      "count": 1
+    },
+    {
+      "category": "street_art",
+      "count": 1
+    },
+    {
+      "category": "structural_engineer",
+      "count": 1
+    },
+    {
+      "category": "surgery",
+      "count": 1
+    },
+    {
+      "category": "taco_restaurant",
+      "count": 1
+    },
+    {
+      "category": "taiwanese_restaurant",
+      "count": 1
+    },
+    {
+      "category": "tapas_bar",
+      "count": 1
+    },
+    {
+      "category": "tax_law",
+      "count": 1
+    },
+    {
+      "category": "taxidermist",
+      "count": 1
+    },
+    {
+      "category": "teeth_whitening",
+      "count": 1
+    },
+    {
+      "category": "test_preparation",
+      "count": 1
+    },
+    {
+      "category": "theatrical_production",
+      "count": 1
+    },
+    {
+      "category": "track_stadium",
+      "count": 1
+    },
+    {
+      "category": "traffic_school",
+      "count": 1
+    },
+    {
+      "category": "tree_service",
+      "count": 1
+    },
+    {
+      "category": "truck_dealer",
+      "count": 1
+    },
+    {
+      "category": "vinyl_record_store",
+      "count": 1
+    },
+    {
+      "category": "water_purification_service",
+      "count": 1
+    },
+    {
+      "category": "web_hosting_service",
+      "count": 1
+    },
+    {
+      "category": "weight_loss_center",
+      "count": 1
+    },
+    {
+      "category": "window_treatment_store",
+      "count": 1
+    },
+    {
+      "category": "wine_bar",
+      "count": 1
+    }
+  ]
+}

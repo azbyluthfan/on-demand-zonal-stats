@@ -1,0 +1,17 @@
+# Verification spike image (docs/spikes.md). Mirrors Dockerfile.api:
+# cgo build of duckdb-go, extensions pre-installed at build time.
+FROM golang:1.26-bookworm AS build
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY cmd ./cmd
+RUN CGO_ENABLED=1 go build -trimpath -o /out/spike ./cmd/spike
+
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates \
+    && apt-get clean
+COPY --from=build /out/spike /usr/local/bin/spike
+ENV DUCKDB_EXT_DIR=/opt/duckdb_ext
+# Download extensions once, at build time. At runtime the spike disables autoinstall.
+RUN spike -install-only
+ENTRYPOINT ["spike"]

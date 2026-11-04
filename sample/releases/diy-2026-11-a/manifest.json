@@ -1,0 +1,287 @@
+{
+  "release_id": "diy-2026-11-a",
+  "created_at": "2026-11-04T07:59:55Z",
+  "status": "ok",
+  "h3_resolution": 10,
+  "boundary_version": "hdx-cod-ab-2020",
+  "poi_release": "2026-10-21.0",
+  "province_codes": [
+    "34"
+  ],
+  "tools": {
+    "duckdb": "v1.5.5",
+    "ext_cog": "1d210fd",
+    "ext_h3": "v1.5.5",
+    "ext_httpfs": "827222f",
+    "ext_spatial": "eb1e57c",
+    "gdal": "GDAL 3.10.3, released 2025/04/01",
+    "github.com/duckdb/duckdb-go/v2": "v2.10505.0",
+    "github.com/paulmach/orb": "v0.14.0",
+    "github.com/uber/h3-go/v4": "v4.5.0"
+  },
+  "sources": [
+    {
+      "kind": "boundaries",
+      "name": "Indonesia - Subnational Administrative Boundaries (COD-AB), admin 4",
+      "url": "https://data.humdata.org/dataset/cod-ab-idn",
+      "version": "HDX resource updated 2026-06-23; boundaries 2020-04-08",
+      "license": "CC BY-IGO",
+      "attribution": "BPS - Statistics Indonesia; World Food Programme; OCHA ROAP (via HDX)",
+      "path": "data/raw/hdx/idn_admin_boundaries.gdb"
+    },
+    {
+      "kind": "pois",
+      "name": "Overture Maps Places",
+      "url": "https://docs.overturemaps.org/guides/places/",
+      "version": "2026-10-21.0",
+      "license": "CDLA-Permissive-2.0 (Places; some sources Apache-2.0)",
+      "attribution": "Overture Maps Foundation",
+      "path": "s3://overturemaps-us-west-2/release/2026-10-21.0"
+    },
+    {
+      "kind": "raster:population_2020",
+      "name": "WorldPop Indonesia 2020, constrained, 100 m (ppp)",
+      "url": "https://hub.worldpop.org/geodata/summary?id=49730",
+      "version": "Global_2000_2020_Constrained BSGM",
+      "license": "CC BY 4.0",
+      "attribution": "WorldPop (www.worldpop.org), University of Southampton",
+      "path": "data/raw/worldpop/idn_ppp_2020_constrained.tif",
+      "sha256": "352f509483db710af656c9b6f20e470c9d2c0cd03cad0bed6f16c6fa3fddcb0a"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "boundaries/villages.parquet",
+      "bytes": 1346200,
+      "sha256": "683aa19db3db3fded3de0839d5b6906813892b483238be9d74bae9891ddab815",
+      "rows": 438
+    },
+    {
+      "path": "categories.json",
+      "bytes": 56469,
+      "sha256": "ba0395c26a601b500b0481391dc26436700b94a12a753693fbdd06938760321e"
+    },
+    {
+      "path": "pois/release=2026-10-21.0/province_code=34/part-0.parquet",
+      "bytes": 5664983,
+      "sha256": "4041761312dcad53a48833e2c77b55f74ea6913907a856c7ae4b77979cdb8723",
+      "rows": 67742
+    },
+    {
+      "path": "pois/release=2026-10-21.0/province_code=_none/part-0.parquet",
+      "bytes": 3136024,
+      "sha256": "f77b07bcd63b2c33a62b180a85f5774cf069fed569ff04bc2e306913225fa36f",
+      "rows": 36915
+    },
+    {
+      "path": "rasters/population_2020.json",
+      "bytes": 882,
+      "sha256": "09f9db1c3fa8606a1b781e9d4ad566c58978301855bb6df5857868755e5cfab3"
+    },
+    {
+      "path": "rasters/population_2020.tif",
+      "bytes": 1255239,
+      "sha256": "7a2f008bc44628d3805f35287f9dcc6af4df7c8ff79803034890da6c717f617b"
+    },
+    {
+      "path": "village_h3/province_code=34/part-0.parquet",
+      "bytes": 374733,
+      "sha256": "037b31401f0efa81e412886d902cb1764b537e52c129e29e347551a455fbb740",
+      "rows": 256673
+    }
+  ],
+  "rasters": [
+    {
+      "id": "population_2020",
+      "path": "rasters/population_2020.tif",
+      "crs": "EPSG:4326",
+      "width": 1002,
+      "height": 799,
+      "origin_x": 110.00124959624206,
+      "origin_y": -7.539583101539147,
+      "pixel_width": 0.000833333330001,
+      "pixel_height": 0.0008333333300046,
+      "data_type": "Float32",
+      "nodata": -99999,
+      "units": "people",
+      "year": 2020,
+      "block_size": [
+        512,
+        512
+      ],
+      "overviews": 1,
+      "sum": 6829236.489706039,
+      "valid_pixels": 195510,
+      "bounds": [
+        110.00124959624206,
+        -8.205416432212823,
+        110.83624959290306,
+        -7.539583101539147
+      ],
+      "source": {
+        "name": "WorldPop Indonesia 2020, constrained, 100 m (ppp)",
+        "url": "https://hub.worldpop.org/geodata/summary?id=49730",
+        "version": "Global_2000_2020_Constrained BSGM",
+        "license": "CC BY 4.0",
+        "attribution": "WorldPop (www.worldpop.org), University of Southampton"
+      }
+    }
+  ],
+  "qc": [
+    {
+      "name": "geometry_validity",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "invalid_after_repair": 0,
+        "non_polygonal": 0,
+        "repaired": 0
+      }
+    },
+    {
+      "name": "unique_village_id",
+      "blocking": true,
+      "passed": true,
+      "value": 0,
+      "detail": null
+    },
+    {
+      "name": "required_fields",
+      "blocking": true,
+      "passed": true,
+      "value": 0
+    },
+    {
+      "name": "overlaps",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "max": 0.001,
+        "overlap_fraction": 0
+      },
+      "detail": null
+    },
+    {
+      "name": "gaps",
+      "blocking": false,
+      "passed": true,
+      "value": {
+        "interior_gap_fraction": 0
+      },
+      "detail": "holes inside the union of villages; informational"
+    },
+    {
+      "name": "h3_coverage",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "interior_cells_shared": 0,
+        "interior_rows": 192417,
+        "total_rows": 256673,
+        "villages_without_cells": 0
+      }
+    },
+    {
+      "name": "unique_poi_id",
+      "blocking": true,
+      "passed": true,
+      "value": 0
+    },
+    {
+      "name": "h3_go_duckdb_consistency",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "allowed_deg": 1e-8,
+        "checked": 100000,
+        "max_edge_distance_deg": 1.0919458947751094e-10,
+        "mismatches": 1
+      },
+      "detail": [
+        {
+          "poi_id": "2157c960-4c10-4ad3-ab92-163e91b1aaa0",
+          "lon": 110.41772502941267,
+          "lat": -7.696464093787992,
+          "duckdb_cell": "8a8d8c16131ffff",
+          "h3go_cell": "8a8d8c16130ffff",
+          "distance_to_edge_deg": 1.0919458947751094e-10
+        }
+      ]
+    },
+    {
+      "name": "poi_assignment",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "boundary_path": 16012,
+        "exact_tests": 33611,
+        "interior_path": 51638,
+        "pois": 104657,
+        "unassigned": 37007,
+        "without_partition": 0
+      }
+    },
+    {
+      "name": "poi_assignment_crosscheck",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "mismatches": 0
+      }
+    },
+    {
+      "name": "h3_calibration",
+      "blocking": false,
+      "passed": true,
+      "detail": [
+        {
+          "size_class": "a_\u003c1km2",
+          "villages": 42,
+          "pois": 14967,
+          "interior_share": 0.5565577604062271
+        },
+        {
+          "size_class": "b_1-5km2",
+          "villages": 109,
+          "pois": 12628,
+          "interior_share": 0.7472283813747228
+        },
+        {
+          "size_class": "c_5-20km2",
+          "villages": 275,
+          "pois": 39363,
+          "interior_share": 0.84477809110078
+        },
+        {
+          "size_class": "d_\u003e=20km2",
+          "villages": 11,
+          "pois": 692,
+          "interior_share": 0.8945086705202312
+        }
+      ]
+    },
+    {
+      "name": "cog_validity:population_2020",
+      "blocking": true,
+      "passed": true,
+      "value": {
+        "block": [
+          512,
+          512
+        ],
+        "compression": "DEFLATE",
+        "layout": "COG",
+        "overviews": 1
+      }
+    },
+    {
+      "name": "raster_sanity:population_2020",
+      "blocking": false,
+      "passed": true,
+      "value": {
+        "sum": 6829236.489706039,
+        "valid_pixels": 195510
+      }
+    }
+  ]
+}

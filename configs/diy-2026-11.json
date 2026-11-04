@@ -1,0 +1,47 @@
+{
+  "release_id": "diy-2026-11-a",
+  "h3_resolution": 10,
+  "province_codes": ["34"],
+  "boundaries": {
+    "adapter": "hdx_cod_ab",
+    "path": "data/raw/hdx/idn_admin_boundaries.gdb",
+    "layer": "idn_admin4",
+    "boundary_version": "hdx-cod-ab-2020",
+    "source": {
+      "name": "Indonesia - Subnational Administrative Boundaries (COD-AB), admin 4",
+      "url": "https://data.humdata.org/dataset/cod-ab-idn",
+      "version": "HDX resource updated 2026-06-23; boundaries 2020-04-08",
+      "license": "CC BY-IGO",
+      "attribution": "BPS - Statistics Indonesia; World Food Programme; OCHA ROAP (via HDX)"
+    }
+  },
+  "pois": {
+    "adapter": "overture",
+    "path": "s3://overturemaps-us-west-2/release/2026-10-21.0",
+    "release": "2026-10-21.0",
+    "source": {
+      "name": "Overture Maps Places",
+      "url": "https://docs.overturemaps.org/guides/places/",
+      "version": "2026-10-21.0",
+      "license": "CDLA-Permissive-2.0 (Places; some sources Apache-2.0)",
+      "attribution": "Overture Maps Foundation"
+    }
+  },
+  "rasters": [
+    {
+      "id": "population_2020",
+      "path": "data/raw/worldpop/idn_ppp_2020_constrained.tif",
+      "units": "people",
+      "year": 2020,
+      "clip_to_villages": true,
+      "source": {
+        "name": "WorldPop Indonesia 2020, constrained, 100 m (ppp)",
+        "url": "https://hub.worldpop.org/geodata/summary?id=49730",
+        "version": "Global_2000_2020_Constrained BSGM",
+        "license": "CC BY 4.0",
+        "attribution": "WorldPop (www.worldpop.org), University of Southampton"
+      }
+    }
+  ],
+  "qc": { "cross_check_pois": true }
+}
