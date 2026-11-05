@@ -31,7 +31,7 @@ Results are cached per (village, category), so only missing pairs are computed (
 ## Tests
 
 - **Fixture golden** (`query_test.go`): the reference is Go `geom.Assign` over all fixture villages, independent of DuckDB, H3 and the release files. Compared per village per metric for province/regency/district areas, hand-drawn edge cases (V002 alone must not get the border POIs, a polygon inside V004's hole selects nothing, the tiny V005) and 40 random rectangles. Also: errors (no or two selectors, limit, bowtie, LineString) and a missing manifest → `ErrStorage`.
-- **DIY invariants** (`diy_test.go`, on `out/releases/diy-2026-11-a` or the bundled `sample/` copy, and on RustFS when `ZS_S3_ENDPOINT` is set):
+- **DIY invariants** (`diy_test.go`, on `out/releases/diy-2026-11-b` or the bundled `sample/` copy, and on RustFS when `ZS_S3_ENDPOINT` is set):
   - Σ villages + unassigned = rows in the province partition (67,742).
   - Additivity: 5 regencies and 78 districts requested one by one give exactly the province-wide per-village counts.
   - Determinism: a repeat gives the same answer.

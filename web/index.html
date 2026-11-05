@@ -44,12 +44,15 @@
     </section>
 
     <section class="block">
-      <h2>Population</h2>
+      <h2>Layers</h2>
       <label class="check"><input type="checkbox" id="pop-on" checked> <span id="pop-label">Population</span></label>
-      <div class="seg" role="radiogroup" aria-label="Raster method">
+      <div class="seg" role="radiogroup" aria-label="Population method">
         <label><input type="radio" name="method" value="fractional" checked> Fractional</label>
         <label><input type="radio" name="method" value="center"> Pixel centre</label>
       </div>
+      <label class="check" id="nl-row" hidden><input type="checkbox" id="nl-on"> <span id="nl-label">Night lights</span></label>
+      <label class="check" id="lc-row" hidden><input type="checkbox" id="lc-on"> <span id="lc-label">Land cover</span></label>
+      <label class="check" id="bld-row" hidden><input type="checkbox" id="bld-on"> <span>Buildings (count, footprint)</span></label>
     </section>
 
     <section class="block">

@@ -16,7 +16,8 @@
     "metrics": {
       "type": "object",
       "propertyNames": { "pattern": "^[A-Za-z0-9_-]{1,64}$" },
-      "additionalProperties": { "type": "number" }
+      "additionalProperties": { "type": ["number", "null"] },
+      "$comment": "null: an undefined mean or class fraction (no valid pixels covered)"
     },
     "village": {
       "type": "object",
@@ -53,7 +54,7 @@
         "total_ms": { "type": "number", "minimum": 0 },
         "stages_ms": {
           "type": "object",
-          "propertyNames": { "enum": ["resolve_area", "reference", "h3_cells", "poi_scan", "poi_interior", "poi_boundary", "raster_geometry", "raster_read", "raster_coverage", "assemble"] },
+          "propertyNames": { "enum": ["resolve_area", "reference", "h3_cells", "poi_scan", "poi_interior", "poi_boundary", "building_cells", "building_boundary", "raster_geometry", "raster_read", "raster_coverage", "assemble"] },
           "additionalProperties": { "type": "number" }
         },
         "partitions": { "type": "array", "items": { "type": "string" } },
@@ -84,7 +85,18 @@
         "raster_blocks": { "$ref": "#/$defs/count" },
         "raster_pixels_read": { "$ref": "#/$defs/count" },
         "raster_pixels_weighted": { "$ref": "#/$defs/count" },
-        "raster_nodata_weight": { "type": "number", "minimum": 0 }
+        "raster_nodata_weight": { "type": "number", "minimum": 0 },
+        "buildings": {
+          "type": "object",
+          "required": ["villages_computed", "cell_rows", "cell_buildings", "boundary_points", "boundary_tests", "points_other_village", "unassigned"],
+          "additionalProperties": false,
+          "properties": {
+            "villages_computed": { "$ref": "#/$defs/count" }, "cell_rows": { "$ref": "#/$defs/count" },
+            "cell_buildings": { "$ref": "#/$defs/count" }, "boundary_points": { "$ref": "#/$defs/count" },
+            "boundary_tests": { "$ref": "#/$defs/count" }, "points_other_village": { "$ref": "#/$defs/count" },
+            "unassigned": { "$ref": "#/$defs/count" }
+          }
+        }
       }
     }
   }

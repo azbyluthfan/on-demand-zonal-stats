@@ -7,8 +7,9 @@ Code: `internal/query/{cache,refcache,trace}.go`. Every replica has its own cach
 | Cache | Key → value | Sizing (env) | Notes |
 |---|---|---|---|
 | **Result: POI** | (village, category) → (count, unassigned) | `RESULT_CACHE_ENTRIES` (2,000,000) | Per **category**, not per category set: any combination of cached categories is a sum, so `["cafe"]` then `["cafe","coffee_shop"]` reuses cafe. A request computes only the villages × categories it misses. |
-| **Result: raster** | (village, layer, method) → sum, weights | ENTRIES / 10 | Deterministic, so reused by any area containing the village. |
-| **Decoded blocks** | (layer, block x, block y) → 512×512 float64 | `BLOCK_CACHE_MB` (256) | Cache misses for new villages or another method skip the cog read and decode. |
+| **Result: buildings** | village → (count, footprint area, unassigned) | ENTRIES / 10 | `building_count` and `building_area` share one entry. |
+| **Result: raster** | (village, layer, method) → sum, weights, per-class weights (categorical) | ENTRIES / 10 | Deterministic, so reused by any area containing the village. Sum, mean and every class fraction of a layer reduce the same entry, so asking for another statistic or class set is a hit. |
+| **Decoded blocks** | (layer, block x, block y) → 512×512 float64 (any stored type) | `BLOCK_CACHE_MB` (256) | Cache misses for new villages or another method skip the cog read and decode. |
 | **Reference** | province → DuckDB tables `ref_h3_*` (village_h3, sorted by cell) and `ref_v_*` (village geometries), plus decoded Go geometries | `REF_CACHE_PROVINCES` (4) | Loaded on first use, shared by concurrent first requests, LRU-evicted only when idle (never under a running query). |
 
 The engine is per release, so the release ID is implicit in every key. `CACHE_DISABLED=1` turns all caches off. A request with **`Cache-Control: no-cache`** bypasses every cache, reading files and computing everything; this is how "cold" is measured.

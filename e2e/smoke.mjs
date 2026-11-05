@@ -68,6 +68,35 @@ try {
   await settle();
   await shot('accuracy');
 
+  // 4b. Night lights, land cover and buildings (when the release has them).
+  const layerToggles = [];
+  for (const id of ['nl-on', 'lc-on', 'bld-on']) {
+    if (await page.isVisible(`#${id}`)) { await page.check(`#${id}`); layerToggles.push(id); }
+  }
+  if (layerToggles.length) {
+    await run();
+    if (layerToggles.includes('lc-on')) {
+      await page.selectOption('#sel-view', 'lc_dominant');
+      await page.waitForTimeout(500);
+      const classes = await page.$$eval('#legend .classes .sw', (s) => s.length);
+      ok(classes >= 2, `dominant land cover legend lists ${classes} classes`);
+      await settle();
+      await shot('landcover');
+    }
+    if (layerToggles.includes('bld-on')) {
+      await page.selectOption('#sel-view', 'bld_share');
+      await page.waitForTimeout(500);
+      ok(/Building footprint/.test(await page.textContent('#legend h3')), 'building footprint view shown');
+      ok(/Buildings/.test(await page.textContent('#diag-body')), 'building diagnostics shown');
+    }
+    if (layerToggles.includes('nl-on')) {
+      await page.selectOption('#sel-view', 'nl');
+      await page.waitForTimeout(500);
+      ok(/radiance/.test(await page.textContent('#legend h3')), 'night lights view shown');
+    }
+    for (const id of layerToggles) await page.uncheck(`#${id}`);
+  }
+
   // 5. Regency (Kota Yogyakarta, if present) and a popup.
   const kota = await page.$('#sel-regency option[value="3471"]');
   await page.selectOption('#sel-regency', kota ? '3471' : { index: 1 });

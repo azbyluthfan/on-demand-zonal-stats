@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"on-demand-zonal-stats/internal/query"
+	"on-demand-zonal-stats/internal/release"
 )
 
 // Limits bound request cost.
@@ -116,16 +117,26 @@ func (s *Server) layers(w http.ResponseWriter, r *http.Request, e *query.Engine)
 		cats = append(cats, cat{c, e.Categories[c]})
 	}
 	type raster struct {
-		ID          string  `json:"id"`
-		Units       string  `json:"units"`
-		Year        int     `json:"year,omitempty"`
-		PixelWidth  float64 `json:"pixel_width"`
-		PixelHeight float64 `json:"pixel_height"`
-		Source      any     `json:"source"`
+		ID          string                `json:"id"`
+		Kind        string                `json:"kind"`
+		Units       string                `json:"units"`
+		Year        int                   `json:"year,omitempty"`
+		PixelWidth  float64               `json:"pixel_width"`
+		PixelHeight float64               `json:"pixel_height"`
+		Classes     []release.RasterClass `json:"classes,omitempty"`
+		Source      any                   `json:"source"`
 	}
 	rasters := []raster{}
 	for _, ri := range m.Rasters {
-		rasters = append(rasters, raster{ri.ID, ri.Units, ri.Year, ri.PixelWidth, ri.PixelHeight, ri.Source})
+		kind := release.RasterContinuous
+		if ri.IsCategorical() {
+			kind = release.RasterCategorical
+		}
+		rasters = append(rasters, raster{ri.ID, kind, ri.Units, ri.Year, ri.PixelWidth, ri.PixelHeight, ri.Classes, ri.Source})
+	}
+	var buildings any
+	if m.HasBuildings() {
+		buildings = map[string]any{"release": m.BuildingRelease}
 	}
 	sources := []any{}
 	for _, sr := range m.Sources {
@@ -138,7 +149,8 @@ func (s *Server) layers(w http.ResponseWriter, r *http.Request, e *query.Engine)
 		"boundary_version": m.BoundaryVersion,
 		"h3_resolution":    m.H3Resolution,
 		"poi_release":      m.POIRelease,
-		"metric_types":     []string{"poi_count", "raster_sum"},
+		"metric_types":     MetricTypes,
+		"buildings":        buildings,
 		"raster_methods":   []string{"fractional", "center"},
 		"categories":       cats,
 		"rasters":          rasters,
@@ -204,13 +216,19 @@ func (s *Server) aggregate(w http.ResponseWriter, r *http.Request, e *query.Engi
 	for k, d := range poi.Stats.Stages {
 		stages[k] = ms(d)
 	}
+	var bld *query.BuildingResult
+	if len(v.buildings) > 0 {
+		if bld, err = e.Buildings(ctx, res, tr); err != nil {
+			s.queryError(w, err)
+			return
+		}
+		for k, d := range bld.Stats.Stages {
+			stages[k] += ms(d)
+		}
+	}
 	var rast *query.RasterResult
 	if len(v.raster) > 0 {
-		rms := make([]query.RasterMetric, len(v.raster))
-		for i, m := range v.raster {
-			rms[i] = query.RasterMetric{ID: m.ID, Layer: m.Layer, Method: m.Method}
-		}
-		if rast, err = e.RasterSums(ctx, res, rms, tr); err != nil {
+		if rast, err = e.RasterSums(ctx, res, v.raster, tr); err != nil {
 			s.queryError(w, err)
 			return
 		}
@@ -221,24 +239,33 @@ func (s *Server) aggregate(w http.ResponseWriter, r *http.Request, e *query.Engi
 
 	t = time.Now()
 	villages := make([]VillageOut, len(res.Villages))
-	totals := map[string]float64{}
+	totals := map[string]Value{}
 	for _, id := range v.order {
 		totals[id] = 0
 	}
 	for i, vv := range res.Villages {
 		out := VillageOut{VillageID: vv.ID, VillageName: vv.Name, DistrictCode: vv.DistrictCode, DistrictName: vv.DistrictName,
-			RegencyCode: vv.RegencyCode, RegencyName: vv.RegencyName, AreaM2: vv.AreaM2, Metrics: map[string]float64{}}
+			RegencyCode: vv.RegencyCode, RegencyName: vv.RegencyName, AreaM2: vv.AreaM2, Metrics: map[string]Value{}}
 		for _, m := range v.poi {
-			n := float64(poi.Counts[m.ID][vv.ID])
+			n := Value(poi.Counts[m.ID][vv.ID])
 			out.Metrics[m.ID] = n
 			totals[m.ID] += n
 		}
-		for _, m := range v.raster {
-			x := rast.Values[m.ID][vv.ID]
+		for _, m := range v.buildings {
+			x := Value(bld.Count[vv.ID])
+			if m.Type == MetricBuildingArea {
+				x = Value(bld.Area[vv.ID])
+			}
 			out.Metrics[m.ID] = x
 			totals[m.ID] += x
 		}
+		for _, m := range v.raster {
+			out.Metrics[m.ID] = Value(rast.Values[m.ID][vv.ID])
+		}
 		villages[i] = out
+	}
+	for _, m := range v.raster { // means and fractions are not sums over villages
+		totals[m.ID] = Value(rast.Totals[m.ID])
 	}
 	summary := Summary{VillageCount: len(villages), Totals: totals}
 
@@ -268,6 +295,12 @@ func (s *Server) aggregate(w http.ResponseWriter, r *http.Request, e *query.Engi
 		if rast != nil {
 			diag.RasterWindows, diag.RasterBlocks, diag.RasterPixelsRead = rast.Stats.Windows, rast.Stats.Blocks, rast.Stats.PixelsRead
 			diag.RasterPixelsWeighted, diag.RasterNodataWeight = rast.Stats.PixelsWeighted, rast.Stats.NodataWeight
+		}
+		if bld != nil {
+			bs := bld.Stats
+			diag.Buildings = &BuildingDiagnostics{VillagesComputed: bs.ComputedFor, CellRows: bs.CellRows,
+				CellBuildings: bs.CellBuildings, BoundaryPoints: bs.Points, BoundaryTests: bs.PointTests,
+				PointsOtherVillage: bs.OtherVillage, Unassigned: bld.Unassigned}
 		}
 		if diag.Partitions == nil {
 			diag.Partitions = []string{}

@@ -17,11 +17,50 @@ import (
 	"on-demand-zonal-stats/internal/release"
 )
 
-// RasterMetric is a raster_sum metric.
+// Raster statistics (the API's raster_* metric types).
+const (
+	StatSum           = "sum"            // Σ value × weight
+	StatMean          = "mean"           // Σ value × weight / Σ weight
+	StatClassFraction = "class_fraction" // Σ weight of Classes / Σ weight
+)
+
+// RasterMetric is a raster_sum, raster_mean or raster_class_fraction metric.
 type RasterMetric struct {
-	ID     string
-	Layer  string
-	Method string // "fractional" or "center"
+	ID      string
+	Layer   string
+	Method  string  // "fractional" or "center"
+	Stat    string  // StatSum (default), StatMean, StatClassFraction
+	Classes []int64 // StatClassFraction: class values counted
+}
+
+// reduce turns accumulated coverage results into the metric's value: for a
+// village, or for an area by passing the sum of its villages' results (so
+// area means and fractions are weighted by coverage, not by village). Means
+// and fractions of nothing are NaN.
+func (m RasterMetric) reduce(r raster.Result, scale float64) float64 {
+	switch m.Stat {
+	case StatMean:
+		return r.Mean() * scale
+	case StatClassFraction:
+		return r.ClassFraction(m.Classes)
+	default:
+		return r.Sum * scale
+	}
+}
+
+func addResult(a *raster.Result, b raster.Result) {
+	a.Sum += b.Sum
+	a.Weight += b.Weight
+	a.NodataWeight += b.NodataWeight
+	a.PixelsTouched += b.PixelsTouched
+	if b.Classes != nil {
+		if a.Classes == nil {
+			a.Classes = map[int64]float64{}
+		}
+		for k, v := range b.Classes {
+			a.Classes[k] += v
+		}
+	}
 }
 
 // RasterStats explains raster work for diagnostics.
@@ -34,26 +73,37 @@ type RasterStats struct {
 	Stages         map[string]time.Duration
 }
 
-// RasterResult holds per-village sums per metric.
+// RasterResult holds per-village values per metric.
 type RasterResult struct {
-	Values map[string]map[string]float64 // metric ID -> village ID -> sum
+	Values map[string]map[string]float64 // metric ID -> village ID -> value (NaN: undefined)
+	// Totals is the value over the whole area: Σ for sums, coverage-weighted
+	// for means and fractions (NaN when undefined).
+	Totals map[string]float64
 	Stats  RasterStats
 }
 
-// RasterSums computes Σ pixel × weight per village (docs/raster.md). Pixel
+// RasterSums computes Σ pixel × weight per village (docs/raster.md) and
+// reduces it to each metric's statistic. Pixel
 // windows are read with the cog extension's RS_BandAsArray using a bbox
 // snapped to pixel edges (cog rounds bbox edges to the nearest pixel edge,
 // returns rows north to south, nodata as NULL, and clips to the raster
 // extent: docs/raster.md). Coverage and sums are computed in Go
 // (internal/raster).
 func (e *Engine) RasterSums(ctx context.Context, r *Resolved, metrics []RasterMetric, tr *Trace) (*RasterResult, error) {
-	res := &RasterResult{Values: map[string]map[string]float64{}, Stats: RasterStats{Stages: map[string]time.Duration{}}}
+	res := &RasterResult{Values: map[string]map[string]float64{}, Totals: map[string]float64{},
+		Stats: RasterStats{Stages: map[string]time.Duration{}}}
+	acc := map[string]map[string]raster.Result{} // metric -> village -> coverage result
 	for _, m := range metrics {
 		res.Values[m.ID] = map[string]float64{}
+		acc[m.ID] = map[string]raster.Result{}
 	}
 	if len(metrics) == 0 || len(r.Villages) == 0 {
+		for _, m := range metrics {
+			res.Totals[m.ID] = m.reduce(raster.Result{}, 1)
+		}
 		return res, nil
 	}
+	defer func() { finish(res, acc, metrics, r, e.Manifest) }()
 	useCache := e.cache != nil && (tr == nil || !tr.NoCache)
 
 	// Result cache: (village, layer, method). Villages missing any metric
@@ -64,7 +114,7 @@ func (e *Engine) RasterSums(ctx context.Context, r *Resolved, metrics []RasterMe
 		for _, v := range r.Villages {
 			if useCache {
 				if x, ok := e.cache.raster.Get(rasterKey{v.ID, m.Layer, m.Method}); ok {
-					res.Values[m.ID][v.ID] = x.Sum
+					acc[m.ID][v.ID] = x
 					hits++
 					continue
 				}
@@ -122,11 +172,29 @@ func (e *Engine) RasterSums(ctx context.Context, r *Resolved, metrics []RasterMe
 		if !ok {
 			return nil, fmt.Errorf("query: unknown raster layer %q", layer)
 		}
-		if err := e.rasterLayer(ctx, sub.subset(missing[layer]), geom, info, byLayer[layer], res, tr, useCache); err != nil {
+		if err := e.rasterLayer(ctx, sub.subset(missing[layer]), geom, info, byLayer[layer], res, acc, tr, useCache); err != nil {
 			return nil, err
 		}
 	}
 	return res, nil
+}
+
+// finish reduces accumulated results to per-village values and area totals.
+// Villages outside the raster (no window) reduce from an empty result.
+func finish(res *RasterResult, acc map[string]map[string]raster.Result, metrics []RasterMetric, r *Resolved, m *release.Manifest) {
+	for _, mt := range metrics {
+		scale := 1.0
+		if info, ok := m.Raster(mt.Layer); ok {
+			scale = info.ScaleFactor()
+		}
+		var tot raster.Result
+		for _, v := range r.Villages {
+			x := acc[mt.ID][v.ID]
+			res.Values[mt.ID][v.ID] = mt.reduce(x, scale)
+			addResult(&tot, x)
+		}
+		res.Totals[mt.ID] = mt.reduce(tot, scale)
+	}
 }
 
 type villageWindow struct {
@@ -137,7 +205,7 @@ type villageWindow struct {
 }
 
 func (e *Engine) rasterLayer(ctx context.Context, r *Resolved, geom func(string) (orb.Geometry, bool), info *release.RasterInfo,
-	metrics []RasterMetric, res *RasterResult, tr *Trace, useCache bool) error {
+	metrics []RasterMetric, res *RasterResult, acc map[string]map[string]raster.Result, tr *Trace, useCache bool) error {
 	grid := raster.Grid{OriginX: info.OriginX, OriginY: info.OriginY, PixelW: info.PixelWidth, PixelH: info.PixelHeight,
 		Cols: info.Width, Rows: info.Height}
 	if err := grid.Validate(); err != nil {
@@ -212,7 +280,13 @@ func (e *Engine) rasterLayer(ctx context.Context, r *Resolved, geom func(string)
 						errs[i] = fmt.Errorf("query: coverage window %+v != read window %+v for %s", cov.Window, w.window, w.id)
 						return
 					}
-					rr, err := cov.WeightedSum(w.values, nd)
+					var rr raster.Result
+					var err error
+					if info.IsCategorical() {
+						rr, err = cov.WeightedClasses(w.values, nd)
+					} else {
+						rr, err = cov.WeightedSum(w.values, nd)
+					}
 					if err != nil {
 						errs[i] = fmt.Errorf("village %s: %w", w.id, err)
 						return
@@ -239,7 +313,7 @@ func (e *Engine) rasterLayer(ctx context.Context, r *Resolved, geom func(string)
 	}
 	for _, rs := range results {
 		for _, o := range rs {
-			res.Values[o.metric][o.village] = o.r.Sum
+			acc[o.metric][o.village] = o.r
 			if useCache {
 				e.cache.raster.Add(rasterKey{o.village, info.ID, method[o.metric]}, o.r)
 			}
@@ -374,6 +448,23 @@ func (e *Engine) readWindows(ctx context.Context, path string, grid raster.Grid,
 			case float64:
 				w.values[k] = x
 			case float32:
+				w.values[k] = float64(x)
+			// Integer rasters (Byte land cover, Int16 night lights).
+			case int8:
+				w.values[k] = float64(x)
+			case int16:
+				w.values[k] = float64(x)
+			case int32:
+				w.values[k] = float64(x)
+			case int64:
+				w.values[k] = float64(x)
+			case uint8:
+				w.values[k] = float64(x)
+			case uint16:
+				w.values[k] = float64(x)
+			case uint32:
+				w.values[k] = float64(x)
+			case uint64:
 				w.values[k] = float64(x)
 			default:
 				return fmt.Errorf("query: unexpected pixel type %T", v)

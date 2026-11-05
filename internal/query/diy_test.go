@@ -14,9 +14,9 @@ import (
 )
 
 // Real-data invariant tests on the DI Yogyakarta release.
-// Local: uses out/releases/diy-2026-11-a if it exists (make prep-diy).
+// Local: uses out/releases/diy-2026-11-b if it exists (make prep-diy).
 // RustFS: set ZS_S3_ENDPOINT=localhost:9000 (make up + prep-upload).
-const diyRelease = "diy-2026-11-a"
+const diyRelease = "diy-2026-11-b"
 
 func diyEngines(t *testing.T) map[string]*query.Engine {
 	t.Helper()
@@ -191,5 +191,122 @@ func TestDIYGoldenNaive(t *testing.T) {
 	}
 	if n < 400 {
 		t.Errorf("naive join produced only %d villages", n)
+	}
+}
+
+// New layers on real data: buildings are additive across districts and add
+// up to what prep stored; land-cover shares of all classes sum to 1; the
+// night-light mean is a sane radiance.
+func TestDIYBuildingsAndLayers(t *testing.T) {
+	for name, e := range diyEngines(t) {
+		t.Run(name, func(t *testing.T) {
+			if !e.Manifest.HasBuildings() {
+				t.Skip("release has no buildings")
+			}
+			ctx := context.Background()
+			r, err := e.ResolveArea(ctx, query.Area{ProvinceCode: "34"}, 10000)
+			if err != nil {
+				t.Fatal(err)
+			}
+			start := time.Now()
+			prov, err := e.Buildings(ctx, r, &query.Trace{NoCache: true})
+			if err != nil {
+				t.Fatal(err)
+			}
+			var n, unassigned int64
+			for _, v := range r.Villages {
+				n += prov.Count[v.ID]
+				unassigned += prov.UnassignedByVillage[v.ID]
+			}
+			// Everything stored for province 34 is either counted or unassigned
+			// (points won by another province's village live in its partition).
+			var stored int64
+			db, err := sql.Open("duckdb", "")
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer db.Close()
+			if local := diyLocal(); name == "local" && local != "" {
+				p := func(rel string) string { return filepath.Join(local, filepath.FromSlash(rel)) }
+				err := db.QueryRow(`SELECT (SELECT sum(buildings) FROM read_parquet('` + p(release.BuildingCellsPath(e.Manifest.BuildingRelease, "34")) +
+					`')) + (SELECT count(*) FROM read_parquet('` + p(release.BuildingPointsPath(e.Manifest.BuildingRelease, "34")) + `'))`).Scan(&stored)
+				if err != nil {
+					t.Fatal(err)
+				}
+				if n+unassigned+prov.Stats.OtherVillage != stored {
+					t.Errorf("counted %d + unassigned %d + other %d != stored %d", n, unassigned, prov.Stats.OtherVillage, stored)
+				}
+			}
+			// Bit-identical on a second cold run (areas are summed as integers,
+			// so DuckDB's parallel summation order cannot change the result).
+			again, err := e.Buildings(ctx, r, &query.Trace{NoCache: true})
+			if err != nil {
+				t.Fatal(err)
+			}
+			for id, a := range prov.Area {
+				if again.Area[id] != a || again.Count[id] != prov.Count[id] {
+					t.Fatalf("non-deterministic buildings for %s: %v/%v vs %v/%v", id, a, prov.Count[id], again.Area[id], again.Count[id])
+				}
+			}
+			t.Logf("province buildings %d (unassigned %d) in %v; stats %+v", n, unassigned, time.Since(start).Round(time.Millisecond), prov.Stats)
+
+			got := map[string]int64{}
+			seen := map[string]bool{}
+			for _, v := range r.Villages {
+				if seen[v.DistrictCode] {
+					continue
+				}
+				seen[v.DistrictCode] = true
+				dr, err := e.ResolveArea(ctx, query.Area{DistrictCode: v.DistrictCode}, 0)
+				if err != nil {
+					t.Fatal(err)
+				}
+				res, err := e.Buildings(ctx, dr, &query.Trace{NoCache: true})
+				if err != nil {
+					t.Fatal(err)
+				}
+				for id, c := range res.Count {
+					got[id] += c
+				}
+			}
+			for _, v := range r.Villages {
+				if got[v.ID] != prov.Count[v.ID] {
+					t.Errorf("district-wise buildings for %s = %d, province-wide %d", v.ID, got[v.ID], prov.Count[v.ID])
+				}
+			}
+
+			var ms []query.RasterMetric
+			for _, info := range e.Manifest.Rasters {
+				switch {
+				case info.IsCategorical():
+					var all []int64
+					for _, c := range info.Classes {
+						all = append(all, c.Value)
+					}
+					ms = append(ms, query.RasterMetric{ID: "lc_all", Layer: info.ID, Method: "fractional", Stat: query.StatClassFraction, Classes: all})
+				case info.Units != "people":
+					ms = append(ms, query.RasterMetric{ID: "mean_" + info.ID, Layer: info.ID, Method: "fractional", Stat: query.StatMean})
+				}
+			}
+			start = time.Now()
+			res, err := e.RasterSums(ctx, r, ms, &query.Trace{NoCache: true})
+			if err != nil {
+				t.Fatal(err)
+			}
+			for _, m := range ms {
+				for _, v := range r.Villages {
+					x := res.Values[m.ID][v.ID]
+					if m.Stat == query.StatClassFraction && (x < 1-1e-9 || x > 1+1e-9) {
+						t.Errorf("%s: %s all-class share %v", m.Layer, v.ID, x)
+					}
+					if m.Stat == query.StatMean && (x < 0 || x > 500) {
+						t.Errorf("%s: %s mean %v", m.Layer, v.ID, x)
+					}
+				}
+				t.Logf("%s: province %v", m.ID, res.Totals[m.ID])
+			}
+			t.Logf("rasters %v: windows %d, blocks %d, pixels %d, stages %v", time.Since(start).Round(time.Millisecond),
+				res.Stats.Windows, res.Stats.Blocks, res.Stats.PixelsRead, res.Stats.Stages)
+		})
 	}
 }

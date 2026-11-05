@@ -184,6 +184,31 @@ type Result struct {
 	Weight        float64 // Σ weight over valid pixels (pixel-equivalents covered)
 	NodataWeight  float64 // Σ weight over nodata/NaN pixels (reported, not summed)
 	PixelsTouched int     // pixels with weight > 0
+	// Classes is Σ weight per class value over valid pixels; set only by
+	// WeightedClasses (categorical rasters). Σ Classes = Weight.
+	Classes map[int64]float64
+}
+
+// Mean is Sum / Weight: the coverage-weighted mean of valid pixels, NaN
+// when no valid pixel is covered.
+func (r Result) Mean() float64 {
+	if r.Weight == 0 {
+		return math.NaN()
+	}
+	return r.Sum / r.Weight
+}
+
+// ClassFraction is the share of the covered valid weight whose class is in
+// classes, NaN when no valid pixel is covered.
+func (r Result) ClassFraction(classes []int64) float64 {
+	if r.Weight == 0 {
+		return math.NaN()
+	}
+	var w float64
+	for _, c := range classes {
+		w += r.Classes[c]
+	}
+	return w / r.Weight
 }
 
 // Nodata describes the raster's nodata value, if any.
@@ -210,6 +235,24 @@ func (c Coverage) WeightedSum(values []float64, nd Nodata) (Result, error) {
 		}
 		r.Sum += v * wt
 		r.Weight += wt
+	}
+	return r, nil
+}
+
+// WeightedClasses is WeightedSum for a categorical raster: it also sums
+// the weight per class (pixel value truncated to an integer class code).
+func (c Coverage) WeightedClasses(values []float64, nd Nodata) (Result, error) {
+	r, err := c.WeightedSum(values, nd)
+	if err != nil {
+		return r, err
+	}
+	r.Classes = map[int64]float64{}
+	for i, wt := range c.Weight {
+		v := values[i]
+		if wt == 0 || math.IsNaN(v) || (nd.Set && v == nd.Value) {
+			continue
+		}
+		r.Classes[int64(v)] += wt
 	}
 	return r, nil
 }

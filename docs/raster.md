@@ -1,6 +1,6 @@
 # Raster aggregation
 
-`raster_sum` metrics: `Engine.RasterSums` in `internal/query/raster.go`, with the coverage maths in `internal/raster`.
+Raster metrics (`raster_sum`, `raster_mean`, `raster_class_fraction`): `Engine.RasterSums` in `internal/query/raster.go`, with the coverage maths in `internal/raster`.
 
 ```json
 { "id": "pop", "type": "raster_sum", "layer": "population_2020", "method": "fractional" }
@@ -9,6 +9,23 @@
 - **fractional**: Σ pixel × (area(pixel ∩ village) / area(pixel)), computed exactly by polygon clipping in planar lon/lat, the same definition exactextract uses.
 - **center**: Σ pixels whose centre is inside the village (half-open rule, so adjacent villages never count a pixel twice). A baseline for the accuracy view.
 - Nodata (and NaN) pixels are excluded; their covered weight is reported as `raster_nodata_weight`.
+
+## Statistics and layer kinds
+
+Every raster metric reduces the same per-village accumulation, so one coverage pass (and one cache entry per village, layer and method) serves all of them:
+
+| Accumulated | Used by |
+|---|---|
+| `Sum` = Σ value × weight over valid pixels | `raster_sum` = Sum × scale |
+| `Weight` = Σ weight over valid pixels | `raster_mean` = Sum / Weight × scale |
+| `Classes[c]` = Σ weight of valid pixels of class c (categorical layers only) | `raster_class_fraction` = Σ Classes[c ∈ classes] / Weight |
+
+- **Kinds.** Each layer is `continuous` (quantities: sum, mean) or `categorical` (class codes: fractions), recorded in its `<id>.json` with the class list (value, label, colour). Categorical COGs use **mode** overviews, never average.
+- **Scale.** An optional `scale` multiplies stored values into `units` at query time (sums and means; never fractions), so integer-coded sources can stay compact. The DIY night-light layer uses none (see the note below).
+- **Area totals** for means and fractions are computed from the summed accumulations (Σ Sum / Σ Weight), i.e. weighted by covered area, not averaged over villages.
+- A mean or fraction with nothing covered (`Weight` = 0, e.g. all nodata) is NaN, returned as `null`.
+- Fractions are of the **valid** covered area, so nodata (e.g. WorldCover's 0) does not dilute them.
+- `TestLandCoverClassFractions` checks fractions against closed forms on the fixture land-cover grid (column bands of classes): 1 for villages inside one band, 2/3 and 1/3 for the L-shaped V003, Σ all classes = 1; and the mean against the fixture formula.
 
 ## Read path
 
@@ -59,3 +76,8 @@ Golden CSVs are regenerated with `make golden-raster` (python:3.12-slim, linux/a
 | Kota Yogyakarta (45 villages), pop fractional + center | 52–58 ms | 35–37 ms | 1–2 ms |
 
 Replicas return identical bodies (diagnostics aside).
+
+## Night lights and land cover on DIY (`diy-2026-11-b`)
+
+- **Night lights**: OpenGeoHub's COG of the Annual VNL V2 2023 average (Zenodo record 17294744), cropped to DIY: 204×163 pixels of 15″ (~460 m), Int16, nodata −32768. **Units caveat:** the record says values were rescaled from 0–200 to 0–2000 (×10), but the file's TIFF tag says `Scale: 10` and the values (34–53 in central Yogyakarta, ~2 on average over the crop) match plausible radiance in nW/cm²/sr directly; a ×0.1 factor would make the city core 3–5 nW. We therefore serve the stored values unscaled as nW/cm²/sr. Values are integers, so dim rural pixels are coarse (0, 1, 2…). Treat the layer as a relative activity index until checked against EOG's original VNL (which needs an EOG account to download).
+- **Land cover**: ESA WorldCover 2021 v200, tile S09E108, mode-aggregated 3×3 to 0.00025° (~28 m; 3328×2650, Byte, nodata 0) so a province request reads ~7 M pixels instead of ~65 M at 10 m. Mode aggregation slightly favours each block's majority class, so small patches (narrow roads, single houses) are under-counted relative to 10 m.

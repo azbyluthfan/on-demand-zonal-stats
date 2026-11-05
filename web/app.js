@@ -12,7 +12,7 @@
   const NODATA = '#d0d4d9';
   const STAGE_COLORS = {
     resolve_area: '#8c96a3', reference: '#b48ead', h3_cells: '#5e81ac', poi_scan: '#88c0d0', poi_interior: '#a3be8c',
-    poi_boundary: '#ebcb8b', raster_geometry: '#d08770', raster_read: '#bf616a', raster_coverage: '#e5a0a8', assemble: '#4c566a',
+    poi_boundary: '#ebcb8b', building_cells: '#8fbcbb', building_boundary: '#d8b66a', raster_geometry: '#d08770', raster_read: '#bf616a', raster_coverage: '#e5a0a8', assemble: '#4c566a',
   };
 
   const PRESETS = [
@@ -26,7 +26,7 @@
 
   const state = {
     layers: null, areas: [], categories: new Map(), selected: new Set(),
-    mode: 'admin', drawn: null, result: null, rasterId: null, draw: null, map: null, hoverId: null, drawFinishedAt: -1e9,
+    mode: 'admin', drawn: null, result: null, rasterId: null, nl: null, lc: null, hasBuildings: false, draw: null, map: null, hoverId: null, drawFinishedAt: -1e9,
   };
 
   // ---------- API ----------
@@ -50,11 +50,22 @@
       state.layers = layers;
       state.areas = areas.areas;
       layers.categories.forEach((c) => state.categories.set(c.category, c.count));
-      state.rasterId = layers.rasters.length ? layers.rasters[0].id : null;
+      // Layer roles from the release: population = the continuous layer in
+      // people; night lights = another continuous layer; land cover = the
+      // first categorical layer.
+      const cont = layers.rasters.filter((r) => r.kind !== 'categorical');
+      const pop = cont.find((r) => r.units === 'people') || null;
+      state.rasterId = pop ? pop.id : null;
+      state.nl = cont.find((r) => r !== pop) || null;
+      state.lc = layers.rasters.find((r) => r.kind === 'categorical') || null;
+      state.hasBuildings = !!layers.buildings;
+      if (state.nl) { $('nl-row').hidden = false; $('nl-label').textContent = `${labelOf(state.nl)} (mean, ${state.nl.units})`; }
+      if (state.lc) { $('lc-row').hidden = false; $('lc-label').textContent = `${labelOf(state.lc)} (class shares)`; }
+      if (state.hasBuildings) $('bld-row').hidden = false;
       $('release').textContent = layers.release_id;
       $('release').title = `Release ${layers.release_id} · boundaries ${layers.boundary_version} · POIs ${layers.poi_release} · H3 res ${layers.h3_resolution}`;
       if (state.rasterId) {
-        const r = layers.rasters[0];
+        const r = pop;
         $('pop-label').textContent = `${r.id.replace(/_/g, ' ')} (${r.units})`;
       } else {
         $('pop-on').checked = false; $('pop-on').disabled = true;
@@ -210,14 +221,33 @@
     $('attribution').innerHTML = s.join('<br>') + '<br>Basemap: OpenFreeMap, © OpenStreetMap contributors';
   }
 
-  // Views available given the current selections.
+  const labelOf = (r) => r.id.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+  const on = (id) => $(id).checked && !$(id).disabled;
+
+  // Views available given the current selections: [id, label, kind]. Kinds:
+  // count (per-km² toggle), rate, value, percent, diverging, categorical.
   function views() {
     const hasPoi = state.selected.size > 0;
-    const hasPop = $('pop-on').checked && state.rasterId;
+    const hasPop = on('pop-on') && state.rasterId;
+    const hasNl = state.nl && on('nl-on');
+    const hasLc = state.lc && on('lc-on');
+    const hasBld = state.hasBuildings && on('bld-on');
     const v = [];
     if (hasPoi) v.push(['pois', 'POI count', 'count']);
     if (hasPop) v.push(['pop', 'Population', 'count']);
     if (hasPoi && hasPop) v.push(['pois_per_1k', 'POIs per 1,000 people', 'rate']);
+    if (hasNl) v.push(['nl', `${labelOf(state.nl)}: mean radiance (${state.nl.units})`, 'value']);
+    if (hasNl && hasPop) v.push(['nl_per_1k', `${labelOf(state.nl)}: radiance × km² per 1,000 people`, 'rate']);
+    if (hasBld) {
+      v.push(['bld', 'Buildings', 'count']);
+      v.push(['bld_share', 'Building footprint (% of village area)', 'percent']);
+      v.push(['bld_size', 'Mean building footprint (m²)', 'value']);
+    }
+    if (hasBld && hasPop) v.push(['people_per_bld', 'People per building', 'rate']);
+    if (hasLc) {
+      v.push(['lc_dominant', `${labelOf(state.lc)}: dominant class`, 'categorical']);
+      state.lc.classes.forEach((c) => v.push([`lc_${c.value}`, `${labelOf(state.lc)}: ${c.label} (% of area)`, 'percent']));
+    }
     if (hasPop) {
       v.push(['accuracy', 'Accuracy: centre − fractional (people)', 'diverging']);
       v.push(['accuracy_pct', 'Accuracy: centre vs fractional (%)', 'diverging']);
@@ -246,12 +276,24 @@
 
     const metrics = [];
     if (state.selected.size) metrics.push({ id: 'pois', type: 'poi_count', categories: [...state.selected].sort() });
-    if ($('pop-on').checked && state.rasterId) {
+    if (on('pop-on') && state.rasterId) {
       // Both methods: the accuracy view needs them and the second costs little.
       metrics.push({ id: 'pop_fractional', type: 'raster_sum', layer: state.rasterId, method: 'fractional' });
       metrics.push({ id: 'pop_center', type: 'raster_sum', layer: state.rasterId, method: 'center' });
     }
-    if (!metrics.length) throw new Error('Choose at least one POI category or the population layer.');
+    if (state.nl && on('nl-on')) {
+      metrics.push({ id: 'nl_mean', type: 'raster_mean', layer: state.nl.id, method: 'fractional' });
+    }
+    if (state.lc && on('lc-on')) {
+      // One fraction per class: dominant-class and per-class views from one request.
+      state.lc.classes.forEach((c) => metrics.push({
+        id: `lc_${c.value}`, type: 'raster_class_fraction', layer: state.lc.id, method: 'fractional', classes: [c.value],
+      }));
+    }
+    if (state.hasBuildings && on('bld-on')) {
+      metrics.push({ id: 'bld_n', type: 'building_count' }, { id: 'bld_area', type: 'building_area' });
+    }
+    if (!metrics.length) throw new Error('Choose at least one POI category or layer.');
     return { area, metrics, include_geometry: true, diagnostics: true };
   }
 
@@ -294,10 +336,30 @@
       case 'pois_per_1k': v = pop > 0 ? (1000 * m.pois) / pop : null; break;
       case 'accuracy': v = m.pop_center - m.pop_fractional; break;
       case 'accuracy_pct': v = m.pop_fractional > 0 ? (100 * (m.pop_center - m.pop_fractional)) / m.pop_fractional : null; break;
-      default: v = null;
+      case 'nl': v = m.nl_mean; break;
+      // Mean radiance × area ≈ total light; per 1,000 people.
+      case 'nl_per_1k': v = m.nl_mean != null && pop > 0 ? (1000 * m.nl_mean * (p.area_m2 / 1e6)) / pop : null; break;
+      case 'bld': v = m.bld_n; break;
+      case 'bld_share': v = p.area_m2 > 0 ? (100 * m.bld_area) / p.area_m2 : null; break;
+      case 'bld_size': v = m.bld_n > 0 ? m.bld_area / m.bld_n : null; break;
+      case 'people_per_bld': v = m.bld_n > 0 ? pop / m.bld_n : null; break;
+      case 'lc_dominant': v = dominantClass(m); break;
+      default:
+        if (view.startsWith('lc_')) v = m[view] == null ? null : 100 * m[view];
+        else v = null;
     }
-    if (v != null && perKm2 && (view === 'pois' || view === 'pop')) v /= p.area_m2 / 1e6;
+    if (v != null && perKm2 && (view === 'pois' || view === 'pop' || view === 'bld')) v /= p.area_m2 / 1e6;
     return v == null || !isFinite(v) ? null : v;
+  }
+
+  // The land-cover class with the largest share (null when no share is known).
+  function dominantClass(m) {
+    let best = null; let share = -1;
+    (state.lc ? state.lc.classes : []).forEach((c) => {
+      const f = m[`lc_${c.value}`];
+      if (f != null && f > share) { share = f; best = c.value; }
+    });
+    return share > 0 ? best : null;
   }
 
   function quantileBreaks(vals, k) {
@@ -331,6 +393,17 @@
     const vals = feats.map((f) => f.properties._v);
 
     let colors; let breaks;
+    if (kind === 'categorical') {
+      const match = ['match', ['get', '_v']];
+      state.lc.classes.forEach((c) => match.push(c.value, c.color || '#999'));
+      match.push(NODATA);
+      state.map.getSource('villages').setData({ type: 'FeatureCollection', features: feats });
+      state.map.setPaintProperty('v-fill', 'fill-color', ['case', ['==', ['get', '_v'], null], NODATA, match]);
+      renderClassLegend(view, vals);
+      renderSummary(view, perKm2);
+      if (fit && fc.features.length) fitTo(fc.features);
+      return;
+    }
     if (kind === 'diverging') {
       breaks = divergingBreaks(vals);
       const mid = Math.floor(DIV.length / 2);
@@ -351,15 +424,29 @@
     if (fit && fc.features.length) fitTo(fc.features);
   }
 
+  function renderClassLegend(view, vals) {
+    const label = (views().find(([id]) => id === view) || [, ''])[1];
+    const counts = new Map();
+    vals.forEach((v) => v != null && counts.set(v, (counts.get(v) || 0) + 1));
+    const rows = state.lc.classes.filter((c) => counts.has(c.value)).map((c) =>
+      `<span class="sw" style="background:${esc(c.color || '#999')}"></span><span>${esc(c.label)}</span><span class="n">${counts.get(c.value)}</span>`).join('');
+    const nulls = vals.filter((v) => v == null).length;
+    $('legend').innerHTML = `<h3>${esc(label)}</h3><div class="classes">${rows}</div><div class="note">Villages per class; fractional coverage.</div>` +
+      (nulls ? `<div class="note">no value (${nulls})</div>` : '');
+    $('legend').hidden = false;
+  }
+
   function renderLegend(view, kind, perKm2, breaks, colors, vals) {
     const label = (views().find(([id]) => id === view) || [, ''])[1] + (perKm2 ? ' per km²' : '');
     const present = vals.filter((v) => v != null);
     const lo = present.length ? Math.min(...present) : 0;
     const hi = present.length ? Math.max(...present) : 0;
-    const ticks = [lo, ...breaks, hi].map(fmtSmart);
+    const unit = kind === 'percent' ? '%' : '';
+    const ticks = [lo, ...breaks, hi].map((x) => fmtSmart(x) + unit);
     const note = kind === 'diverging'
       ? '<div class="note">Red: counting whole pixels by their centre gives more people than exact fractional coverage; blue: fewer.</div>'
-      : view !== 'pois' ? `<div class="note">Population method: ${popMethod()}</div>` : '';
+      : ['pop', 'pois_per_1k', 'nl_per_1k', 'people_per_bld'].includes(view) ? `<div class="note">Population method: ${popMethod()}</div>`
+        : view.startsWith('lc_') || view === 'nl' ? '<div class="note">Fractional pixel coverage</div>' : '';
     const nulls = vals.length - present.length;
     $('legend').innerHTML = `<h3>${esc(label)}</h3><div class="ramp">${colors.map((c) => `<span style="background:${c}"></span>`).join('')}</div>` +
       `<div class="ticks">${ticks.map((t) => `<span>${t}</span>`).join('')}</div>${note}` +
@@ -373,22 +460,44 @@
     const rows = [['Villages', fc.summary.village_count]];
     if ('pois' in t) rows.push(['POIs', t.pois]);
     if ('pop_fractional' in t) rows.push(['Population (fractional)', t.pop_fractional], ['Population (pixel centre)', t.pop_center]);
+    if ('nl_mean' in t) rows.push([`${labelOf(state.nl)}, mean (${state.nl.units})`, t.nl_mean]);
+    if ('bld_n' in t) {
+      const area = fc.features.reduce((s, f) => s + f.properties.area_m2, 0);
+      rows.push(['Buildings', t.bld_n], ['Building footprint (km²)', t.bld_area / 1e6]);
+      if (area > 0) rows.push(['Footprint share of area (%)', (100 * t.bld_area) / area]);
+    }
+    if (state.lc && `lc_${state.lc.classes[0].value}` in t) {
+      state.lc.classes
+        .map((c) => [c.label, t[`lc_${c.value}`]])
+        .filter(([, f]) => f != null && f >= 0.005)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([l, f]) => rows.push([`${l} (% of area)`, 100 * f]));
+    }
     if (fc.diagnostics && fc.diagnostics.unassigned_pois && 'pois' in fc.diagnostics.unassigned_pois) {
       rows.push(['POIs in no village', fc.diagnostics.unassigned_pois.pois]);
     }
     $('summary').innerHTML = rows.map(([k, v]) => `<span>${k}</span><span class="v">${fmtSmart(v)}</span>`).join('');
 
+    const classLabel = (v) => ((state.lc && state.lc.classes.find((c) => c.value === v)) || {}).label || '–';
+    const cat = view === 'lc_dominant';
     const ranked = fc.features
-      .map((f) => ({ f, v: valueOf(f.properties, view, perKm2) }))
+      .map((f) => ({ f, v: cat ? dominantShare(f.properties.metrics) : valueOf(f.properties, view, perKm2), c: cat ? dominantClass(f.properties.metrics) : null }))
       .filter((x) => x.v != null)
       .sort((a, b) => (view.startsWith('accuracy') ? Math.abs(b.v) - Math.abs(a.v) : b.v - a.v))
       .slice(0, 10);
     const top = $('top');
-    top.querySelector('caption').textContent = view.startsWith('accuracy') ? 'Largest centre-vs-fractional gaps' : 'Top villages';
+    top.querySelector('caption').textContent = view.startsWith('accuracy') ? 'Largest centre-vs-fractional gaps'
+      : cat ? 'Most uniform villages (dominant class share)' : 'Top villages';
     top.querySelector('thead').innerHTML = '<tr><th>Village</th><th>District</th><th class="num">Value</th></tr>';
-    top.querySelector('tbody').innerHTML = ranked.map(({ f, v }) =>
-      `<tr data-id="${esc(f.id)}"><td>${esc(f.properties.village_name)}</td><td>${esc(f.properties.district_name)}</td><td class="num">${fmtSmart(v)}</td></tr>`).join('');
+    top.querySelector('tbody').innerHTML = ranked.map(({ f, v, c }) =>
+      `<tr data-id="${esc(f.id)}"><td>${esc(f.properties.village_name)}</td><td>${esc(f.properties.district_name)}</td>` +
+      `<td class="num">${cat ? `${esc(classLabel(c))} ${fmtSmart(v)}%` : fmtSmart(v)}</td></tr>`).join('');
     $('summary-block').hidden = false;
+  }
+
+  function dominantShare(m) {
+    const c = dominantClass(m);
+    return c == null ? null : 100 * m[`lc_${c}`];
   }
 
   function showPopup(feature, lngLat) {
@@ -402,6 +511,17 @@
       rows.push(['Centre − fractional', m.pop_center - m.pop_fractional]);
     }
     if ('pois' in m && 'pop_fractional' in m && m.pop_fractional > 0) rows.push(['POIs per 1,000 people', (1000 * m.pois) / m['pop_' + popMethod()]]);
+    if ('nl_mean' in m) rows.push([`${labelOf(state.nl)}, mean (${state.nl.units})`, m.nl_mean]);
+    if ('bld_n' in m) {
+      rows.push(['Buildings', m.bld_n], ['Footprint (% of area)', p.area_m2 > 0 ? (100 * m.bld_area) / p.area_m2 : null]);
+      if (m.bld_n > 0) rows.push(['Mean footprint (m²)', m.bld_area / m.bld_n]);
+    }
+    if (state.lc) {
+      state.lc.classes
+        .filter((c) => m[`lc_${c.value}`] != null && m[`lc_${c.value}`] >= 0.005)
+        .sort((a, b) => m[`lc_${b.value}`] - m[`lc_${a.value}`])
+        .forEach((c) => rows.push([`${c.label} (%)`, 100 * m[`lc_${c.value}`]]));
+    }
     rows.push(['Area (km²)', p.area_m2 / 1e6]);
     new maplibregl.Popup({ closeButton: true, maxWidth: '300px' })
       .setLngLat(lngLat)
@@ -441,6 +561,16 @@
       ['Exact ST_Covers tests', fmt0.format(d.points_boundary_tested)],
       ['Won by a neighbour outside the area', fmt0.format(d.points_other_village)],
     ]);
+    if (d.buildings) {
+      const b = d.buildings;
+      html += '<h4>Buildings</h4>' + kv([
+        ['Villages computed (cache misses)', fmt0.format(b.villages_computed)],
+        ['Interior cells read (pre-summed)', fmt0.format(b.cell_rows)],
+        ['Buildings via interior cells', fmt0.format(b.cell_buildings)],
+        ['Boundary building points', fmt0.format(b.boundary_points)],
+        ['Exact ST_Covers tests', fmt0.format(b.boundary_tests)],
+      ]);
+    }
     if (d.raster_windows) {
       html += '<h4>Raster</h4>' + kv([
         ['Village windows', fmt0.format(d.raster_windows)],
@@ -504,7 +634,7 @@
       state.selected.has(c) ? state.selected.delete(c) : state.selected.add(c);
       renderSelected(); searchCategories();
     });
-    $('pop-on').addEventListener('change', updateViewOptions);
+    ['pop-on', 'nl-on', 'lc-on', 'bld-on'].forEach((id) => $(id).addEventListener('change', updateViewOptions));
     $('sel-view').addEventListener('change', () => { updateViewOptions(); render(false); });
     $('per-km2').addEventListener('change', () => render(false));
     document.querySelectorAll('input[name=method]').forEach((r) => r.addEventListener('change', () => render(false)));

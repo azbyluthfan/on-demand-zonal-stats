@@ -1,5 +1,5 @@
 {
-  "release_id": "diy-2026-11-a",
+  "release_id": "diy-2026-11-b",
   "h3_resolution": 10,
   "province_codes": ["34"],
   "boundaries": {
@@ -27,6 +27,18 @@
       "attribution": "Overture Maps Foundation"
     }
   },
+  "buildings": {
+    "adapter": "overture",
+    "path": "s3://overturemaps-us-west-2/release/2026-10-21.0",
+    "release": "2026-10-21.0",
+    "source": {
+      "name": "Overture Maps Buildings",
+      "url": "https://docs.overturemaps.org/guides/buildings/",
+      "version": "2026-10-21.0",
+      "license": "ODbL-1.0 (Buildings; includes OpenStreetMap, Microsoft and Google Open Buildings footprints)",
+      "attribution": "Overture Maps Foundation; © OpenStreetMap contributors"
+    }
+  },
   "rasters": [
     {
       "id": "population_2020",
@@ -40,6 +52,50 @@
         "version": "Global_2000_2020_Constrained BSGM",
         "license": "CC BY 4.0",
         "attribution": "WorldPop (www.worldpop.org), University of Southampton"
+      }
+    },
+    {
+      "id": "nightlights_2023",
+      "path": "data/raw/nightlights/nightlights.average_viirs.v21_m_500m_s_20230101_20231231_go_epsg4326_v20250904.tif",
+      "units": "nW/cm²/sr",
+      "year": 2023,
+      "clip_to_villages": true,
+      "source": {
+        "name": "Annual VIIRS night lights 2023, 500 m (VNL V2 average; integer radiance)",
+        "url": "https://zenodo.org/records/17294744",
+        "version": "v0.4 (2025-10-08), file v20250904",
+        "license": "CC BY 4.0",
+        "attribution": "Hengl, T. (OpenGeoHub), from Annual VNL V2 by Elvidge et al. (2021), Earth Observation Group, Colorado School of Mines"
+      }
+    },
+    {
+      "id": "landcover_2021",
+      "path": "data/raw/worldcover/ESA_WorldCover_10m_2021_v200_S09E108_Map.tif",
+      "units": "class",
+      "year": 2021,
+      "kind": "categorical",
+      "resolution": 0.00025,
+      "resampling": "mode",
+      "clip_to_villages": true,
+      "classes": [
+        { "value": 10, "label": "Tree cover", "color": "#006400" },
+        { "value": 20, "label": "Shrubland", "color": "#ffbb22" },
+        { "value": 30, "label": "Grassland", "color": "#ffff4c" },
+        { "value": 40, "label": "Cropland", "color": "#f096ff" },
+        { "value": 50, "label": "Built-up", "color": "#fa0000" },
+        { "value": 60, "label": "Bare / sparse vegetation", "color": "#b4b4b4" },
+        { "value": 70, "label": "Snow and ice", "color": "#f0f0f0" },
+        { "value": 80, "label": "Permanent water bodies", "color": "#0064c8" },
+        { "value": 90, "label": "Herbaceous wetland", "color": "#0096a0" },
+        { "value": 95, "label": "Mangroves", "color": "#00cf75" },
+        { "value": 100, "label": "Moss and lichen", "color": "#fae6a0" }
+      ],
+      "source": {
+        "name": "ESA WorldCover 2021 v200, 10 m (mode-aggregated 3x3 to 0.00025°, ~28 m)",
+        "url": "https://esa-worldcover.org/en",
+        "version": "v200, tile S09E108",
+        "license": "CC BY 4.0",
+        "attribution": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium"
       }
     }
   ],

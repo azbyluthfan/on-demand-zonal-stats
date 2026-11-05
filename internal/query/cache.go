@@ -31,9 +31,10 @@ type blockCacheKey struct {
 // resultCaches are keyed within one engine, i.e. one release: the release
 // ID is implicit in the key.
 type resultCaches struct {
-	poi    *lru.Cache[poiKey, poiVal]
-	raster *lru.Cache[rasterKey, raster.Result]
-	blocks *lru.Cache[blockCacheKey, []float64]
+	poi       *lru.Cache[poiKey, poiVal]
+	buildings *lru.Cache[string, buildingVal] // village ID
+	raster    *lru.Cache[rasterKey, raster.Result]
+	blocks    *lru.Cache[blockCacheKey, []float64]
 }
 
 func newCaches(cfg CacheConfig) (*resultCaches, *refCache, error) {
@@ -53,6 +54,10 @@ func newCaches(cfg CacheConfig) (*resultCaches, *refCache, error) {
 	if err != nil {
 		return nil, nil, err
 	}
+	bld, err := lru.New[string, buildingVal](max(cfg.ResultEntries/10, 1000))
+	if err != nil {
+		return nil, nil, err
+	}
 	rs, err := lru.New[rasterKey, raster.Result](max(cfg.ResultEntries/10, 1000))
 	if err != nil {
 		return nil, nil, err
@@ -61,16 +66,17 @@ func newCaches(cfg CacheConfig) (*resultCaches, *refCache, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	return &resultCaches{poi: poi, raster: rs, blocks: blocks},
+	return &resultCaches{poi: poi, buildings: bld, raster: rs, blocks: blocks},
 		&refCache{m: map[string]*refEntry{}, cap: cfg.RefProvinces}, nil
 }
 
 // CacheSizes reports current cache occupancy.
 type CacheSizes struct {
-	POIEntries    int            `json:"poi_entries"`
-	RasterEntries int            `json:"raster_entries"`
-	Blocks        int            `json:"blocks"`
-	Reference     *RefCacheStats `json:"reference,omitempty"`
+	POIEntries      int            `json:"poi_entries"`
+	BuildingEntries int            `json:"building_entries"`
+	RasterEntries   int            `json:"raster_entries"`
+	Blocks          int            `json:"blocks"`
+	Reference       *RefCacheStats `json:"reference,omitempty"`
 }
 
 // CacheSizes reports current occupancy (zero when caching is disabled).
@@ -79,5 +85,5 @@ func (e *Engine) CacheSizes() CacheSizes {
 		return CacheSizes{}
 	}
 	ref := e.ReferenceCache()
-	return CacheSizes{POIEntries: e.cache.poi.Len(), RasterEntries: e.cache.raster.Len(), Blocks: e.cache.blocks.Len(), Reference: &ref}
+	return CacheSizes{POIEntries: e.cache.poi.Len(), BuildingEntries: e.cache.buildings.Len(), RasterEntries: e.cache.raster.Len(), Blocks: e.cache.blocks.Len(), Reference: &ref}
 }

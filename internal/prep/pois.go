@@ -83,23 +83,7 @@ func loadPOIs(ctx context.Context, d *db, cfg *Config, qc *qcLog) error {
 		return err
 	}
 
-	// Exact assignment via the H3 split (the serving algorithm, docs/query.md):
-	// interior cell -> its single village; boundary cell -> ST_Covers against
-	// the cell's candidate villages, lowest village_id wins; else none.
-	if err := d.exec(ctx, `CREATE TABLE poi_assign AS
-		WITH cand AS (
-			SELECT p.poi_id, h.village_id, h.cell_type FROM pois p JOIN village_h3 h USING (h3_cell)),
-		interior AS (SELECT poi_id, village_id FROM cand WHERE cell_type = 'interior'),
-		tested AS (
-			SELECT c.poi_id, count(*) AS n_tested,
-				min(c.village_id) FILTER (ST_Covers(v.geometry, p.geometry)) AS village_id
-			FROM cand c JOIN pois p USING (poi_id) JOIN villages v USING (village_id)
-			WHERE c.cell_type = 'boundary' GROUP BY c.poi_id)
-		SELECT p.poi_id, coalesce(i.village_id, t.village_id) AS village_id,
-			CASE WHEN i.village_id IS NOT NULL THEN 'interior'
-			     WHEN t.village_id IS NOT NULL THEN 'boundary' ELSE 'none' END AS path,
-			coalesce(t.n_tested, 0) AS n_tested
-		FROM pois p LEFT JOIN interior i USING (poi_id) LEFT JOIN tested t USING (poi_id)`); err != nil {
+	if err := assignPoints(ctx, d, "pois", "poi_id", "poi_assign"); err != nil {
 		return err
 	}
 	// Partition key: the assigned village's province; for unassigned POIs in
@@ -130,15 +114,41 @@ func loadPOIs(ctx context.Context, d *db, cfg *Config, qc *qcLog) error {
 	return calibrationQC(ctx, d, qc)
 }
 
+// assignPoints creates table out (id, village_id, path, n_tested): the exact
+// village of every point in table pts (columns <id>, h3_cell, geometry) via
+// the H3 split, the serving algorithm (docs/query.md): interior cell -> its
+// single village; boundary cell -> ST_Covers against the cell's candidate
+// villages, lowest village_id wins; else none.
+func assignPoints(ctx context.Context, d *db, pts, id, out string) error {
+	return d.exec(ctx, fmt.Sprintf(`CREATE TABLE %[3]s AS
+		WITH cand AS (
+			SELECT p.%[2]s, h.village_id, h.cell_type FROM %[1]s p JOIN village_h3 h USING (h3_cell)),
+		interior AS (SELECT %[2]s, village_id FROM cand WHERE cell_type = 'interior'),
+		tested AS (
+			SELECT c.%[2]s, count(*) AS n_tested,
+				min(c.village_id) FILTER (ST_Covers(v.geometry, p.geometry)) AS village_id
+			FROM cand c JOIN %[1]s p USING (%[2]s) JOIN villages v USING (village_id)
+			WHERE c.cell_type = 'boundary' GROUP BY c.%[2]s)
+		SELECT p.%[2]s, coalesce(i.village_id, t.village_id) AS village_id,
+			CASE WHEN i.village_id IS NOT NULL THEN 'interior'
+			     WHEN t.village_id IS NOT NULL THEN 'boundary' ELSE 'none' END AS path,
+			coalesce(t.n_tested, 0) AS n_tested
+		FROM %[1]s p LEFT JOIN interior i USING (%[2]s) LEFT JOIN tested t USING (%[2]s)`, pts, id, out))
+}
+
 // poiCrossCheck compares the H3-split assignment against a naive ST_Covers
 // join over all villages with the same edge rule.
 func poiCrossCheck(ctx context.Context, d *db, qc *qcLog) {
-	mismatch, err := d.count(ctx, `WITH naive AS (
-			SELECT p.poi_id, min(v.village_id) AS village_id
-			FROM pois p JOIN villages v ON ST_Covers(v.geometry, p.geometry) GROUP BY p.poi_id)
-		SELECT count(*) FROM poi_assign a LEFT JOIN naive n USING (poi_id)
-		WHERE a.village_id IS DISTINCT FROM n.village_id`)
-	qc.add(QCResult{Name: "poi_assignment_crosscheck", Blocking: true, Passed: err == nil && mismatch == 0,
+	crossCheck(ctx, d, qc, "poi_assignment_crosscheck", "pois", "poi_id", "poi_assign")
+}
+
+func crossCheck(ctx context.Context, d *db, qc *qcLog, name, pts, id, assign string) {
+	mismatch, err := d.count(ctx, fmt.Sprintf(`WITH naive AS (
+			SELECT p.%[2]s, min(v.village_id) AS village_id
+			FROM %[1]s p JOIN villages v ON ST_Covers(v.geometry, p.geometry) GROUP BY p.%[2]s)
+		SELECT count(*) FROM %[3]s a LEFT JOIN naive n USING (%[2]s)
+		WHERE a.village_id IS DISTINCT FROM n.village_id`, pts, id, assign))
+	qc.add(QCResult{Name: name, Blocking: true, Passed: err == nil && mismatch == 0,
 		Value: map[string]int64{"mismatches": mismatch}, Error: errStr(err)})
 }
 

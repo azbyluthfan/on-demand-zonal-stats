@@ -249,3 +249,30 @@ func BenchmarkFractionalLargeVillage(b *testing.B) {
 		raster.Fractional(g, p)
 	}
 }
+
+func TestWeightedClasses(t *testing.T) {
+	// Covers cols 0-2 of row 0: weights 0.5, 1, 0.5 (x 0.5..2.5).
+	c := raster.Fractional(unit, poly(orb.Point{0.5, 3}, orb.Point{2.5, 3}, orb.Point{2.5, 4}, orb.Point{0.5, 4}))
+	r, err := c.WeightedClasses([]float64{10, 50, 0}, raster.Nodata{Value: 0, Set: true}) // 0 = nodata
+	if err != nil {
+		t.Fatal(err)
+	}
+	if math.Abs(r.Classes[10]-0.5) > tol || math.Abs(r.Classes[50]-1) > tol || len(r.Classes) != 2 {
+		t.Errorf("classes %v", r.Classes)
+	}
+	if math.Abs(r.Weight-1.5) > tol || math.Abs(r.NodataWeight-0.5) > tol {
+		t.Errorf("weights %+v", r)
+	}
+	if f := r.ClassFraction([]int64{50}); math.Abs(f-2.0/3) > tol {
+		t.Errorf("fraction(50) = %v, want 2/3", f)
+	}
+	if f := r.ClassFraction([]int64{10, 50}); math.Abs(f-1) > tol {
+		t.Errorf("fraction(all) = %v, want 1", f)
+	}
+	if m := r.Mean(); math.Abs(m-(10*0.5+50)/1.5) > tol {
+		t.Errorf("mean = %v", m)
+	}
+	if !math.IsNaN((raster.Result{}).Mean()) || !math.IsNaN((raster.Result{}).ClassFraction([]int64{10})) {
+		t.Error("mean/fraction of nothing should be NaN")
+	}
+}
