@@ -15,7 +15,7 @@ app-down: ## Stop the demo (keeps the RustFS volume)
 	$(COMPOSE) down
 
 api-local: ## One API on the host (:8080) reading a local release directory
-	RELEASE_BASE=$${RELEASE_BASE:-sample/releases/diy-2026-11-a} DEV_INSTALL_EXTENSIONS=1 LISTEN_ADDR=:8080 go run ./cmd/api
+	RELEASE_BASE=$${RELEASE_BASE:-sample/releases/diy-2026-11-b} DEV_INSTALL_EXTENSIONS=1 LISTEN_ADDR=:8080 go run ./cmd/api
 
 # ---- checks -------------------------------------------------------------
 test: ## Unit, golden, invariant and contract tests
@@ -58,20 +58,20 @@ prep-fixture: prep-image ## Build the synthetic fixture release (no downloads)
 prep-diy: prep-image ## Build the DI Yogyakarta release (needs data/raw; see docs/prep.md)
 	$(PREP) build -config configs/diy-2026-11.json
 
-prep-upload: up ## Upload a built release: make prep-upload RELEASE=diy-2026-11-a
+prep-upload: up ## Upload a built release: make prep-upload RELEASE=diy-2026-11-b
 	$(PREP) upload -dir out/releases/$(RELEASE)
 
 # Regenerate testdata/golden/*_population_2020.csv with exactextract and
 # rasterstats (amd64 container: exactextract ships no linux/arm64 wheel).
-golden-raster: ## Regenerate raster golden CSVs (needs out/releases/{fixture-1,diy-2026-11-a})
+golden-raster: ## Regenerate raster golden CSVs (needs out/releases/{fixture-1,diy-2026-11-b})
 	mkdir -p data/work
-	for r in fixture-1 diy-2026-11-a; do rm -f data/work/villages_$$r.geojson; \
+	for r in fixture-1 diy-2026-11-b; do rm -f data/work/villages_$$r.geojson; \
 	  go run ./cmd/duckq "COPY (SELECT village_id, geometry FROM read_parquet('out/releases/$$r/boundaries/villages.parquet')) TO 'data/work/villages_$$r.geojson' WITH (FORMAT GDAL, DRIVER 'GeoJSON')"; done
 	docker run --rm --platform linux/amd64 -v "$(CURDIR)":/work -w /work python:3.12-slim sh -c '\
 	  apt-get update -qq && apt-get install -y -qq libexpat1 >/dev/null && \
 	  pip install -q --root-user-action=ignore --only-binary=:all: exactextract rasterstats rasterio fiona shapely pandas && \
 	  python -I scripts/golden_raster.py data/work/villages_fixture-1.geojson out/releases/fixture-1/rasters/population_2020.tif testdata/golden/fixture_population_2020.csv && \
-	  python -I scripts/golden_raster.py data/work/villages_diy-2026-11-a.geojson out/releases/diy-2026-11-a/rasters/population_2020.tif testdata/golden/diy_population_2020.csv'
+	  python -I scripts/golden_raster.py data/work/villages_diy-2026-11-b.geojson out/releases/diy-2026-11-b/rasters/population_2020.tif testdata/golden/diy_population_2020.csv'
 
 # ---- infrastructure / verification spike --------------------------------------------
 up: ## Start RustFS only

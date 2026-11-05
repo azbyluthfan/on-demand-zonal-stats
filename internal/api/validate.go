@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"regexp"
+	"strings"
 
 	"github.com/paulmach/orb"
 	"github.com/paulmach/orb/geojson"
@@ -19,10 +20,11 @@ var (
 
 // validated is a request after validation.
 type validated struct {
-	area   query.Area
-	poi    []query.POIMetric
-	raster []MetricRequest
-	order  []string // metric IDs in request order
+	area      query.Area
+	poi       []query.POIMetric
+	raster    []query.RasterMetric
+	buildings []MetricRequest
+	order     []string // metric IDs in request order
 }
 
 // validate checks the request against the release and returns field errors.
@@ -80,10 +82,13 @@ func validate(req *AggregateRequest, m *release.Manifest, hasCategory func(strin
 		}
 		seen[mr.ID] = true
 		v.order = append(v.order, mr.ID)
+		if mr.Type != MetricRasterClassFraction && len(mr.Classes) > 0 {
+			fail(p+".classes", "classes apply to raster_class_fraction only")
+		}
 		switch mr.Type {
-		case "poi_count":
+		case MetricPOICount:
 			if mr.Layer != "" || mr.Method != "" {
-				fail(p, "layer and method apply to raster_sum only")
+				fail(p, "layer and method apply to raster metrics only")
 			}
 			if len(mr.Categories) == 0 {
 				fail(p+".categories", "at least one category is required")
@@ -102,19 +107,55 @@ func validate(req *AggregateRequest, m *release.Manifest, hasCategory func(strin
 				dup[c] = true
 			}
 			v.poi = append(v.poi, query.POIMetric{ID: mr.ID, Categories: mr.Categories})
-		case "raster_sum":
+		case MetricRasterSum, MetricRasterMean, MetricRasterClassFraction:
 			if len(mr.Categories) > 0 {
 				fail(p+".categories", "categories apply to poi_count only")
 			}
-			if _, ok := m.Raster(mr.Layer); !ok {
+			info, ok := m.Raster(mr.Layer)
+			switch {
+			case !ok:
 				fail(p+".layer", "unknown raster layer %q (see GET /v1/layers)", mr.Layer)
+			case mr.Type == MetricRasterClassFraction && !info.IsCategorical():
+				fail(p+".layer", "layer %q is continuous; use raster_sum or raster_mean", mr.Layer)
+			case mr.Type != MetricRasterClassFraction && info.IsCategorical():
+				fail(p+".layer", "layer %q is categorical; use raster_class_fraction", mr.Layer)
 			}
 			if mr.Method != "fractional" && mr.Method != "center" {
 				fail(p+".method", `must be "fractional" or "center"`)
 			}
-			v.raster = append(v.raster, mr)
+			rm := query.RasterMetric{ID: mr.ID, Layer: mr.Layer, Method: mr.Method, Stat: query.StatSum}
+			switch mr.Type {
+			case MetricRasterMean:
+				rm.Stat = query.StatMean
+			case MetricRasterClassFraction:
+				rm.Stat, rm.Classes = query.StatClassFraction, mr.Classes
+				if len(mr.Classes) == 0 {
+					fail(p+".classes", "at least one class is required")
+				}
+				dup := map[int64]bool{}
+				for j, c := range mr.Classes {
+					if ok && info.IsCategorical() {
+						if _, known := info.Class(c); !known {
+							fail(fmt.Sprintf("%s.classes[%d]", p, j), "unknown class %d of layer %q (see GET /v1/layers)", c, mr.Layer)
+						}
+					}
+					if dup[c] {
+						fail(fmt.Sprintf("%s.classes[%d]", p, j), "duplicate class %d", c)
+					}
+					dup[c] = true
+				}
+			}
+			v.raster = append(v.raster, rm)
+		case MetricBuildingCount, MetricBuildingArea:
+			if len(mr.Categories) > 0 || mr.Layer != "" || mr.Method != "" {
+				fail(p, "%s takes no categories, layer or method", mr.Type)
+			}
+			if !m.HasBuildings() {
+				fail(p+".type", "this release has no building layer")
+			}
+			v.buildings = append(v.buildings, mr)
 		default:
-			fail(p+".type", `must be "poi_count" or "raster_sum"`)
+			fail(p+".type", "must be one of %s", strings.Join(MetricTypes, ", "))
 		}
 	}
 	return v, errs

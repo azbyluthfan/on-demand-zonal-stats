@@ -21,8 +21,10 @@ type Config struct {
 
 	Boundaries BoundarySource `json:"boundaries"`
 	POIs       POISource      `json:"pois"`
-	Rasters    []RasterSource `json:"rasters"`
-	QC         QCConfig       `json:"qc"`
+	// Buildings is the optional building footprint layer (docs/buildings.md).
+	Buildings *BuildingSource `json:"buildings,omitempty"`
+	Rasters   []RasterSource  `json:"rasters"`
+	QC        QCConfig        `json:"qc"`
 }
 
 // Source is provenance recorded in the manifest.
@@ -49,6 +51,16 @@ type POISource struct {
 	Source  Source `json:"source"`
 }
 
+// BuildingSource is the building footprint input.
+type BuildingSource struct {
+	// Adapter: "geojson" (building_id + Polygon/MultiPolygon geometry) or
+	// "overture" (Overture Buildings GeoParquet; Path is the release prefix).
+	Adapter string `json:"adapter"`
+	Path    string `json:"path"`
+	Release string `json:"release"` // used in the partition path
+	Source  Source `json:"source"`
+}
+
 // RasterSource is one raster layer.
 type RasterSource struct {
 	ID    string `json:"id"` // e.g. population_2020
@@ -56,6 +68,17 @@ type RasterSource struct {
 	SRS   string `json:"srs,omitempty"` // assign if the source lacks one (e.g. .asc)
 	Units string `json:"units"`
 	Year  int    `json:"year,omitempty"`
+	// Kind is "continuous" (default) or "categorical" (class codes; needs
+	// Classes, and overviews use mode resampling).
+	Kind    string                `json:"kind,omitempty"`
+	Classes []release.RasterClass `json:"classes,omitempty"`
+	// Scale multiplies stored values to get Units (e.g. 0.1); recorded in the
+	// layer info and applied at query time.
+	Scale float64 `json:"scale,omitempty"`
+	// Resolution, when set, resamples to this pixel size in degrees with
+	// Resampling (e.g. 0.00025 with "mode" aggregates 10 m land cover 3x3).
+	Resolution float64 `json:"resolution,omitempty"`
+	Resampling string  `json:"resampling,omitempty"`
 	// ClipToVillages crops the raster to the villages' extent (plus a pad),
 	// for province-sized releases.
 	ClipToVillages bool `json:"clip_to_villages,omitempty"`
@@ -118,12 +141,48 @@ func (c *Config) validate() error {
 	default:
 		return fmt.Errorf("config: unknown pois.adapter %q", c.POIs.Adapter)
 	}
+	if b := c.Buildings; b != nil {
+		switch {
+		case b.Adapter != "geojson" && b.Adapter != "overture":
+			return fmt.Errorf("config: unknown buildings.adapter %q", b.Adapter)
+		case b.Path == "" || b.Release == "":
+			return fmt.Errorf("config: buildings.path and buildings.release are required")
+		}
+	}
 	seen := map[string]bool{}
 	for _, r := range c.Rasters {
 		if r.ID == "" || r.Path == "" || seen[r.ID] {
 			return fmt.Errorf("config: raster needs a unique id and a path (%q)", r.ID)
 		}
 		seen[r.ID] = true
+		switch r.Kind {
+		case "", release.RasterContinuous:
+			if len(r.Classes) > 0 {
+				return fmt.Errorf("config: raster %s: classes apply to categorical rasters only", r.ID)
+			}
+		case release.RasterCategorical:
+			if len(r.Classes) == 0 {
+				return fmt.Errorf("config: raster %s: a categorical raster needs classes", r.ID)
+			}
+			vals := map[int64]bool{}
+			for _, cl := range r.Classes {
+				if vals[cl.Value] || cl.Label == "" {
+					return fmt.Errorf("config: raster %s: classes need unique values and labels", r.ID)
+				}
+				vals[cl.Value] = true
+			}
+			if r.Scale != 0 {
+				return fmt.Errorf("config: raster %s: scale applies to continuous rasters only", r.ID)
+			}
+		default:
+			return fmt.Errorf("config: raster %s: unknown kind %q", r.ID, r.Kind)
+		}
+		if r.Scale < 0 || r.Resolution < 0 {
+			return fmt.Errorf("config: raster %s: scale and resolution must be positive", r.ID)
+		}
+		if r.Resolution > 0 && r.Resampling == "" {
+			return fmt.Errorf("config: raster %s: resolution needs resampling (e.g. mode, average)", r.ID)
+		}
 	}
 	return nil
 }

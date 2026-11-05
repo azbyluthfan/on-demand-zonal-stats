@@ -5,18 +5,29 @@
 ```
 make prep-fixture                      # synthetic release, no downloads
 make prep-diy                          # DI Yogyakarta, needs data/raw (below)
-make prep-upload RELEASE=diy-2026-11-a # copy to s3://villagestat/releases/<id>/
+make prep-upload RELEASE=diy-2026-11-b # copy to s3://villagestat/releases/<id>/
 ```
 
-Configs live in `configs/`. Output goes to `out/releases/<release_id>/`. `upload` refuses a release whose manifest status is not `ok`, and it uploads `manifest.json` last. Blocking QC failures stop the release: geometry validity, unique IDs, required fields, overlaps (< 0.1% of total area), H3 coverage, POI assignment (including an exact cross-check against a naive join when `cross_check_pois` is on), h3-go/DuckDB H3 consistency and COG validity. Gaps, raster sums and H3 calibration are informational.
+Configs live in `configs/`. Output goes to `out/releases/<release_id>/`. `upload` refuses a release whose manifest status is not `ok`, and it uploads `manifest.json` last. Blocking QC failures stop the release: geometry validity, unique IDs, required fields, overlaps (< 0.1% of total area), H3 coverage, POI and building assignment (including exact cross-checks against a naive join when `cross_check_pois` is on), h3-go/DuckDB H3 consistency and COG validity. Gaps, raster sums and H3 calibration are informational.
 
 ## Steps
 
 1. **Boundaries**: adapter, then `ST_SetCRS(…, 'EPSG:4326')`, repair (`ST_MakeValid` + polygon extract), `area_m2` in EPSG:6933, the `bbox` struct, QC, Hilbert sort, `boundaries/villages.parquet`.
 2. **village_h3**: Go `internal/h3index` classifies each village in parallel. `Merge` demotes any shared cell. Rows go into DuckDB through the appender, then out to one partition per province, sorted by `h3_cell`.
 3. **POIs**: adapter, then `h3_cell` from DuckDB's `h3`. Exact assignment uses the serving algorithm (interior cell, or `ST_Covers` against the boundary-cell candidates, lowest `village_id` wins). Partition key is the province of the assigned village; unassigned points in a boundary cell use the lowest candidate province, and points with no candidate go to `_none`. Then `categories.json`.
-4. **Rasters**: `gdal_translate -of COG` (512 blocks, DEFLATE, predictor, overviews), optionally cropped to the villages' extent. The exact sum comes from reading the COG back through the `cog` extension in pixel-aligned 2048² tiles. Each tile must return exactly `cols × rows` values; this guards the serving read path. Companion `<id>.json` holds the full-precision geotransform.
-5. **Manifest**: tools and versions, sources (sha256 when local), artifacts (bytes, sha256, Parquet row counts), raster info, and all QC results.
+4. **Buildings** (optional, `buildings` in the config): adapter, polygon footprints only (invalid ones repaired), `area_m2` in EPSG:6933, point on surface rounded to 1e-7° (`x_e7`, `y_e7`), `h3_cell`, then the same exact assignment as POIs. Interior-cell buildings are pre-summed per cell (`cells.parquet`), boundary-cell buildings stay points (`points.parquet`), buildings in no village's cell are dropped (docs/buildings.md).
+5. **Rasters**: `gdal_translate -of COG` (512 blocks, DEFLATE, predictor, overviews; **mode** overviews for categorical layers), optionally cropped to the villages' extent and resampled (`resolution` + `resampling`). The exact sum comes from reading the COG back through the `cog` extension in pixel-aligned 2048² tiles. Each tile must return exactly `cols × rows` values; this guards the serving read path. Companion `<id>.json` holds the full-precision geotransform.
+6. **Manifest**: tools and versions, sources (sha256 when local), artifacts (bytes, sha256, Parquet row counts), raster info, and all QC results.
+
+## Raster options
+
+| Field | Meaning |
+|---|---|
+| `kind` | `continuous` (default) or `categorical`; categorical needs `classes` (`value`, `label`, optional `color`) |
+| `scale` | multiplier from stored values to `units`, applied at query time to sums and means (default 1) |
+| `resolution`, `resampling` | resample to this pixel size in degrees with this GDAL method (WorldCover: 0.00025 with `mode`, exactly 3×3 source pixels) |
+| `clip_to_villages` | crop to the villages' extent plus two source pixels |
+| `srs` | assign a CRS when the source has none (`.asc` fixtures) |
 
 ## Adapters
 
@@ -24,6 +35,8 @@ Configs live in `configs/`. Output goes to `out/releases/<release_id>/`. `upload
 |---|---|
 | `geojson` (boundaries/POIs) | Columns already named as in the output. Used by fixtures. |
 | `hdx_cod_ab` | Runs `ogr2ogr` to FlatGeobuf first (filtered to `adm1_pcode IN ('ID<code>')`), because **DuckDB spatial 1.5.5 `ST_Read` sees only `OGC_FID` + `geometry` in the HDX FileGDB**. GDAL 3.10 reads it fine. Codes drop the `ID` prefix (`ID3404010001` → `3404010001`); the original is kept as `source_pcode` in the work table. Names keep the text before any `/` or `\`. Note that ST_Read on a non-existent FileGDB layer **segfaults** DuckDB 1.5.5. |
+| `geojson` (buildings) | `building_id` + Polygon/MultiPolygon geometry. Used by fixtures. |
+| `overture` (buildings) | Reads `theme=buildings/type=building/*` the same way, bbox-filtered, skipping `is_underground`. |
 | `overture` | Reads `s3://overturemaps-us-west-2/release/<rel>/theme=places/type=place/*` anonymously, filtered by the villages' bbox ± 0.01°. **The 2026 schema has no `categories`**: we use `taxonomy.primary` (there is also a coarser `basic_category`). Places with `operating_status = 'permanently_closed'` are skipped. The secret needs explicit empty keys, or the `AWS_*` env vars set for `cog` leak in. |
 
 ## Gotchas
@@ -38,13 +51,29 @@ Configs live in `configs/`. Output goes to `out/releases/<release_id>/`. `upload
 | File | Source | Size | sha256 |
 |---|---|---|---|
 | `hdx/idn_admin_boundaries.gdb.zip` (unzipped next to it) | [HDX cod-ab-idn](https://data.humdata.org/dataset/cod-ab-idn), GDB resource | 218,753,706 B | `640c6239…e308` |
+| `nightlights/nightlights.average_viirs.v21_m_500m_s_20230101_20231231_go_epsg4326_v20250904.tif` | [Zenodo 17294744](https://zenodo.org/records/17294744) (no login) | 62,086,259 B | in `manifest.json` |
+| `worldcover/ESA_WorldCover_10m_2021_v200_S09E108_Map.tif` | `https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S09E108_Map.tif` (public bucket) | 46,809,596 B | in `manifest.json` |
 | `worldpop/idn_ppp_2020_constrained.tif` | `https://data.worldpop.org/GIS/Population/Global_2000_2020_Constrained/2020/BSGM/IDN/idn_ppp_2020_constrained.tif` | 103,102,616 B | `352f5094…cb0a` |
 
-Overture is read in place (release `2026-10-21.0`).
+Overture (places and buildings) is read in place (release `2026-10-21.0`).
 
-## DI Yogyakarta release `diy-2026-11-a`
+## DI Yogyakarta release `diy-2026-11-b`
 
-Built 2026-11-04 in 24 s. All QC passed. This release is bundled in `sample/` and seeded into RustFS by `docker compose up`.
+`diy-2026-11-b` (2026-11-05, 4 min 25 s, all QC passed) is `diy-2026-11-a` plus three layers; every `-a` artifact is byte-identical. It is bundled in `sample/` (16 MB) and seeded into RustFS by `docker compose up`. Build it with `PREP_MEMORY_LIMIT=2500MB make prep-diy` when Docker has ~4 GB (the 6 GB default was OOM-killed while loading 3.6 M footprints).
+
+| New artifact | Rows | Bytes |
+|---|---|---|
+| `buildings/…/province_code=34/cells.parquet` (interior cells, pre-summed) | 114,136 cells = 1,758,841 buildings | 1.08 MB |
+| `buildings/…/province_code=34/points.parquet` (boundary-cell buildings) | 316,117 | 3.30 MB |
+| `rasters/nightlights_2023.tif` (204×163, 15″, Int16) | | 11 KB |
+| `rasters/landcover_2021.tif` (3328×2650, 0.00025°, Byte, mode overviews) | | 0.97 MB |
+
+- **Buildings**: 3,623,473 Overture footprints in the bbox (4 min to read from S3). 1,548,515 lie in no DIY village's cell (mostly Central Java) and are dropped; 2,068,649 are in DIY villages, 6,309 are unassigned (holes/gaps). 1,758,841 go through interior cells with no geometry; 316,117 boundary points need 634,786 exact tests. The naive `ST_Covers` cross-check over all 3.6 M had **0 mismatches**.
+- **Night lights / land cover**: see docs/raster.md (units caveat, aggregation).
+
+### Previous release `diy-2026-11-a`
+
+Built 2026-11-04 in 24 s. All QC passed.
 
 | Artifact | Rows | Bytes |
 |---|---|---|

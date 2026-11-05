@@ -11,6 +11,7 @@ The honest comparison: every answer this API gives is a sum over **villages**. A
 What on-demand buys:
 
 - **New questions without a rebuild.** A new category grouping, raster layer, coverage method, or a POI filter (confidence, operating status, date) is a query change, not a prep run over the whole country.
+- **Dense layers get the same split, applied at storage time.** Buildings (3.6 M in DIY's bbox) store interior-cell buildings pre-summed per H3 cell and keep points only for boundary cells (docs/buildings.md). That is still exact and area-independent, because an interior cell belongs to one village whatever is asked.
 - **One code path for correctness.** The serving algorithm is also prep's QC (prep assigns every POI with the same H3 split and cross-checks it against a naive join), so there is no separate precompute pipeline to keep consistent.
 - **Precompute-like latency anyway, after first touch.** The per-village result cache turns a 608 ms cold province request into 9 ms warm (docs/caching.md). Caching per **category** rather than per category set means any combination of seen categories is a cache hit.
 

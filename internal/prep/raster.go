@@ -79,11 +79,19 @@ func buildRaster(ctx context.Context, d *db, cfg *Config, rs RasterSource, out s
 	if err := mkdirFor(dst); err != nil {
 		return nil, err
 	}
+	categorical := rs.Kind == release.RasterCategorical
+	ovr := "AVERAGE"
+	if categorical {
+		ovr = "MODE" // never average class codes
+	}
 	args := []string{"-of", "COG",
 		"-co", "BLOCKSIZE=512", "-co", "COMPRESS=DEFLATE", "-co", "PREDICTOR=YES",
-		"-co", "OVERVIEWS=AUTO", "-co", "RESAMPLING=AVERAGE", "-co", "BIGTIFF=IF_SAFER"}
+		"-co", "OVERVIEWS=AUTO", "-co", "RESAMPLING=" + ovr, "-co", "BIGTIFF=IF_SAFER"}
 	if rs.SRS != "" {
 		args = append(args, "-a_srs", rs.SRS)
+	}
+	if rs.Resolution > 0 {
+		args = append(args, "-tr", fmt.Sprint(rs.Resolution), fmt.Sprint(rs.Resolution), "-r", rs.Resampling)
 	}
 	if rs.ClipToVillages {
 		srcInfo, err := readGDALInfo(ctx, src)
@@ -118,7 +126,11 @@ func buildRaster(ctx context.Context, d *db, cfg *Config, rs RasterSource, out s
 		Width: gi.Size[0], Height: gi.Size[1],
 		OriginX: gt[0], OriginY: gt[3], PixelWidth: gt[1], PixelHeight: -gt[5],
 		DataType: b.Type, Nodata: b.NoDataValue, Units: rs.Units, Year: rs.Year,
+		Kind: release.RasterContinuous, Scale: rs.Scale,
 		BlockSize: b.Block, Overviews: len(b.Overviews), Source: rs.Source,
+	}
+	if categorical {
+		info.Kind, info.Classes = release.RasterCategorical, rs.Classes
 	}
 	info.Bounds = [4]float64{gt[0], gt[3] + gt[5]*float64(gi.Size[1]), gt[0] + gt[1]*float64(gi.Size[0]), gt[3]}
 

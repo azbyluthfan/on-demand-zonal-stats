@@ -58,6 +58,9 @@ func Build(ctx context.Context, cfg *Config, outRoot string, opt Options) (*Mani
 		POIRelease: cfg.POIs.Release, ProvinceCodes: cfg.ProvinceCodes,
 		Tools: tools(ctx, d),
 	}
+	if cfg.Buildings != nil {
+		m.BuildingRelease = cfg.Buildings.Release
+	}
 
 	step := func(name string, f func() error) error {
 		t := time.Now()
@@ -76,6 +79,11 @@ func Build(ctx context.Context, cfg *Config, outRoot string, opt Options) (*Mani
 	if err := step("pois", func() error { return loadPOIs(ctx, d, cfg, qc) }); err != nil {
 		return nil, err
 	}
+	if cfg.Buildings != nil {
+		if err := step("buildings", func() error { return loadBuildings(ctx, d, cfg, qc) }); err != nil {
+			return nil, err
+		}
+	}
 	if err := step("write", func() error {
 		if _, err := writeVillages(ctx, d, out); err != nil {
 			return err
@@ -85,6 +93,11 @@ func Build(ctx context.Context, cfg *Config, outRoot string, opt Options) (*Mani
 		}
 		if _, err := writePOIs(ctx, d, cfg, out); err != nil {
 			return err
+		}
+		if cfg.Buildings != nil {
+			if err := writeBuildings(ctx, d, cfg, out); err != nil {
+				return err
+			}
 		}
 		_, err := writeCategories(ctx, d, out)
 		return err
@@ -158,6 +171,9 @@ func sourceRecords(cfg *Config, opt Options) []SourceRecord {
 	recs := []SourceRecord{
 		{Kind: "boundaries", Source: cfg.Boundaries.Source, Path: cfg.Boundaries.Path},
 		{Kind: "pois", Source: cfg.POIs.Source, Path: cfg.POIs.Path},
+	}
+	if cfg.Buildings != nil {
+		recs = append(recs, SourceRecord{Kind: "buildings", Source: cfg.Buildings.Source, Path: cfg.Buildings.Path})
 	}
 	if !opt.SkipRasters {
 		for _, r := range cfg.Rasters {

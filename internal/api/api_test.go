@@ -143,15 +143,15 @@ func TestAggregateContractAndValues(t *testing.T) {
 	}
 	var total float64
 	for _, v := range got.Villages {
-		if v.Metrics["cafes"] != float64(want.Counts["cafes"][v.VillageID]) {
+		if float64(v.Metrics["cafes"]) != float64(want.Counts["cafes"][v.VillageID]) {
 			t.Errorf("%s cafes %v, engine %d", v.VillageID, v.Metrics["cafes"], want.Counts["cafes"][v.VillageID])
 		}
 		if _, ok := v.Metrics["schools"]; !ok {
 			t.Errorf("%s: zero-valued metric omitted", v.VillageID)
 		}
-		total += v.Metrics["cafes"]
+		total += float64(v.Metrics["cafes"])
 	}
-	if total != got.Summary.Totals["cafes"] {
+	if total != float64(got.Summary.Totals["cafes"]) {
 		t.Errorf("totals %v vs sum %v", got.Summary.Totals["cafes"], total)
 	}
 	if d := got.Diagnostics; d == nil || d.PointsInterior == 0 || d.PointsBoundaryTested == 0 || d.StagesMS["poi_boundary"] < 0 {
@@ -240,6 +240,10 @@ func TestValidationErrors(t *testing.T) {
 			"metrics": []map[string]any{{"id": "p", "type": "raster_sum", "layer": "population_1900", "method": "fractional"}}}, "metrics[0].layer", "invalid_request"},
 		{"bad method", map[string]any{"area": map[string]any{"province_code": "34"},
 			"metrics": []map[string]any{{"id": "p", "type": "raster_sum", "layer": "population_2020", "method": "nearest"}}}, "metrics[0].method", "invalid_request"},
+		{"classes on poi_count", map[string]any{"area": map[string]any{"province_code": "34"},
+			"metrics": []map[string]any{{"id": "x", "type": "poi_count", "categories": []string{"cafe"}, "classes": []int{10}}}}, "metrics[0].classes", "invalid_request"},
+		{"building metric with layer", map[string]any{"area": map[string]any{"province_code": "34"},
+			"metrics": []map[string]any{{"id": "b", "type": "building_count", "layer": "population_2020"}}}, "metrics[0]", "invalid_request"},
 	}
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
@@ -416,13 +420,138 @@ func TestAggregateRasterContract(t *testing.T) {
 	}
 	var total float64
 	for _, v := range got.Villages {
-		if v.Metrics["pop"] != want.Values["pop"][v.VillageID] {
+		if float64(v.Metrics["pop"]) != want.Values["pop"][v.VillageID] {
 			t.Errorf("%s pop %v, engine %v", v.VillageID, v.Metrics["pop"], want.Values["pop"][v.VillageID])
 		}
-		total += v.Metrics["pop"]
+		total += float64(v.Metrics["pop"])
 	}
-	if math.Abs(total-got.Summary.Totals["pop"]) > 1e-6 || got.Diagnostics.RasterWindows != 6 || got.Diagnostics.StagesMS["raster_read"] <= 0 {
+	if math.Abs(total-float64(got.Summary.Totals["pop"])) > 1e-6 || got.Diagnostics.RasterWindows != 6 || got.Diagnostics.StagesMS["raster_read"] <= 0 {
 		t.Errorf("summary/diagnostics: %+v %+v", got.Summary, got.Diagnostics)
+	}
+}
+
+func TestRasterMetricValidation(t *testing.T) {
+	ts, _ := newServer(t, testfixtures.ReleaseWithRasters(t), nil)
+	area := map[string]any{"province_code": "34"}
+	cases := []struct {
+		name   string
+		metric map[string]any
+		field  string
+	}{
+		{"fraction of continuous layer", map[string]any{"id": "x", "type": "raster_class_fraction", "layer": "population_2020",
+			"method": "fractional", "classes": []int{10}}, "metrics[0].layer"},
+		{"sum of categorical layer", map[string]any{"id": "x", "type": "raster_sum", "layer": "landcover", "method": "fractional"}, "metrics[0].layer"},
+		{"mean of categorical layer", map[string]any{"id": "x", "type": "raster_mean", "layer": "landcover", "method": "center"}, "metrics[0].layer"},
+		{"no classes", map[string]any{"id": "x", "type": "raster_class_fraction", "layer": "landcover", "method": "fractional"}, "metrics[0].classes"},
+		{"unknown class", map[string]any{"id": "x", "type": "raster_class_fraction", "layer": "landcover", "method": "fractional",
+			"classes": []int{10, 11}}, "metrics[0].classes[1]"},
+		{"duplicate class", map[string]any{"id": "x", "type": "raster_class_fraction", "layer": "landcover", "method": "fractional",
+			"classes": []int{10, 10}}, "metrics[0].classes[1]"},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			status, body := post(t, ts, map[string]any{"area": area, "metrics": []map[string]any{c.metric}})
+			if status != 400 {
+				t.Fatalf("status %d: %s", status, body)
+			}
+			var er api.ErrorResponse
+			_ = json.Unmarshal(body, &er)
+			found := false
+			for _, f := range er.Fields {
+				found = found || f.Field == c.field
+			}
+			if !found {
+				t.Errorf("no field error for %q: %+v", c.field, er.Fields)
+			}
+		})
+	}
+}
+
+func TestClassFractionAndMeanContract(t *testing.T) {
+	ts, e := newServer(t, testfixtures.ReleaseWithRasters(t), nil)
+	ms := []map[string]any{
+		{"id": "trees", "type": "raster_class_fraction", "layer": "landcover", "method": "fractional", "classes": []int{10}},
+		{"id": "pop_mean", "type": "raster_mean", "layer": "population_2020", "method": "fractional"},
+	}
+	status, body := post(t, ts, map[string]any{"area": map[string]any{"province_code": "34"}, "metrics": ms, "include_geometry": true})
+	if status != 200 {
+		t.Fatalf("status %d: %s", status, body)
+	}
+	validateSchema(t, "aggregate_geojson.schema.json", body)
+	var got api.FeatureCollection
+	_ = json.Unmarshal(body, &got)
+	r, _ := e.ResolveArea(context.Background(), query.Area{ProvinceCode: "34"}, 0)
+	want, err := e.RasterSums(context.Background(), r, []query.RasterMetric{
+		{ID: "trees", Layer: "landcover", Method: "fractional", Stat: query.StatClassFraction, Classes: []int64{10}},
+		{ID: "pop_mean", Layer: "population_2020", Method: "fractional", Stat: query.StatMean}}, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, f := range got.Features {
+		for _, m := range []string{"trees", "pop_mean"} {
+			if float64(f.Properties.Metrics[m]) != want.Values[m][f.ID] {
+				t.Errorf("%s %s = %v, engine %v", f.ID, m, f.Properties.Metrics[m], want.Values[m][f.ID])
+			}
+		}
+	}
+	// Totals of means and fractions are coverage-weighted, not sums.
+	for _, m := range []string{"trees", "pop_mean"} {
+		if float64(got.Summary.Totals[m]) != want.Totals[m] {
+			t.Errorf("total %s = %v, engine %v", m, got.Summary.Totals[m], want.Totals[m])
+		}
+	}
+	if tr := float64(got.Summary.Totals["trees"]); tr <= 0 || tr >= 1 {
+		t.Errorf("trees total %v not a fraction", tr)
+	}
+}
+
+func TestBuildingsContract(t *testing.T) {
+	ts, e := newServer(t, testfixtures.Release(t), nil)
+	body := map[string]any{"area": map[string]any{"district_code": "340401"}, "diagnostics": true,
+		"metrics": []map[string]any{{"id": "n", "type": "building_count"}, {"id": "a", "type": "building_area"}}}
+	for i, want := range []string{"computed", "cached"} {
+		status, b := post(t, ts, body)
+		if status != 200 {
+			t.Fatalf("status %d: %s", status, b)
+		}
+		validateSchema(t, "aggregate_response.schema.json", b)
+		var got api.AggregateResponse
+		_ = json.Unmarshal(b, &got)
+		r, _ := e.ResolveArea(context.Background(), query.Area{DistrictCode: "340401"}, 0)
+		eng, err := e.Buildings(context.Background(), r, &query.Trace{NoCache: true})
+		if err != nil {
+			t.Fatal(err)
+		}
+		var n, a float64
+		for _, v := range got.Villages {
+			if float64(v.Metrics["n"]) != float64(eng.Count[v.VillageID]) || float64(v.Metrics["a"]) != eng.Area[v.VillageID] {
+				t.Errorf("%s: %v/%v, engine %v/%v", v.VillageID, v.Metrics["n"], v.Metrics["a"], eng.Count[v.VillageID], eng.Area[v.VillageID])
+			}
+			n, a = n+float64(v.Metrics["n"]), a+float64(v.Metrics["a"])
+		}
+		if n == 0 || n != float64(got.Summary.Totals["n"]) || math.Abs(a-float64(got.Summary.Totals["a"])) > 1e-6 {
+			t.Errorf("totals %+v, sums %v %v", got.Summary.Totals, n, a)
+		}
+		d := got.Diagnostics
+		switch {
+		case d == nil || d.Buildings == nil:
+			t.Fatalf("no building diagnostics")
+		case i == 0 && (d.Buildings.VillagesComputed != 2 || d.Buildings.CellBuildings+d.Buildings.BoundaryPoints == 0):
+			t.Errorf("%s: %+v", want, d.Buildings)
+		case i == 1 && (d.Buildings.VillagesComputed != 0 || d.Cache.ResultHits != 2):
+			t.Errorf("%s: %+v cache %+v", want, d.Buildings, d.Cache)
+		}
+	}
+}
+
+func TestValueJSON(t *testing.T) {
+	b, _ := json.Marshal(map[string]api.Value{"x": api.Value(math.NaN()), "y": 1.5})
+	if string(b) != `{"x":null,"y":1.5}` {
+		t.Errorf("marshal %s", b)
+	}
+	var v map[string]api.Value
+	if err := json.Unmarshal(b, &v); err != nil || !math.IsNaN(float64(v["x"])) || v["y"] != 1.5 {
+		t.Errorf("unmarshal %v %v", v, err)
 	}
 }
 

@@ -12,6 +12,7 @@
   "nodata": -99999,
   "units": "people",
   "year": 2020,
+  "kind": "continuous",
   "block_size": [
     512,
     512

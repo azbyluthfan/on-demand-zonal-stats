@@ -1,0 +1,36 @@
+{
+  "id": "nightlights_2023",
+  "path": "rasters/nightlights_2023.tif",
+  "crs": "EPSG:4326",
+  "width": 204,
+  "height": 163,
+  "origin_x": 109.9916666666669,
+  "origin_y": -7.530000000000072,
+  "pixel_width": 0.0041666666666667,
+  "pixel_height": 0.0041666666666667,
+  "data_type": "Int16",
+  "nodata": -32768,
+  "units": "nW/cm²/sr",
+  "year": 2023,
+  "kind": "continuous",
+  "block_size": [
+    512,
+    512
+  ],
+  "overviews": 0,
+  "sum": 77899,
+  "valid_pixels": 33252,
+  "bounds": [
+    109.9916666666669,
+    -8.209166666666745,
+    110.84166666666691,
+    -7.530000000000072
+  ],
+  "source": {
+    "name": "Annual VIIRS night lights 2023, 500 m (VNL V2 average; integer radiance)",
+    "url": "https://zenodo.org/records/17294744",
+    "version": "v0.4 (2025-10-08), file v20250904",
+    "license": "CC BY 4.0",
+    "attribution": "Hengl, T. (OpenGeoHub), from Annual VNL V2 by Elvidge et al. (2021), Earth Observation Group, Colorado School of Mines"
+  }
+}

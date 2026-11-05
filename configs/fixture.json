@@ -13,6 +13,12 @@
     "release": "fixture-1",
     "source": { "name": "Synthetic fixture POIs", "license": "CC0-1.0" }
   },
+  "buildings": {
+    "adapter": "geojson",
+    "path": "testdata/fixtures/buildings.geojson",
+    "release": "fixture-1",
+    "source": { "name": "Synthetic fixture buildings", "license": "CC0-1.0" }
+  },
   "rasters": [
     {
       "id": "population_2020",
@@ -21,6 +27,20 @@
       "units": "people",
       "year": 2020,
       "source": { "name": "Synthetic fixture raster", "license": "CC0-1.0" }
+    },
+    {
+      "id": "landcover",
+      "path": "testdata/fixtures/landcover.asc",
+      "srs": "EPSG:4326",
+      "units": "class",
+      "kind": "categorical",
+      "classes": [
+        { "value": 10, "label": "Tree cover", "color": "#006400" },
+        { "value": 40, "label": "Cropland", "color": "#f096ff" },
+        { "value": 50, "label": "Built-up", "color": "#fa0000" },
+        { "value": 80, "label": "Permanent water bodies", "color": "#0064c8" }
+      ],
+      "source": { "name": "Synthetic fixture land cover", "license": "CC0-1.0" }
     }
   ],
   "qc": { "cross_check_pois": true }

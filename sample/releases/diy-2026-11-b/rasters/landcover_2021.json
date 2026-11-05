@@ -1,0 +1,93 @@
+{
+  "id": "landcover_2021",
+  "path": "rasters/landcover_2021.tif",
+  "crs": "EPSG:4326",
+  "width": 3328,
+  "height": 2650,
+  "origin_x": 110.00282233333334,
+  "origin_y": -7.541728033333333,
+  "pixel_width": 0.00025,
+  "pixel_height": 0.00025,
+  "data_type": "Byte",
+  "nodata": 0,
+  "units": "class",
+  "year": 2021,
+  "kind": "categorical",
+  "classes": [
+    {
+      "value": 10,
+      "label": "Tree cover",
+      "color": "#006400"
+    },
+    {
+      "value": 20,
+      "label": "Shrubland",
+      "color": "#ffbb22"
+    },
+    {
+      "value": 30,
+      "label": "Grassland",
+      "color": "#ffff4c"
+    },
+    {
+      "value": 40,
+      "label": "Cropland",
+      "color": "#f096ff"
+    },
+    {
+      "value": 50,
+      "label": "Built-up",
+      "color": "#fa0000"
+    },
+    {
+      "value": 60,
+      "label": "Bare / sparse vegetation",
+      "color": "#b4b4b4"
+    },
+    {
+      "value": 70,
+      "label": "Snow and ice",
+      "color": "#f0f0f0"
+    },
+    {
+      "value": 80,
+      "label": "Permanent water bodies",
+      "color": "#0064c8"
+    },
+    {
+      "value": 90,
+      "label": "Herbaceous wetland",
+      "color": "#0096a0"
+    },
+    {
+      "value": 95,
+      "label": "Mangroves",
+      "color": "#00cf75"
+    },
+    {
+      "value": 100,
+      "label": "Moss and lichen",
+      "color": "#fae6a0"
+    }
+  ],
+  "block_size": [
+    512,
+    512
+  ],
+  "overviews": 3,
+  "sum": 291283820,
+  "valid_pixels": 8819200,
+  "bounds": [
+    110.00282233333334,
+    -8.204228033333333,
+    110.83482233333334,
+    -7.541728033333333
+  ],
+  "source": {
+    "name": "ESA WorldCover 2021 v200, 10 m (mode-aggregated 3x3 to 0.00025°, ~28 m)",
+    "url": "https://esa-worldcover.org/en",
+    "version": "v200, tile S09E108",
+    "license": "CC BY 4.0",
+    "attribution": "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium"
+  }
+}
