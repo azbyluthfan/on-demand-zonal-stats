@@ -10,6 +10,7 @@ What it is built around:
 2. **Correct raster numbers**: exact fractional pixel coverage per village (matches exactextract to 1.8e-8), shown next to naive pixel-centre counting, which is off by up to 12.8% for single villages.
 3. **Fast village joins without a database**: an H3 interior/boundary split sends 76% of POIs to their village with no geometry test; only boundary points get an exact `ST_Covers`.
 4. **Visible performance**: every response can explain where time went, including stages, cache hits, the POI split, raster blocks and DuckDB's own profile.
+5. **Live map tiles from DuckDB**: every layer (villages, H3 cells, POIs, buildings, rasters) can be drawn on the map from tiles DuckDB makes per request: `ST_AsMVT` over Parquet for vector tiles, the `cog` extension for raster tiles, with per-tile DuckDB time shown in the UI ([docs/tiles.md](docs/tiles.md)).
 
 ## Quickstart (≈1–5 minutes)
 
@@ -33,9 +34,13 @@ docker compose down        # stop (add -v to drop the RustFS volume)
 
 ![Accuracy view: pixel-centre vs fractional population](docs/img/accuracy.png)
 
+More views, one per data layer (night lights, land cover, buildings, and the live DuckDB tiles of every layer, including the H3 interior/boundary split): **[docs/gallery.md](docs/gallery.md)**.
+
+![H3 interior and boundary cells as live DuckDB vector tiles](docs/img/gallery/tiles-h3-split.jpg)
+
 ## API
 
-`GET /healthz` · `GET /v1/layers` · `GET /v1/areas` · `POST /v1/aggregate`. Full reference: [docs/api.md](docs/api.md); response schemas are in [schemas/](schemas/).
+`GET /healthz` · `GET /v1/layers` · `GET /v1/areas` · `POST /v1/aggregate` · `GET /v1/tiles/…`. Full reference: [docs/api.md](docs/api.md); response schemas are in [schemas/](schemas/).
 
 ```bash
 curl -s localhost:8080/v1/aggregate -H 'Content-Type: application/json' -d '{
@@ -135,6 +140,7 @@ make api-local
 |---|---|
 | `make app-up` / `app-down` | Demo stack (same as `docker compose up -d --build`) |
 | `make e2e` | Playwright smoke test against the stack; refreshes `docs/img/` |
+| `make gallery` | Screenshots of every data layer for [docs/gallery.md](docs/gallery.md) |
 | `make perf-baseline` | k6: latency scenarios + 5-minute, 20-user soak |
 | `make prep-fixture` | Synthetic release, no downloads |
 | `make prep-diy` | Real DI Yogyakarta release (needs `data/raw/`, see [docs/prep.md](docs/prep.md)) |
@@ -166,6 +172,8 @@ Every release's `manifest.json` records each source's URL, version, license and 
 | [docs/prep.md](docs/prep.md) | Release pipeline, adapters, QC, H3 resolution calibration |
 | [docs/query.md](docs/query.md) | Engine, area resolution, POI split, golden and invariant tests |
 | [docs/raster.md](docs/raster.md) | Raster path, statistics (sum, mean, class share), layer kinds, cog behaviour, exactextract/rasterstats golden results |
+| [docs/gallery.md](docs/gallery.md) | Screenshots of every data layer: choropleths and live tiles |
+| [docs/tiles.md](docs/tiles.md) | Live map tiles: `ST_AsMVT` vector tiles, `cog` raster tiles, caching, Server-Timing, measurements |
 | [docs/buildings.md](docs/buildings.md) | Building layer: point-on-surface rule, H3-split storage, query, tests |
 | [docs/api.md](docs/api.md) | HTTP API, errors, resilience checks |
 | [docs/caching.md](docs/caching.md) | Caches, diagnostics, performance baseline |

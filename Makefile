@@ -1,7 +1,7 @@
 COMPOSE := docker compose -f deploy/docker-compose.yml --env-file $(if $(wildcard .env),.env,.env.example)
 PREP    := $(COMPOSE) --profile prep run --rm prep
 
-.PHONY: help app-up app-down api-local test test-race lint vet build tidy e2e perf-baseline \
+.PHONY: help app-up app-down api-local test test-race lint vet build tidy e2e gallery perf-baseline \
         prep-image prep-fixture prep-diy prep-upload golden-raster up down logs spike spike-local
 
 help: ## Show targets
@@ -43,6 +43,11 @@ e2e: ## Playwright smoke test + README screenshots (needs app-up); NO_SHOTS=1 sk
 	docker run --rm --network zonalstats_default -v "$(CURDIR)":/work -w /tmp/e2e -e NO_SHOTS=$(NO_SHOTS) \
 	  mcr.microsoft.com/playwright:v1.64.1-noble sh -c \
 	  'npm init -y >/dev/null && npm install --silent playwright@1.64.1 && cp /work/e2e/smoke.mjs . && node smoke.mjs'
+
+gallery: ## Screenshot every data layer into docs/img/gallery for docs/gallery.md (needs app-up)
+	docker run --rm --network zonalstats_default -v "$(CURDIR)":/work -w /tmp/e2e \
+	  mcr.microsoft.com/playwright:v1.64.1-noble sh -c \
+	  'npm init -y >/dev/null && npm install --silent playwright@1.64.1 && cp /work/e2e/gallery.mjs . && node gallery.mjs'
 
 perf-baseline: ## k6 baseline against both replicas (needs app-up); SOAK=5m
 	docker run --rm --network zonalstats_default -v "$(CURDIR)/deploy/k6":/k6 -e SOAK=$${SOAK:-5m} \

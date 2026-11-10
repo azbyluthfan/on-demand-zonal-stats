@@ -97,6 +97,19 @@ try {
     for (const id of layerToggles) await page.uncheck(`#${id}`);
   }
 
+  // 4c. Live map tiles from DuckDB: village outlines (MVT) and a raster layer (PNG).
+  if (await page.isVisible('#map-layers [data-ml="villages"]')) {
+    await page.check('#map-layers [data-ml="villages"]');
+    const raster = await page.$('#map-layers [data-ml^="r_"]');
+    if (raster) await raster.check();
+    await page.waitForFunction(() => /^\d+ tiles .*DuckDB median/.test(document.getElementById('tile-stats').textContent), null, { timeout: 30000 });
+    ok(true, `live tiles: ${await page.textContent('#tile-stats')}`);
+    await settle();
+    await shot('tiles');
+    await page.uncheck('#map-layers [data-ml="villages"]');
+    if (raster) await raster.uncheck();
+  }
+
   // 5. Regency (Kota Yogyakarta, if present) and a popup.
   const kota = await page.$('#sel-regency option[value="3471"]');
   await page.selectOption('#sel-regency', kota ? '3471' : { index: 1 });

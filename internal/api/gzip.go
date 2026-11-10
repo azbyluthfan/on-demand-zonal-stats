@@ -37,7 +37,9 @@ func (g *gzipWriter) Write(b []byte) (int, error) {
 // accepts gzip (village GeoJSON for a province is ~6 MB uncompressed).
 func withGzip(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") || r.URL.Path == "/healthz" {
+		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") || r.URL.Path == "/healthz" ||
+			strings.HasSuffix(r.URL.Path, ".png") { // already compressed
+
 			next.ServeHTTP(w, r)
 			return
 		}

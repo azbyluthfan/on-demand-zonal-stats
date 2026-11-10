@@ -10,6 +10,7 @@ Code: `internal/query/{cache,refcache,trace}.go`. Every replica has its own cach
 | **Result: buildings** | village → (count, footprint area, unassigned) | ENTRIES / 10 | `building_count` and `building_area` share one entry. |
 | **Result: raster** | (village, layer, method) → sum, weights, per-class weights (categorical) | ENTRIES / 10 | Deterministic, so reused by any area containing the village. Sum, mean and every class fraction of a layer reduce the same entry, so asking for another statistic or class set is a hit. |
 | **Decoded blocks** | (layer, block x, block y) → 512×512 float64 (any stored type) | `BLOCK_CACHE_MB` (256) | Cache misses for new villages or another method skip the cog read and decode. |
+| **Tiles** | (layer, z, x, y, category filter) → encoded MVT or PNG | `TILE_CACHE_ENTRIES` (4,096) | Live map tiles (docs/tiles.md). Raster tiles also share the decoded-block cache with aggregation. |
 | **Reference** | province → DuckDB tables `ref_h3_*` (village_h3, sorted by cell) and `ref_v_*` (village geometries), plus decoded Go geometries | `REF_CACHE_PROVINCES` (4) | Loaded on first use, shared by concurrent first requests, LRU-evicted only when idle (never under a running query). |
 
 The engine is per release, so the release ID is implicit in every key. `CACHE_DISABLED=1` turns all caches off. A request with **`Cache-Control: no-cache`** bypasses every cache, reading files and computing everything; this is how "cold" is measured.

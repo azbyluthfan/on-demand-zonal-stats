@@ -136,3 +136,17 @@ button.secondary { flex: 1; }
   .legend { left: 12px; top: 12px; bottom: auto; }
   .diag { display: none; }
 }
+
+/* Map layers (live tiles) */
+h2 .hint { text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: 4px; }
+.mono { font-family: var(--mono); font-size: 11px; }
+.map-layers { display: grid; gap: 4px; }
+.map-layers .ml { display: grid; grid-template-columns: 1fr 72px; align-items: center; gap: 6px; }
+.map-layers .ml label.check { min-width: 0; }
+.map-layers .ml label.check span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.map-layers input[type=range] { width: 72px; margin: 0; }
+.map-layers .ml-legend { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 2px 8px; font-size: 10px; color: var(--muted); margin: 0 0 4px 22px; }
+.map-layers .ml-legend .ramp { display: flex; height: 6px; width: 100%; border-radius: 2px; overflow: hidden; }
+.map-layers .ml-legend .ramp span { flex: 1; }
+.map-layers .ml-legend .sw { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 3px; vertical-align: -1px; }
+.map-layers .ml-note { grid-column: 1 / -1; font-size: 10px; color: var(--muted); margin: -2px 0 4px 22px; }

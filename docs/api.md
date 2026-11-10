@@ -15,6 +15,8 @@ make api-local         # one API on :8080 reading sample/releases/diy-2026-11-b 
 | `GET /v1/layers` | Release ID, boundary version, H3 resolution, POI release, metric types, categories with counts, raster layers (with `kind`, and `classes` for categorical layers), the building layer (or `null`), sources and licenses (`schemas/layers.schema.json`). |
 | `GET /v1/areas` | Province/regency/district codes and names with village counts, for the frontend's area picker. |
 | `POST /v1/aggregate` | Per-village aggregates for an area (`schemas/aggregate_response.schema.json`, or `aggregate_geojson.schema.json` with `include_geometry`). |
+| `GET /v1/tiles/{layer}/{z}/{x}/{y}.mvt` | Live vector tile of a release layer (`villages`, `h3`, `pois` with `?categories=`, `buildings`), encoded by DuckDB `ST_AsMVT` (docs/tiles.md) |
+| `GET /v1/tiles/raster/{layer}/{z}/{x}/{y}.png`, `…/legend` | Live raster tile read through the `cog` extension, and its colouring |
 
 ### `POST /v1/aggregate`
 
@@ -77,7 +79,7 @@ Every non-2xx body is `{"error": <code>, "message": ..., "fields": [{"field", "m
 
 ## Operation
 
-- Configuration is via env vars (see the `cmd/api/main.go` header): `RELEASE_ID` or `RELEASE_BASE`, `S3_*`, `DUCKDB_MEMORY_LIMIT` (2GB), `DUCKDB_THREADS` (4), `MAX_VILLAGES` (10,000), `QUERY_TIMEOUT` (30s), `WEB_DIR`, and cache sizes `RESULT_CACHE_ENTRIES`, `BLOCK_CACHE_MB`, `REF_CACHE_PROVINCES`, `CACHE_DISABLED`.
+- Configuration is via env vars (see the `cmd/api/main.go` header): `RELEASE_ID` or `RELEASE_BASE`, `S3_*`, `DUCKDB_MEMORY_LIMIT` (2GB), `DUCKDB_THREADS` (4), `MAX_VILLAGES` (10,000), `QUERY_TIMEOUT` (30s), `WEB_DIR`, and cache sizes `RESULT_CACHE_ENTRIES`, `BLOCK_CACHE_MB`, `REF_CACHE_PROVINCES`, `TILE_CACHE_ENTRIES`, `CACHE_DISABLED`.
 - The HTTP server starts immediately. The release loads in the background with exponential backoff (1 s → 30 s) and each failure is logged, so a replica started without storage reports `starting` instead of crash-looping.
 - Image: `deploy/Dockerfile.api` (Debian slim, non-root, extensions baked into `/opt/duckdb_ext`, Docker `HEALTHCHECK` via `api -healthcheck`). Compose runs `api1`/`api2` with `mem_limit: 3g` behind nginx round-robin (`deploy/nginx.conf`, port 8080), which also serves the frontend.
 - Logs: JSON (slog), one line per request (healthy `/healthz` probes are skipped).

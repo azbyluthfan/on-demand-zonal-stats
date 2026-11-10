@@ -71,6 +71,7 @@
         $('pop-on').checked = false; $('pop-on').disabled = true;
       }
       fillAreas();
+      fillMapLayers();
       fillPresets();
       fillAttribution();
       togglePreset(PRESETS[0]); // a sensible default: cafés + population
@@ -86,6 +87,7 @@
       container: 'map',
       style: 'https://tiles.openfreemap.org/styles/positron',
       center: [110.4, -7.85], zoom: 9.2, attributionControl: { compact: true },
+      hash: 'map', // #map=zoom/lat/lng in the URL: shareable views (and scripted screenshots)
     });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(new maplibregl.ScaleControl(), 'bottom-right');
@@ -109,9 +111,12 @@
       map.on('click', 'v-fill', (e) => {
         // No popups while drawing, nor for the click that closes a polygon.
         if (isDrawing() || performance.now() - state.drawFinishedAt < 400) return;
+        if (layerPopup(e, false)) return; // a POI or building under the cursor wins (map click handler)
         showPopup(e.features[0], e.lngLat);
       });
       initDraw();
+      state.mapLoaded = true;
+      addMapLayers();
       document.body.dataset.mapReady = '1';
       // A query may have finished before the style loaded (slow network/GPU).
       if (state.result) render(true);
@@ -201,6 +206,7 @@
       box.appendChild(b);
     });
     updateViewOptions();
+    updatePoiTiles();
   }
   function searchCategories() {
     const q = $('cat-search').value.trim().toLowerCase().replace(/\s+/g, '_');
@@ -595,6 +601,176 @@
     $('diag').hidden = false;
   }
   const order = (k) => { const i = Object.keys(STAGE_COLORS).indexOf(k); return i < 0 ? 99 : i; };
+
+  // ---------- live map layers: tiles rendered per request by DuckDB ----------
+  // Vector tiles: /v1/tiles/{layer}/{z}/{x}/{y}.mvt (ST_AsMVT over Parquet).
+  // Raster tiles: /v1/tiles/raster/{layer}/{z}/{x}/{y}.png (cog extension).
+  // Tiles load through the "duck://" protocol: a main-thread fetch that
+  // reads each tile's Server-Timing header (MapLibre fetches vector tiles in
+  // a worker, where the page cannot see their timing).
+  const tileUrl = (tmpl, vars) => 'duck://' + tmpl.replace(/^\//, '').replace(/\{(layer)\}/g, () => vars.layer);
+  const tileLog = [];
+  maplibregl.addProtocol('duck', async (params, abort) => {
+    // A plain fetch: cache:'no-store' would make the browser send
+    // Cache-Control: no-cache, which bypasses the server tile cache. The
+    // "Bypass cache" checkbox asks for that explicitly.
+    const headers = $('no-cache').checked ? { 'Cache-Control': 'no-cache' } : {};
+    const res = await fetch(location.origin + '/' + params.url.slice('duck://'.length), { signal: abort.signal, headers });
+    if (!res.ok) throw new Error(`tile ${res.status}`);
+    const st = res.headers.get('Server-Timing') || '';
+    const m = st.match(/duckdb;dur=([\d.]+)/);
+    const f = st.match(/features;desc="(\d+)"/);
+    tileLog.push({ duckdb: m ? Number(m[1]) : null, hit: /cache;/.test(st), empty: /empty;/.test(st), features: f ? Number(f[1]) : 0,
+      kind: params.url.includes('/raster/') ? 'raster' : 'vector' });
+    if (tileLog.length > 500) tileLog.shift();
+    renderTileStats();
+    return { data: await res.arrayBuffer() };
+  });
+  const H3_COLORS = { interior: '#2ca25f', boundary: '#f03b20' };
+
+  function mapLayerDefs() {
+    const L = state.layers;
+    const vec = new Map((L.tiles ? L.tiles.vector.layers : []).map((l) => [l.id, l]));
+    const defs = [{ id: 'choropleth', label: 'Village results (choropleth)', kind: 'choropleth', opacity: 0.78, on: true }];
+    if (vec.has('villages')) defs.push({ id: 'villages', label: 'Village outlines', kind: 'vector', minzoom: vec.get('villages').minzoom, opacity: 0.9 });
+    if (vec.has('h3')) defs.push({ id: 'h3', label: 'H3 cells: interior / boundary', kind: 'vector', minzoom: vec.get('h3').minzoom, opacity: 0.45 });
+    if (vec.has('pois')) defs.push({ id: 'pois', label: 'POIs (selected categories, else all)', kind: 'vector', minzoom: vec.get('pois').minzoom, opacity: 0.9 });
+    if (vec.has('buildings')) defs.push({ id: 'buildings', label: 'Buildings: cells + boundary points', kind: 'vector', minzoom: vec.get('buildings').minzoom, opacity: 0.8 });
+    (L.rasters || []).forEach((r) => defs.push({ id: 'r_' + r.id, layer: r.id, label: `${labelOf(r)} (raster)`, kind: 'raster', minzoom: L.tiles ? L.tiles.raster.minzoom : 0, opacity: 0.75 }));
+    return defs;
+  }
+
+  function fillMapLayers() {
+    state.mapDefs = mapLayerDefs();
+    const box = $('map-layers');
+    box.innerHTML = '';
+    state.mapDefs.forEach((d) => {
+      const row = document.createElement('div');
+      row.className = 'ml';
+      row.innerHTML = `<label class="check"><input type="checkbox" data-ml="${d.id}" ${d.on ? 'checked' : ''}> <span title="${esc(d.label)}">${esc(d.label)}</span></label>` +
+        `<input type="range" min="0" max="1" step="0.05" value="${d.opacity}" data-mlo="${d.id}" aria-label="${esc(d.label)} opacity">` +
+        (d.minzoom ? `<div class="ml-note" data-mln="${d.id}">from zoom ${d.minzoom}</div>` : '') +
+        `<div class="ml-legend" data-mll="${d.id}" hidden></div>`;
+      box.appendChild(row);
+    });
+    box.addEventListener('change', (e) => {
+      const id = e.target.dataset.ml;
+      if (!id) return;
+      const d = state.mapDefs.find((x) => x.id === id);
+      d.on = e.target.checked;
+      applyMapLayer(d);
+      if (d.on && d.kind === 'raster') showRasterLegend(d);
+      box.querySelector(`[data-mll="${id}"]`).hidden = !d.on || !box.querySelector(`[data-mll="${id}"]`).innerHTML;
+    });
+    box.addEventListener('input', (e) => {
+      const id = e.target.dataset.mlo;
+      if (!id) return;
+      const d = state.mapDefs.find((x) => x.id === id);
+      d.opacity = Number(e.target.value);
+      applyMapLayer(d);
+    });
+    addMapLayers();
+  }
+
+  // Map layers per definition: [layer id, opacity paint property, opacity factor].
+  function addMapLayers() {
+    if (!state.mapLoaded || !state.mapDefs || state.mapLayersAdded) return;
+    state.mapLayersAdded = true;
+    const map = state.map;
+    const L = state.layers;
+    const top = (map.getStyle().layers.find((l) => l.type === 'symbol') || {}).id; // under labels
+    state.mapDefs.forEach((d) => {
+      if (d.kind === 'choropleth') { d.parts = [['v-fill', 'fill-opacity', 1], ['v-line', 'line-opacity', 1]]; return; }
+      const src = `ml-src-${d.id}`;
+      if (d.kind === 'raster') {
+        map.addSource(src, { type: 'raster', tiles: [tileUrl(L.tiles.raster.url, { layer: d.layer })], tileSize: 256, minzoom: d.minzoom, maxzoom: 15 });
+        map.addLayer({ id: `ml-${d.id}`, type: 'raster', source: src, layout: { visibility: 'none' },
+          paint: { 'raster-resampling': 'nearest', 'raster-fade-duration': 0 } }, 'v-fill'); // under the choropleth
+        d.parts = [[`ml-${d.id}`, 'raster-opacity', 1]];
+        return;
+      }
+      map.addSource(src, { type: 'vector', tiles: [vectorUrl(d.id)], minzoom: d.minzoom, maxzoom: 15 });
+      const add = (id, spec, prop, f) => { map.addLayer({ id, source: src, layout: { visibility: 'none' }, ...spec }, top); d.parts.push([id, prop, f]); };
+      d.parts = [];
+      if (d.id === 'villages') {
+        add('ml-villages', { type: 'line', 'source-layer': 'villages', paint: { 'line-color': '#1f2328', 'line-width': 1 } }, 'line-opacity', 1);
+      } else if (d.id === 'h3') {
+        add('ml-h3', { type: 'fill', 'source-layer': 'h3', paint: { 'fill-color': ['match', ['get', 'cell_type'], 'interior', H3_COLORS.interior, H3_COLORS.boundary], 'fill-outline-color': '#ffffff' } }, 'fill-opacity', 1);
+      } else if (d.id === 'pois') {
+        add('ml-pois', { type: 'circle', 'source-layer': 'pois', paint: { 'circle-color': '#d6336c', 'circle-radius': ['interpolate', ['linear'], ['zoom'], 13, 2, 17, 5], 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 0.5 } }, 'circle-opacity', 1);
+      } else if (d.id === 'buildings') {
+        add('ml-bcells', { type: 'fill', 'source-layer': 'building_cells', paint: { 'fill-color': ['interpolate', ['linear'], ['get', 'buildings'], 1, '#fee6ce', 10, '#fd8d3c', 40, '#a63603'] } }, 'fill-opacity', 0.8);
+        add('ml-bpoints', { type: 'circle', 'source-layer': 'building_points', paint: { 'circle-color': '#7f2704', 'circle-radius': ['interpolate', ['linear'], ['zoom'], 14, 1.2, 17, 3] } }, 'circle-opacity', 1);
+      }
+    });
+    state.mapDefs.forEach(applyMapLayer);
+    map.on('click', (e) => { if (!isDrawing()) layerPopup(e, true); });
+  }
+
+  function vectorUrl(id) {
+    const base = tileUrl(state.layers.tiles.vector.url, { layer: id });
+    return id === 'pois' && state.selected.size ? `${base}?categories=${[...state.selected].sort().map(encodeURIComponent).join(',')}` : base;
+  }
+  function updatePoiTiles() {
+    const src = state.map && state.mapLayersAdded && state.map.getSource('ml-src-pois');
+    if (src) src.setTiles([vectorUrl('pois')]);
+  }
+
+  function applyMapLayer(d) {
+    if (!d.parts || !state.map) return;
+    d.parts.forEach(([id, prop, f]) => {
+      if (!state.map.getLayer(id)) return;
+      state.map.setLayoutProperty(id, 'visibility', d.on ? 'visible' : 'none');
+      state.map.setPaintProperty(id, prop, d.opacity * f);
+    });
+  }
+
+  async function showRasterLegend(d) {
+    const el = $('map-layers').querySelector(`[data-mll="${d.id}"]`);
+    try {
+      const lg = await api(state.layers.tiles.raster.legend.replace('{layer}', encodeURIComponent(d.layer)));
+      el.innerHTML = lg.kind === 'categorical'
+        ? lg.classes.map((c) => `<span><span class="sw" style="background:${esc(c.color)}"></span>${esc(c.label)}</span>`).join('')
+        : `<div class="ramp">${lg.colors.map((c) => `<span style="background:${esc(c)}"></span>`).join('')}</div>` +
+          `<span>deciles of values &gt; 0: ${fmtSmart(lg.breaks[0])} … ${fmtSmart(lg.breaks[lg.breaks.length - 1])} ${esc(lg.units)}</span>`;
+      el.hidden = false;
+    } catch (_) { el.hidden = true; }
+  }
+
+  // Per-tile cost from the Server-Timing header (duckdb;dur=… or cache;desc=hit).
+  let tileStatsPending = false;
+  function renderTileStats() {
+    if (tileStatsPending) return;
+    tileStatsPending = true;
+    requestAnimationFrame(() => {
+      tileStatsPending = false;
+      const db = tileLog.filter((t) => t.duckdb != null).map((t) => t.duckdb).sort((a, b) => a - b);
+      const hits = tileLog.filter((t) => t.hit).length;
+      const empty = tileLog.filter((t) => t.empty).length;
+      const feats = tileLog.reduce((s, t) => s + t.features, 0);
+      const q = (p) => db[Math.min(db.length - 1, Math.floor(p * db.length))];
+      $('tile-stats').textContent = `${tileLog.length} tiles (${hits} from tile cache${empty ? `, ${empty} empty` : ''}) · DuckDB ` +
+        (db.length ? `median ${fmt.format(q(0.5))} ms, p95 ${fmt.format(q(0.95))} ms` : '–') +
+        ` · ${fmt0.format(feats)} features encoded`;
+    });
+  }
+
+  // Popup for a POI, building or H3 cell under the click; true if there is one.
+  function layerPopup(e, show) {
+    const ids = ['ml-pois', 'ml-bpoints', 'ml-bcells', 'ml-h3'].filter((id) => state.map.getLayer(id) && state.map.getLayoutProperty(id, 'visibility') === 'visible');
+    if (!ids.length) return false;
+    const f = state.map.queryRenderedFeatures(e.point, { layers: ids })[0];
+    if (!f) return false;
+    if (!show) return true;
+    const p = f.properties;
+    let html;
+    if (f.layer.id === 'ml-pois') html = `<h3>${esc(p.name || '(no name)')}</h3><div class="sub">${esc(String(p.category).replace(/_/g, ' '))}</div>`;
+    else if (f.layer.id === 'ml-bpoints') html = `<h3>Building</h3><div class="sub">boundary-cell point · ${fmtSmart(p.area_m2)} m² footprint</div>`;
+    else if (f.layer.id === 'ml-bcells') html = `<h3>${fmt0.format(p.buildings)} buildings</h3><div class="sub">interior H3 cell, pre-summed · ${fmtSmart(p.area_m2)} m² footprint</div>`;
+    else html = `<h3>H3 cell (${esc(p.cell_type)})</h3><div class="sub">${esc(p.h3_cell)} · village ${esc(p.village_id)}</div>`;
+    new maplibregl.Popup({ closeButton: true, maxWidth: '280px' }).setLngLat(e.lngLat).setHTML(html).addTo(state.map);
+    return true;
+  }
 
   // ---------- misc ----------
   function showError(msg) { $('error').textContent = msg; $('error').hidden = false; }

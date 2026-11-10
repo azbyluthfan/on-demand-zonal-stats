@@ -5,6 +5,8 @@ import (
 	"compress/gzip"
 	"context"
 	"encoding/json"
+	"fmt"
+	"image/png"
 	"io"
 	"log/slog"
 	"math"
@@ -574,4 +576,53 @@ func TestGzip(t *testing.T) {
 	}
 	body, _ := io.ReadAll(zr)
 	validateSchema(t, "aggregate_geojson.schema.json", body)
+}
+
+func TestTileEndpoints(t *testing.T) {
+	ts, _ := newServer(t, testfixtures.ReleaseWithRasters(t), nil)
+	fetch := func(path string) (*http.Response, []byte) {
+		t.Helper()
+		resp, err := http.Get(ts.URL + path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		defer resp.Body.Close()
+		b, _ := io.ReadAll(resp.Body)
+		return resp, b
+	}
+	// z14 tile over V001 (lon 110.31, lat -7.81).
+	const z, x, y = 14, 13212, 8547
+	for _, c := range []struct{ path, ctype string }{
+		{fmt.Sprintf("/v1/tiles/pois/%d/%d/%d.mvt?categories=cafe", z, x, y), "application/vnd.mapbox-vector-tile"},
+		{fmt.Sprintf("/v1/tiles/villages/%d/%d/%d.mvt", z, x, y), "application/vnd.mapbox-vector-tile"},
+		{fmt.Sprintf("/v1/tiles/raster/landcover/%d/%d/%d.png", z, x, y), "image/png"},
+	} {
+		resp, body := fetch(c.path)
+		if resp.StatusCode != 200 || resp.Header.Get("Content-Type") != c.ctype || len(body) == 0 {
+			t.Fatalf("%s: %d %s, %d bytes", c.path, resp.StatusCode, resp.Header.Get("Content-Type"), len(body))
+		}
+		if st := resp.Header.Get("Server-Timing"); !strings.Contains(st, "duckdb;dur=") {
+			t.Errorf("%s: Server-Timing %q", c.path, st)
+		}
+		// Second request: the tile cache, same bytes.
+		resp2, body2 := fetch(c.path)
+		if st := resp2.Header.Get("Server-Timing"); !strings.Contains(st, "cache") || !bytes.Equal(body, body2) {
+			t.Errorf("%s: second request Server-Timing %q, equal %v", c.path, st, bytes.Equal(body, body2))
+		}
+		if c.ctype == "image/png" {
+			if _, err := png.Decode(bytes.NewReader(body)); err != nil {
+				t.Errorf("%s: not a PNG: %v", c.path, err)
+			}
+		}
+	}
+	status, body := get(t, ts, "/v1/tiles/raster/population_2020/legend")
+	if status != 200 || !strings.Contains(string(body), `"breaks"`) {
+		t.Errorf("legend %d %s", status, body)
+	}
+	for _, p := range []string{"/v1/tiles/nope/14/1/1.mvt", "/v1/tiles/pois/14/1/1.png", "/v1/tiles/pois/3/9/0.mvt",
+		"/v1/tiles/pois/14/1/1.mvt?categories=spaceport", "/v1/tiles/raster/nope/14/1/1.png", "/v1/tiles/raster/nope/legend"} {
+		if status, body := get(t, ts, p); status != 400 || errorCode(t, body) != "invalid_request" {
+			t.Errorf("%s: %d %s", p, status, body)
+		}
+	}
 }
