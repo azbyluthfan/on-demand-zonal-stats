@@ -9,7 +9,7 @@
 //	DUCKDB_MEMORY_LIMIT  2GB      DUCKDB_THREADS 4     DUCKDB_EXT_DIR
 //	MAX_VILLAGES         10000    QUERY_TIMEOUT  30s
 //	WEB_DIR              web      (static frontend; empty disables)
-//	RESULT_CACHE_ENTRIES 2000000  BLOCK_CACHE_MB 256   REF_CACHE_PROVINCES 4
+//	RESULT_CACHE_ENTRIES 2000000  BLOCK_CACHE_MB 256   REF_CACHE_PROVINCES 4   TILE_CACHE_ENTRIES 4096
 //	CACHE_DISABLED=1              (turn every cache off)
 //	DEV_INSTALL_EXTENSIONS=1      (allow INSTALL at startup; dev only)
 //
@@ -104,6 +104,7 @@ func engineOptions() (query.Options, error) {
 			ResultEntries: atoi(os.Getenv("RESULT_CACHE_ENTRIES")),
 			BlockMB:       atoi(os.Getenv("BLOCK_CACHE_MB")),
 			RefProvinces:  atoi(os.Getenv("REF_CACHE_PROVINCES")),
+			TileEntries:   atoi(os.Getenv("TILE_CACHE_ENTRIES")),
 		},
 	}
 	bucket := env("S3_BUCKET", "villagestat")

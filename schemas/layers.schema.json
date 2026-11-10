@@ -3,7 +3,7 @@
   "$id": "layers.schema.json",
   "title": "GET /v1/layers response",
   "type": "object",
-  "required": ["release_id", "created_at", "boundary_version", "h3_resolution", "poi_release", "metric_types", "buildings",
+  "required": ["release_id", "created_at", "boundary_version", "h3_resolution", "poi_release", "metric_types", "buildings", "tiles",
                "raster_methods", "categories", "rasters", "sources"],
   "additionalProperties": false,
   "properties": {
@@ -13,6 +13,18 @@
     "h3_resolution": { "type": "integer", "minimum": 0, "maximum": 15 },
     "poi_release": { "type": "string" },
     "metric_types": { "type": "array", "items": { "enum": ["poi_count", "raster_sum", "raster_mean", "raster_class_fraction", "building_count", "building_area"] } },
+    "tiles": {
+      "description": "Live map tiles (docs/tiles.md): vector tiles encoded by DuckDB ST_AsMVT, raster PNG tiles read through the cog extension.",
+      "type": "object", "required": ["vector", "raster"], "additionalProperties": false,
+      "properties": {
+        "vector": { "type": "object", "required": ["url", "layers"], "additionalProperties": false,
+                    "properties": { "url": { "type": "string" },
+                                    "layers": { "type": "array", "items": { "type": "object", "required": ["id", "minzoom", "description"], "additionalProperties": false,
+                                                "properties": { "id": { "type": "string" }, "minzoom": { "type": "integer", "minimum": 0 }, "description": { "type": "string" } } } } } },
+        "raster": { "type": "object", "required": ["url", "legend", "minzoom"], "additionalProperties": false,
+                    "properties": { "url": { "type": "string" }, "legend": { "type": "string" }, "minzoom": { "type": "integer", "minimum": 0 } } }
+      }
+    },
     "buildings": {
       "description": "The building layer, or null when the release has none.",
       "oneOf": [ { "type": "null" },

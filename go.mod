@@ -23,6 +23,7 @@ require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.5.0 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
+	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/flatbuffers v25.12.19+incompatible // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/klauspost/compress v1.19.2 // indirect
@@ -30,6 +31,7 @@ require (
 	github.com/klauspost/crc32 v1.3.0 // indirect
 	github.com/minio/crc64nvme v1.1.1 // indirect
 	github.com/minio/md5-simd v1.1.2 // indirect
+	github.com/paulmach/protoscan v0.2.1 // indirect
 	github.com/philhofer/fwd v1.2.0 // indirect
 	github.com/pierrec/lz4/v4 v4.1.25 // indirect
 	github.com/rs/xid v1.6.0 // indirect

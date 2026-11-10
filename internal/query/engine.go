@@ -62,6 +62,7 @@ type Engine struct {
 	refs       *refCache     // nil when caching is disabled
 	Manifest   *release.Manifest
 	Categories map[string]int64
+	legends    legendCache // raster tile legends, per layer
 }
 
 var extensions = []struct{ name, repo string }{

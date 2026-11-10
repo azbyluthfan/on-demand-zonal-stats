@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -64,6 +65,9 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /v1/layers", s.withEngine(s.layers))
 	mux.HandleFunc("GET /v1/areas", s.withEngine(s.areas))
 	mux.HandleFunc("POST /v1/aggregate", s.withEngine(s.aggregate))
+	mux.HandleFunc("GET /v1/tiles/{layer}/{z}/{x}/{y}", s.withEngine(s.vectorTile))
+	mux.HandleFunc("GET /v1/tiles/raster/{layer}/{z}/{x}/{y}", s.withEngine(s.rasterTile))
+	mux.HandleFunc("GET /v1/tiles/raster/{layer}/legend", s.withEngine(s.rasterLegend))
 	if s.webDir != "" {
 		if st, err := os.Stat(s.webDir); err == nil && st.IsDir() {
 			mux.Handle("GET /", http.FileServer(http.Dir(s.webDir)))
@@ -151,10 +155,15 @@ func (s *Server) layers(w http.ResponseWriter, r *http.Request, e *query.Engine)
 		"poi_release":      m.POIRelease,
 		"metric_types":     MetricTypes,
 		"buildings":        buildings,
-		"raster_methods":   []string{"fractional", "center"},
-		"categories":       cats,
-		"rasters":          rasters,
-		"sources":          sources,
+		"tiles": map[string]any{
+			"vector": map[string]any{"url": "/v1/tiles/{layer}/{z}/{x}/{y}.mvt", "layers": e.VectorLayers()},
+			"raster": map[string]any{"url": "/v1/tiles/raster/{layer}/{z}/{x}/{y}.png",
+				"legend": "/v1/tiles/raster/{layer}/legend", "minzoom": query.RasterTileMinZoom},
+		},
+		"raster_methods": []string{"fractional", "center"},
+		"categories":     cats,
+		"rasters":        rasters,
+		"sources":        sources,
 	})
 }
 
@@ -320,10 +329,94 @@ func (s *Server) aggregate(w http.ResponseWriter, r *http.Request, e *query.Engi
 	writeJSON(w, http.StatusOK, fc)
 }
 
+// vectorTile serves GET /v1/tiles/{layer}/{z}/{x}/{y}.mvt (docs/tiles.md).
+func (s *Server) vectorTile(w http.ResponseWriter, r *http.Request, e *query.Engine) {
+	t, err := query.ParseTile(r.PathValue("z"), r.PathValue("x"), r.PathValue("y"), ".mvt")
+	if err != nil {
+		s.queryError(w, err)
+		return
+	}
+	var cats []string
+	if c := strings.TrimSpace(r.URL.Query().Get("categories")); c != "" {
+		cats = strings.Split(c, ",")
+		if len(cats) > s.limits.MaxCategories {
+			writeError(w, http.StatusBadRequest, "invalid_request", "too many categories", nil)
+			return
+		}
+	}
+	ctx, cancel := context.WithTimeout(r.Context(), s.limits.QueryTimeout)
+	defer cancel()
+	res, err := e.VectorTile(ctx, r.PathValue("layer"), t, cats, noCache(r))
+	if err != nil {
+		s.queryError(w, err)
+		return
+	}
+	writeTile(w, "application/vnd.mapbox-vector-tile", res)
+}
+
+// rasterTile serves GET /v1/tiles/raster/{layer}/{z}/{x}/{y}.png.
+func (s *Server) rasterTile(w http.ResponseWriter, r *http.Request, e *query.Engine) {
+	t, err := query.ParseTile(r.PathValue("z"), r.PathValue("x"), r.PathValue("y"), ".png")
+	if err != nil {
+		s.queryError(w, err)
+		return
+	}
+	ctx, cancel := context.WithTimeout(r.Context(), s.limits.QueryTimeout)
+	defer cancel()
+	res, err := e.RasterTile(ctx, r.PathValue("layer"), t, noCache(r))
+	if err != nil {
+		s.queryError(w, err)
+		return
+	}
+	writeTile(w, "image/png", res)
+}
+
+// rasterLegend serves GET /v1/tiles/raster/{layer}/legend.
+func (s *Server) rasterLegend(w http.ResponseWriter, r *http.Request, e *query.Engine) {
+	ctx, cancel := context.WithTimeout(r.Context(), s.limits.QueryTimeout)
+	defer cancel()
+	lg, err := e.Legend(ctx, r.PathValue("layer"))
+	if err != nil {
+		s.queryError(w, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, lg)
+}
+
+func noCache(r *http.Request) bool {
+	return strings.Contains(strings.ToLower(r.Header.Get("Cache-Control")), "no-cache")
+}
+
+// writeTile writes a tile with Server-Timing (time inside DuckDB, cache hit
+// or miss) so browsers expose per-tile cost to the frontend.
+func writeTile(w http.ResponseWriter, contentType string, res *query.TileResult) {
+	h := w.Header()
+	h.Set("Content-Type", contentType)
+	// Map clients keep tiles in memory; the server tile cache answers repeats
+	// in ~1 ms. no-cache keeps browsers from silently reusing a tile, so the
+	// Server-Timing the UI shows is always this request's.
+	h.Set("Cache-Control", "no-cache")
+	switch {
+	case res.Cached:
+		h.Set("Server-Timing", `cache;desc="hit"`)
+	case res.BlockCached:
+		h.Set("Server-Timing", `cache;desc="blocks"`)
+	case res.DuckDB == 0: // below minzoom or outside the data: no query ran
+		h.Set("Server-Timing", `empty;desc="no data"`)
+	default:
+		h.Set("Server-Timing", fmt.Sprintf(`duckdb;dur=%.2f, features;desc="%d"`, float64(res.DuckDB.Microseconds())/1000, res.Features))
+	}
+	h.Set("Timing-Allow-Origin", "*")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(res.Data)
+}
+
 // queryError maps engine errors to the documented status codes. No partial
 // results are ever written: errors happen before the body.
 func (s *Server) queryError(w http.ResponseWriter, err error) {
 	switch {
+	case errors.Is(err, query.ErrBadTile):
+		writeError(w, http.StatusBadRequest, "invalid_request", err.Error(), nil)
 	case errors.Is(err, query.ErrInvalidArea):
 		writeError(w, http.StatusBadRequest, "invalid_request", err.Error(), []FieldError{{Field: "area", Message: err.Error()}})
 	case errors.Is(err, query.ErrTooManyVillages):
