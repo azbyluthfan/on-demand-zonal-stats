@@ -1,0 +1,30 @@
+# Code owners: GitHub requests a review from these owners on pull requests
+# that touch matching paths. Later rules take precedence over earlier ones.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default: everything
+*                       @azbyluthfan
+
+# Serving: API, query engine, tiles, caches
+/internal/api/          @azbyluthfan
+/internal/query/        @azbyluthfan
+/schemas/               @azbyluthfan
+
+# Release pipeline and data
+/internal/prep/         @azbyluthfan
+/internal/release/      @azbyluthfan
+/configs/               @azbyluthfan
+/sample/                @azbyluthfan
+
+# Geometry and raster kernels
+/internal/geom/         @azbyluthfan
+/internal/raster/       @azbyluthfan
+/internal/h3index/      @azbyluthfan
+
+# Frontend and end-to-end tests
+/web/                   @azbyluthfan
+/e2e/                   @azbyluthfan
+
+# Deployment and CI
+/deploy/                @azbyluthfan
+/.github/               @azbyluthfan
